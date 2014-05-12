@@ -1,0 +1,5 @@
+#
+# $Id$
+#
+00 02 * * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/milestone_sweep.aspx
+15 02 * * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/daily_tasks.aspx
