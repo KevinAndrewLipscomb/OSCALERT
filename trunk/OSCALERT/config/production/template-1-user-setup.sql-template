@@ -1,0 +1,18 @@
+grant select
+ , insert
+ , update
+ , delete
+ , create
+ , create routine
+ , alter routine
+  on oscalertdb.*
+  to 'ki-oscalert'@'localhost' identified by '~ki-oscalert-password~'
+;
+--
+-- Must grant PROCESS priv to primary user to include SHOW ENGINE INNODB
+-- STATUS output in MySQL-related exception reports.
+--
+;
+grant process
+  on *.*
+  to 'ki-oscalert'@'localhost'
