@@ -2,11 +2,13 @@ grant select
  , insert
  , update
  , delete
+ , execute
  , create
+ , alter
  , create routine
  , alter routine
-  on oscalertdb_d.*
-  to 'ki-oscalert-d'@'localhost' identified by '~ki-oscalert-d-password~'
+  on oscardotnetdb_d.*
+  to 'ki-oscalert-d'@'localhost' identified by '~'
 ;
 --
 -- Must grant PROCESS priv to primary user to include SHOW ENGINE INNODB

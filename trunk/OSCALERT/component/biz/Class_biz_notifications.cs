@@ -229,6 +229,25 @@ namespace Class_biz_notifications
       template_reader.Close();
       }
 
+    internal void IssueOscalert
+      (
+      string description,
+      string elaboration
+      )
+      {
+      k.SmtpMailSend
+        (
+        from:ConfigurationManager.AppSettings["sender_email_address_oscalert"],
+        to:k.EMPTY,
+        subject:k.EMPTY,
+        message_string:elaboration,
+        be_html:false,
+        cc:k.EMPTY,
+        bcc:db_notifications.TargetOfOscalert(description:description),
+        reply_to:ConfigurationManager.AppSettings["bouncer_email_address"]
+        );
+      }
+
     } // end TClass_biz_notifications
 
   }
