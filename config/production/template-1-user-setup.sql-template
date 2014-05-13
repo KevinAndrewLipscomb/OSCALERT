@@ -2,10 +2,12 @@ grant select
  , insert
  , update
  , delete
+ , execute
  , create
+ , alter
  , create routine
  , alter routine
-  on oscalertdb.*
+  on oscardotnetdb.*
   to 'ki-oscalert'@'localhost' identified by '~ki-oscalert-password~'
 ;
 --

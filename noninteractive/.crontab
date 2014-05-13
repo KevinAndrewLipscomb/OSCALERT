@@ -1,5 +1,22 @@
 #
 # $Id$
 #
-00 02 * * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/milestone_sweep.aspx
-15 02 * * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/daily_tasks.aspx
+MAILTO=kevin.lipscomb@kvrs.org
+#
+#mmhh DD MM d (mm=minute, hh=hour, DD=DayOfMonth, MM=MonthNum, d=DayOfWeekWhereZeroIsSunday)
+#
+# Daily
+#
+30 03  *  * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/cad_activity_notification_agent.aspx
+#
+# Weekly
+#
+#
+# Monthly
+#
+#
+# Quarterly
+#
+#
+# Yearly
+#

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <appSettings>
-  <add key="db_connection_string" value="Server=localhost;Database=oscalertdb_d;Uid=ki-aspdotnetfw-d;Pwd=~ki-oscalert-d-password~;Treat Tiny As Boolean=false;Respect Binary Flags=false;Default Command Timeout=300" />
-  <add key="sysadmin_encoded_password" value="dd04f229d53353251372d7fd3ea847ff3625826e" />
+  <add key="db_connection_string" value="Server=localhost;Database=oscardotnetdb_d;Uid=ki-oscalert-d;Pwd=~ki-oscalert-d-password~;Treat Tiny As Boolean=false;Respect Binary Flags=false;Allow User Variables=true;Default Command Timeout=300;" />
+  <add key="vbemsbridge_username" value="~"/>
+  <add key="vbemsbridge_password" value="~"/>
 </appSettings>
