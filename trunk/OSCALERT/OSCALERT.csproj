@@ -70,18 +70,13 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app_online.htm" />
-    <Content Include="Default.aspx" />
     <Content Include="exception.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="js\sha1.js" />
-    <Content Include="login.aspx" />
-    <Content Include="new_user_registration.aspx" />
     <Content Include="noninteractive\cad_activity_notification_agent.aspx" />
-    <Content Include="remind_username.aspx" />
-    <Content Include="salogin.aspx" />
     <Content Include="timeout.aspx" />
-    <Content Include="usercontrol\app\UserControl_my_roles_and_mappings.ascx" />
+    <Content Include="usercontrol\app\UserControl_postcontent.ascx" />
+    <Content Include="usercontrol\app\UserControl_precontent.ascx" />
+    <Content Include="usercontrol\app\UserControl_update_progress_blocker.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -94,44 +89,23 @@
     </Compile>
     <Compile Include="component\biz\Class_biz_field_situation_impressions.cs" />
     <Compile Include="component\biz\Class_biz_members.cs" />
-    <Compile Include="component\biz\Class_biz_milestones.cs" />
     <Compile Include="component\biz\Class_biz_notifications.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="component\biz\Class_biz_privileges.cs" />
     <Compile Include="component\biz\Class_biz_roles.cs" />
-    <Compile Include="component\biz\Class_biz_role_member_map.cs" />
-    <Compile Include="component\biz\Class_biz_role_notification_map.cs" />
-    <Compile Include="component\biz\Class_biz_role_privilege_map.cs" />
-    <Compile Include="component\biz\Class_biz_scheduled_tasks.cs" />
     <Compile Include="component\biz\Class_biz_user.cs" />
     <Compile Include="component\biz\Class_biz_users.cs" />
-    <Compile Include="component\biz\Class_biz_user_member_map.cs" />
     <Compile Include="component\db\Class_db_cad_records.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="component\db\Class_db_field_situations.cs" />
     <Compile Include="component\db\Class_db_field_situation_impressions.cs" />
     <Compile Include="component\db\Class_db_members.cs" />
-    <Compile Include="component\db\Class_db_milestones.cs" />
     <Compile Include="component\db\Class_db_notifications.cs" />
-    <Compile Include="component\db\Class_db_privileges.cs" />
     <Compile Include="component\db\Class_db_roles.cs" />
-    <Compile Include="component\db\Class_db_role_member_map.cs" />
-    <Compile Include="component\db\Class_db_role_notification_map.cs" />
-    <Compile Include="component\db\Class_db_role_privilege_map.cs" />
     <Compile Include="component\db\Class_db_user.cs" />
     <Compile Include="component\db\Class_db_users.cs" />
-    <Compile Include="component\db\Class_db_user_member_map.cs" />
     <Compile Include="component\db\Class_db__information_schema.cs" />
-    <Compile Include="component\fs\Class_fs.cs" />
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="exception.aspx.cs">
       <DependentUpon>exception.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -142,20 +116,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="login.aspx.cs">
-      <DependentUpon>login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="login.aspx.designer.cs">
-      <DependentUpon>login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="new_user_registration.aspx.cs">
-      <DependentUpon>new_user_registration.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="new_user_registration.aspx.designer.cs">
-      <DependentUpon>new_user_registration.aspx</DependentUpon>
-    </Compile>
     <Compile Include="noninteractive\cad_activity_notification_agent.aspx.cs">
       <DependentUpon>cad_activity_notification_agent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -163,115 +123,13 @@
     <Compile Include="noninteractive\cad_activity_notification_agent.aspx.designer.cs">
       <DependentUpon>cad_activity_notification_agent.aspx</DependentUpon>
     </Compile>
-    <Compile Include="noninteractive\daily_tasks.aspx.cs">
-      <DependentUpon>daily_tasks.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="noninteractive\daily_tasks.aspx.designer.cs">
-      <DependentUpon>daily_tasks.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="noninteractive\milestone_sweep.aspx.cs">
-      <DependentUpon>milestone_sweep.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="noninteractive\milestone_sweep.aspx.designer.cs">
-      <DependentUpon>milestone_sweep.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="noninteractive\test_report.aspx.cs">
-      <DependentUpon>test_report.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="noninteractive\test_report.aspx.designer.cs">
-      <DependentUpon>test_report.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="protected\change_email_address.aspx.cs">
-      <DependentUpon>change_email_address.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="protected\change_email_address.aspx.designer.cs">
-      <DependentUpon>change_email_address.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="protected\change_password.aspx.cs">
-      <DependentUpon>change_password.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="protected\change_password.aspx.designer.cs">
-      <DependentUpon>change_password.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="protected\establish_membership_trouble.aspx.cs">
-      <DependentUpon>establish_membership_trouble.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="protected\establish_membership_trouble.aspx.designer.cs">
-      <DependentUpon>establish_membership_trouble.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="protected\overview.aspx.cs">
-      <DependentUpon>overview.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="protected\overview.aspx.designer.cs">
-      <DependentUpon>overview.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="remind_username.aspx.cs">
-      <DependentUpon>remind_username.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="remind_username.aspx.designer.cs">
-      <DependentUpon>remind_username.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="salogin.aspx.cs">
-      <DependentUpon>salogin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="salogin.aspx.designer.cs">
-      <DependentUpon>salogin.aspx</DependentUpon>
-    </Compile>
     <Compile Include="timeout.aspx.cs">
       <DependentUpon>timeout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="timeout.aspx.designer.cs">
       <DependentUpon>timeout.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_about.ascx.cs">
-      <DependentUpon>UserControl_about.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_about.ascx.designer.cs">
-      <DependentUpon>UserControl_about.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_common_header_bar.ascx.cs">
-      <DependentUpon>UserControl_common_header_bar.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_common_header_bar.ascx.designer.cs">
-      <DependentUpon>UserControl_common_header_bar.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_config_binder.ascx.cs">
-      <DependentUpon>UserControl_config_binder.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_establish_membership.ascx.cs">
-      <DependentUpon>UserControl_establish_membership.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_establish_membership.ascx.designer.cs">
-      <DependentUpon>UserControl_establish_membership.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_member_binder.ascx.cs">
-      <DependentUpon>UserControl_member_binder.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_member_binder.ascx.designer.cs">
-      <DependentUpon>UserControl_member_binder.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_my_roles_and_mappings.ascx.cs">
-      <DependentUpon>UserControl_my_roles_and_mappings.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_my_roles_and_mappings.ascx.designer.cs">
-      <DependentUpon>UserControl_my_roles_and_mappings.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_postcontent.ascx.cs">
       <DependentUpon>UserControl_postcontent.ascx</DependentUpon>
@@ -287,86 +145,12 @@
     <Compile Include="usercontrol\app\UserControl_precontent.ascx.designer.cs">
       <DependentUpon>UserControl_precontent.ascx</DependentUpon>
     </Compile>
-    <Compile Include="usercontrol\app\UserControl_role.ascx.cs">
-      <DependentUpon>UserControl_role.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role.ascx.designer.cs">
-      <DependentUpon>UserControl_role.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_roles_and_matrices_binder.ascx.cs">
-      <DependentUpon>UserControl_roles_and_matrices_binder.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_roles_and_matrices_binder.ascx.designer.cs">
-      <DependentUpon>UserControl_roles_and_matrices_binder.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_member_mapping.ascx.cs">
-      <DependentUpon>UserControl_role_member_mapping.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_member_mapping.ascx.designer.cs">
-      <DependentUpon>UserControl_role_member_mapping.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_member_matrix.ascx.cs">
-      <DependentUpon>UserControl_role_member_matrix.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_member_matrix.ascx.designer.cs">
-      <DependentUpon>UserControl_role_member_matrix.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_notification_mapping.ascx.cs">
-      <DependentUpon>UserControl_role_notification_mapping.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_notification_mapping.ascx.designer.cs">
-      <DependentUpon>UserControl_role_notification_mapping.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_notification_matrix.ascx.cs">
-      <DependentUpon>UserControl_role_notification_matrix.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_notification_matrix.ascx.designer.cs">
-      <DependentUpon>UserControl_role_notification_matrix.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_privilege_mapping.ascx.cs">
-      <DependentUpon>UserControl_role_privilege_mapping.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_privilege_mapping.ascx.designer.cs">
-      <DependentUpon>UserControl_role_privilege_mapping.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_privilege_matrix.ascx.cs">
-      <DependentUpon>UserControl_role_privilege_matrix.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_role_privilege_matrix.ascx.designer.cs">
-      <DependentUpon>UserControl_role_privilege_matrix.ascx</DependentUpon>
-    </Compile>
     <Compile Include="usercontrol\app\UserControl_update_progress_blocker.ascx.cs">
       <DependentUpon>UserControl_update_progress_blocker.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_update_progress_blocker.ascx.designer.cs">
       <DependentUpon>UserControl_update_progress_blocker.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_user.ascx.cs">
-      <DependentUpon>UserControl_user.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_user.ascx.designer.cs">
-      <DependentUpon>UserControl_user.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_users_and_mapping_binder.ascx.cs">
-      <DependentUpon>UserControl_users_and_mapping_binder.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_user_member_mapping.ascx.cs">
-      <DependentUpon>UserControl_user_member_mapping.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="usercontrol\app\UserControl_user_member_mapping.ascx.designer.cs">
-      <DependentUpon>UserControl_user_member_mapping.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_about_by.ascx.cs">
       <DependentUpon>UserControl_about_by.ascx</DependentUpon>
@@ -429,39 +213,9 @@
     <None Include="deploy.bat" />
     <Content Include="css\standard-overrides-for-ie6.css" />
     <Content Include="css\standard.css" />
-    <Content Include="js\ErrorHandler.js" />
-    <Content Include="js\gradient.js" />
-    <Content Include="noninteractive\daily_tasks.aspx" />
-    <Content Include="noninteractive\milestone_sweep.aspx" />
-    <Content Include="noninteractive\test_report.aspx" />
-    <Content Include="protected\change_email_address.aspx" />
-    <Content Include="protected\change_password.aspx" />
-    <Content Include="protected\establish_membership_trouble.aspx" />
-    <Content Include="protected\overview.aspx" />
-    <Content Include="template\notification\temporary_password.txt" />
-    <Content Include="template\notification\username_reminder.txt" />
     <Content Include="unpublished.config" />
     <None Include="noninteractive\.crontab" />
     <Content Include="protected\Web.config" />
-    <Content Include="usercontrol\app\UserControl_about.ascx" />
-    <Content Include="usercontrol\app\UserControl_common_header_bar.ascx" />
-    <Content Include="usercontrol\app\UserControl_config_binder.ascx" />
-    <Content Include="usercontrol\app\UserControl_establish_membership.ascx" />
-    <Content Include="usercontrol\app\UserControl_member_binder.ascx" />
-    <Content Include="usercontrol\app\UserControl_postcontent.ascx" />
-    <Content Include="usercontrol\app\UserControl_precontent.ascx" />
-    <Content Include="usercontrol\app\UserControl_role.ascx" />
-    <Content Include="usercontrol\app\UserControl_roles_and_matrices_binder.ascx" />
-    <Content Include="usercontrol\app\UserControl_role_member_mapping.ascx" />
-    <Content Include="usercontrol\app\UserControl_role_member_matrix.ascx" />
-    <Content Include="usercontrol\app\UserControl_role_notification_mapping.ascx" />
-    <Content Include="usercontrol\app\UserControl_role_notification_matrix.ascx" />
-    <Content Include="usercontrol\app\UserControl_role_privilege_mapping.ascx" />
-    <Content Include="usercontrol\app\UserControl_role_privilege_matrix.ascx" />
-    <Content Include="usercontrol\app\UserControl_update_progress_blocker.ascx" />
-    <Content Include="usercontrol\app\UserControl_user.ascx" />
-    <Content Include="usercontrol\app\UserControl_users_and_mapping_binder.ascx" />
-    <Content Include="usercontrol\app\UserControl_user_member_mapping.ascx" />
     <Content Include="usercontrol\ki\image\delete_x16_h.png" />
     <Content Include="usercontrol\ki\image\paperclip_16x16.gif" />
     <Content Include="usercontrol\ki\UserControl_about_by.ascx" />
@@ -476,6 +230,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="component\fs\" />
+    <Folder Include="js\" />
+    <Folder Include="template\notification\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Users\KevinAndrewLipscomb\Documents\SANDBOX\kveo-it-project\oscalib\oscalib.csproj">
