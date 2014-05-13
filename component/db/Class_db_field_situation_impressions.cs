@@ -109,6 +109,14 @@ namespace Class_db_field_situation_impressions
       return result;
       }
 
+    internal string ElaborationOfDescription(string description)
+      {
+      Open();
+      var elaboration_of_description = new MySqlCommand("select elaboration from field_situation_impression where description = '" + description + "'",connection).ExecuteScalar().ToString();
+      Close();
+      return elaboration_of_description;
+      }
+
     public bool Get
       (
       string id,
