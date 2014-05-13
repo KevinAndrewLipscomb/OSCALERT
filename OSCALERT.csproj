@@ -211,8 +211,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="deploy.bat" />
-    <Content Include="css\standard-overrides-for-ie6.css" />
-    <Content Include="css\standard.css" />
     <Content Include="unpublished.config" />
     <None Include="noninteractive\.crontab" />
     <Content Include="protected\Web.config" />
@@ -230,6 +228,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="css\" />
     <Folder Include="template\" />
   </ItemGroup>
   <ItemGroup>
