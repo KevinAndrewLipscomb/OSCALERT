@@ -237,7 +237,7 @@ namespace Class_biz_notifications
       {
       k.SmtpMailSend
         (
-        from:ConfigurationManager.AppSettings["sender_email_address_oscalert"],
+        from:ConfigurationManager.AppSettings["sender_email_address"],
         to:k.EMPTY,
         subject:k.EMPTY,
         message_string:elaboration,
