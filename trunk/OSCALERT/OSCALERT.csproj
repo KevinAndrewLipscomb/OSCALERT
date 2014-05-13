@@ -230,9 +230,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="component\fs\" />
-    <Folder Include="js\" />
-    <Folder Include="template\notification\" />
+    <Folder Include="template\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Users\KevinAndrewLipscomb\Documents\SANDBOX\kveo-it-project\oscalib\oscalib.csproj">
