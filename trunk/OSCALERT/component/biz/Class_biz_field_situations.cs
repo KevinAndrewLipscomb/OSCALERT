@@ -311,28 +311,31 @@ namespace Class_biz_field_situations
         //
         if (db_field_situations.BeMultAmbHolds() && (DateTime.Now - saved_multambholds_alert_timestamp > TimeSpan.Parse(ConfigurationManager.AppSettings["oscalert_inhibition_period_multambholds"])))
           {
+          impression_description = "MultAmbHolds";
           biz_notifications.IssueOscalert
             (
-            description:"MultAmbHolds",
-            elaboration:impression_elaboration
+            description:impression_description,
+            elaboration:db_field_situation_impressions.ElaborationOfDescription(impression_description)
             );
           saved_multambholds_alert_timestamp = DateTime.Now;
           }
         if (db_field_situations.BeMultAlsHolds() && (DateTime.Now - saved_multalsholds_alert_timestamp > TimeSpan.Parse(ConfigurationManager.AppSettings["oscalert_inhibition_period_multalsholds"])))
           {
+          impression_description = "MultAlsHolds";
           biz_notifications.IssueOscalert
             (
-            description:"MultAlsHolds",
-            elaboration:impression_elaboration
+            description:impression_description,
+            elaboration:db_field_situation_impressions.ElaborationOfDescription(impression_description)
             );
           saved_multalsholds_alert_timestamp = DateTime.Now;
           }
         if (db_field_situations.BeFireSurge() && (DateTime.Now - saved_firesurge_alert_timestamp > TimeSpan.Parse(ConfigurationManager.AppSettings["oscalert_inhibition_period_fire_surge"])))
           {
+          impression_description = "FireSurge";
           biz_notifications.IssueOscalert
             (
-            description:"FireSurge",
-            elaboration:impression_elaboration
+            description:impression_description,
+            elaboration:db_field_situation_impressions.ElaborationOfDescription(impression_description)
             );
           saved_firesurge_alert_timestamp = DateTime.Now;
           }
