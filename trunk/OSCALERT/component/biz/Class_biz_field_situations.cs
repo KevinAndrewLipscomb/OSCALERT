@@ -64,10 +64,24 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("SarCall");
           }
-        //if ()
-        //  {
-        //  impression_pecking_order.val = db_field_situation_impressions.GetPeckingOrderOfDescription("AirportAlert");
-        //  }
+        if(
+            (digest.num_ambulances >= 2)
+          &&
+            (digest.num_mci_trucks >= 1)
+          &&
+            (digest.num_supervisors >= 1)
+          &&
+            (digest.num_engines >= 1)
+          &&
+            (digest.num_ladders >= 1)
+          &&
+            (digest.num_bats >= 1)
+          &&
+            (digest.num_tacs >= 1)
+          )
+          {
+          impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("AirportAlert");
+          }
         if (digest.num_holds >= 1)
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("AmbNeeded");

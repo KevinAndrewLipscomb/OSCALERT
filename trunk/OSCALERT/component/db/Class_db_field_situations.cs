@@ -237,14 +237,14 @@ namespace Class_db_field_situations
         + " , sum(call_sign = 'FTBY') as be_ftby"
         + " , sum(call_sign = 'MIRT') as be_mirt"
         + " , sum(call_sign = 'STECH') as be_stech"
-        + " , sum(call_sign = 'SART') as be_sart"
+        + " , sum(call_sign REGEXP '^SART') as be_sart" // Both SART and SARTM have appeared in the CAD records.
         + " from"
         +   " ("
         +   " select incident_date"
         +   " , incident_num"
         +   " , incident_address"
         +   " , call_sign"
-        +   " , IF(call_sign in ('EMTALS','ETBY','FTBY','MIRT','MRT','SQTM','SART','TECH'),0," // especially informative indicators
+        +   " , IF(call_sign in ('EMTALS','ETBY','FTBY','MIRT','MRT','SQTM','SART','SARTM','TECH'),0," // especially informative indicators
         +        " IF(call_sign REGEXP '^R[[:digit:]]',10," // rescue area
         +           " IF(call_sign REGEXP '^TAC[[:digit:]]',20," // tactical channel
         +              " IF(call_sign REGEXP '^E[[:digit:]]',30," // engine
