@@ -311,7 +311,10 @@ namespace Class_ac_cad_activity_notification_agent
         }
       catch (Exception the_exception)
         {
-        k.EscalatedException(the_exception);
+        if (the_exception.Message != "Thread was being aborted.")
+          {
+          k.EscalatedException(the_exception);
+          }
         }
       }
 
