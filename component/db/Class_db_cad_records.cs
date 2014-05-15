@@ -307,6 +307,10 @@ namespace Class_db_cad_records
         //
         + " update cad_record full_table join cad_record invalid on"
         +   " ("
+        +     " full_table.be_current and invalid.be_current"
+        +   " and"
+        +     " (invalid.incident_num < full_table.incident_num)"
+        +   " and"
         +     " ("
                   //--
                   //
@@ -319,7 +323,7 @@ namespace Class_db_cad_records
         +                  " REPLACE("
         +                    " invalid.call_sign,"
         +                    " 'R',''),"
-        +                  "'S',''),"
+        +                  " 'S',''),"
         +               " 'P',''),"
         +            " 'D',''),"
         +         " IF(invalid.call_sign REGEXP '(^E[[:digit:]])|(^L[[:digit:]])|(^FRSQ[[:digit:]])|(^T[[:digit:]])'," // engines, ladders, frsqs, tankers
@@ -352,11 +356,8 @@ namespace Class_db_cad_records
                   //
                   //--
         +     " )"
-        +   " and"
-        +     " (invalid.incident_num < full_table.incident_num)"
         +   " )"
         + " set invalid.be_current = FALSE"
-        + " where invalid.be_current"
         + ";"
         //
         // Delete records that are most likely inaccessible to us for updating.
