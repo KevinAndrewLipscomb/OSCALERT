@@ -1,6 +1,7 @@
 using Class_db;
 using kix;
 using MySql.Data.MySqlClient;
+using System;
 using System.Collections;
 using System.Configuration;
 using System.Web.UI.WebControls;
@@ -138,6 +139,7 @@ namespace Class_db_notifications
 
     internal string TargetOfOscalert(string description)
       {
+      var target_of_oscalert = k.EMPTY;
       var condition_clause = k.EMPTY;
       if (new ArrayList() {"AlsNeeded","CardiacArrestAlsNeeded","MultAlsHolds"}.Contains(description))
         {
@@ -164,10 +166,14 @@ namespace Class_db_notifications
         condition_clause = " min_oscalert_peck_order_general <= (select pecking_order from field_situation_impression where description = '" + description + "')";
         }
       Open();
-      var target_of_oscalert_obj = new MySqlCommand("select IFNULL(GROUP_CONCAT(CONCAT(phone_num,'@',hostname)),'') from member join sms_gateway on (sms_gateway.id=member.phone_service_id) where " + condition_clause,connection)
-        .ExecuteScalar();
+      var dr = new MySqlCommand("select CONCAT(phone_num,'@',hostname) as sms_target from member join sms_gateway on (sms_gateway.id=member.phone_service_id) where " + condition_clause,connection).ExecuteReader();
+      while (dr.Read())
+        {
+        target_of_oscalert += dr["sms_target"].ToString() + k.COMMA;
+        }
+      dr.Close();
       Close();
-      return (target_of_oscalert_obj == null ? k.EMPTY : target_of_oscalert_obj.ToString());
+      return target_of_oscalert.TrimEnd(new char[] {Convert.ToChar(k.COMMA)});
       }
 
     } // end TClass_db_notifications
