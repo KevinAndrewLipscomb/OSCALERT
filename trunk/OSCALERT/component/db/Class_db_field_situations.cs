@@ -72,7 +72,7 @@ namespace Class_db_field_situations
       var be_meta_surge_fire = "1" == new MySqlCommand
         (
         "select"
-        + " IF(((sum(num_engines) >= 8) and (sum(num_ladders) >= 2) and (sum(num_frsqs) >= 2) and (sum(num_tacs) >= 2) and (sum(num_bats) >= 2) and (sum(num_ambulances) + sum(num_holds) >= 2) and (sum(num_supervisors) >= 2) and (sum(num_safes) >= 1))"
+        + " IF(((sum(num_engines) + sum(num_ladders) + sum(num_frsqs) >= 10) and (sum(num_tacs) >= 2) and (sum(num_bats) >= 2) and (sum(num_ambulances) + sum(num_holds) >= 2) and (sum(num_supervisors) >= 2) and (sum(num_safes) >= 1))"
         +     " or (sum(field_situation_impression.description = 'WorkingFire') >= 2)"
         +   " , 1, 0)"
         + " from field_situation"
