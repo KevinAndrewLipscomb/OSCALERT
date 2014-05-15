@@ -117,11 +117,7 @@ namespace Class_biz_field_situations
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("CardiacArrestAmbNeeded");
           }
         if(
-            (digest.num_engines >= 4)
-          &&
-            (digest.num_ladders >= 1)
-          &&
-            (digest.num_frsqs >= 1)
+            (digest.num_engines + digest.num_ladders + digest.num_frsqs >= 5)
           &&
             (digest.num_tacs >= 1)
           &&
@@ -136,18 +132,46 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("WorkingFire");
           }
-        //if (false)
-        //  {
-        //  impression_pecking_order.val = db_field_situation_impressions.GetPeckingOrderOfDescription("TwoAlarmFire");
-        //  }
+        if(
+            (digest.num_engines + digest.num_ladders + digest.num_frsqs >= 9)
+          &&
+            (digest.num_tacs >= 2)
+          &&
+            (digest.num_bats >= 2)
+          &&
+            (digest.num_cars >= 1)
+          &&
+            (digest.num_ambulances + digest.num_holds >= 2)
+          &&
+            (digest.num_supervisors >= 1)
+          &&
+            (digest.num_safes >= 1)
+          )
+          {
+          impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("TwoAlarmFire");
+          }
         //if (false)
         //  {
         //  impression_pecking_order.val = db_field_situation_impressions.GetPeckingOrderOfDescription("MajorFireIncident");
         //  }
-        //if (false)
-        //  {
-        //  impression_pecking_order.val = db_field_situation_impressions.GetPeckingOrderOfDescription("MultiAlarmFire");
-        //  }
+        if(
+            (digest.num_engines + digest.num_ladders + digest.num_frsqs >= 13)
+          &&
+            (digest.num_tacs >= 3)
+          &&
+            (digest.num_bats >= 3)
+          &&
+            (digest.num_cars >= 2)
+          &&
+            (digest.num_ambulances + digest.num_holds >= 3)
+          &&
+            (digest.num_supervisors >= 1)
+          &&
+            (digest.num_safes >= 1)
+          )
+          {
+          impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MultiAlarmFire");
+          }
         if(digest.be_sqtm)
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("Trap");
