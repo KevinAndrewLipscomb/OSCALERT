@@ -38,7 +38,7 @@ namespace Class_ac_cad_activity_notification_agent
       EventArgs e
       )
       {
-      try // Because this code only runs in the master_browser_thread, any exceptions will not bubble up to TGlobal.Application_Error(), so we must catch and raise them within master_browser_thread (I think).
+      try // Because this code only runs in the master_browser_thread, any exceptions will not bubble up to TGlobal.Application_Error(), so we must catch and escalate them within master_browser_thread (I think).
         {
         master_browser_timer.Stop();
         //
@@ -113,13 +113,16 @@ namespace Class_ac_cad_activity_notification_agent
         }
       catch (Exception the_exception)
         {
-        k.EscalatedException(the_exception);
+        if (the_exception.Message != "Thread was being aborted.")
+          {
+          k.EscalatedException(the_exception);
+          }
         }
       }
 
     private void master_browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
       {
-      try // Because this code only runs in the master_browser_thread, any exceptions will not bubble up to TGlobal.Application_Error(), so we must catch and raise them within master_browser_thread (I think).
+      try // Because this code only runs in the master_browser_thread, any exceptions will not bubble up to TGlobal.Application_Error(), so we must catch and escalate them within master_browser_thread (I think).
         {
         master_browser_timer.Stop();
         //
@@ -210,7 +213,7 @@ namespace Class_ac_cad_activity_notification_agent
       WebBrowserNavigatingEventArgs e
       )
       {
-      try // Because this code only runs in the master_browser_thread, any exceptions will not bubble up to TGlobal.Application_Error(), so we must catch and raise them within master_browser_thread (I think).
+      try // Because this code only runs in the master_browser_thread, any exceptions will not bubble up to TGlobal.Application_Error(), so we must catch and escalate them within master_browser_thread (I think).
         {
         master_navigation_counter.val++;
         //
@@ -233,7 +236,7 @@ namespace Class_ac_cad_activity_notification_agent
 
     private void MasterKickoff(bool be_browser_surface_visible_for_debugging)
       {
-      try // Because this code only runs in the master_browser_thread, any exceptions will not bubble up to TGlobal.Application_Error(), so we must catch and raise them within master_browser_thread (I think).
+      try // Because this code only runs in the master_browser_thread, any exceptions will not bubble up to TGlobal.Application_Error(), so we must catch and escalate them within master_browser_thread (I think).
         {
         master_browser = new WebBrowser();
         master_browser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(master_browser_DocumentCompleted);
@@ -299,7 +302,7 @@ namespace Class_ac_cad_activity_notification_agent
 
     public new void Dispose()
       {
-      try // Because this code only runs in the master_browser_thread, any exceptions will not bubble up to TGlobal.Application_Error(), so we must catch and raise them within master_browser_thread (I think).
+      try // Because this code only runs in the master_browser_thread, any exceptions will not bubble up to TGlobal.Application_Error(), so we must catch and escalate them within master_browser_thread (I think).
         {
         master_browser.Dispose();
         master_browser_thread.Abort();
