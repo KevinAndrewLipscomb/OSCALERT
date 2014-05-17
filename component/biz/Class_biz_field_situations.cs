@@ -150,10 +150,6 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("TwoAlarmFire");
           }
-        //if (false)
-        //  {
-        //  impression_pecking_order.val = db_field_situation_impressions.GetPeckingOrderOfDescription("MajorFireIncident");
-        //  }
         if(
             (digest.num_engines + digest.num_ladders + digest.num_frsqs >= 13)
           &&
