@@ -3,6 +3,7 @@ using Class_biz_roles;
 using Class_biz_user;
 using Class_biz_users;
 using Class_db_notifications;
+using Class_db_oscalert_logs;
 using kix;
 using System;
 using System.Configuration;
@@ -28,6 +29,7 @@ namespace Class_biz_notifications
 
     private string application_name = String.Empty;
     private TClass_db_notifications db_notifications = null;
+    private TClass_db_oscalert_logs db_oscalert_logs = null;
     private string host_domain_name = String.Empty;
     private string runtime_root_fullspec = String.Empty;
 
@@ -35,6 +37,7 @@ namespace Class_biz_notifications
       {
       application_name = ConfigurationManager.AppSettings["application_name"];
       db_notifications = new TClass_db_notifications();
+      db_oscalert_logs = new TClass_db_oscalert_logs();
       host_domain_name = ConfigurationManager.AppSettings["host_domain_name"];
       runtime_root_fullspec = ConfigurationManager.AppSettings["runtime_root_fullspec"];
       }
@@ -246,6 +249,7 @@ namespace Class_biz_notifications
         bcc:db_notifications.TargetOfOscalert(description:description),
         reply_to:ConfigurationManager.AppSettings["bouncer_email_address"]
         );
+      db_oscalert_logs.Enter(content:elaboration);
       }
 
     } // end TClass_biz_notifications

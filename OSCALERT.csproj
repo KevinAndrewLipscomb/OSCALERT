@@ -92,6 +92,7 @@
     <Compile Include="component\biz\Class_biz_notifications.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="component\biz\Class_biz_oscalert_logs.cs" />
     <Compile Include="component\biz\Class_biz_roles.cs" />
     <Compile Include="component\biz\Class_biz_user.cs" />
     <Compile Include="component\biz\Class_biz_users.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="component\db\Class_db_field_situation_impressions.cs" />
     <Compile Include="component\db\Class_db_members.cs" />
     <Compile Include="component\db\Class_db_notifications.cs" />
+    <Compile Include="component\db\Class_db_oscalert_logs.cs" />
     <Compile Include="component\db\Class_db_roles.cs" />
     <Compile Include="component\db\Class_db_user.cs" />
     <Compile Include="component\db\Class_db_users.cs" />
