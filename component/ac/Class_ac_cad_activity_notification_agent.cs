@@ -119,6 +119,7 @@ namespace Class_ac_cad_activity_notification_agent
         if (the_exception.Message != "Thread was being aborted.")
           {
           k.EscalatedException(the_exception);
+          throw;
           }
         }
       }
@@ -207,6 +208,7 @@ namespace Class_ac_cad_activity_notification_agent
           the_exception:the_exception,
           user_identity_name:master_browser.Document.ActiveElement.InnerHtml
           );
+        throw;
         }
       }
 
@@ -228,6 +230,7 @@ namespace Class_ac_cad_activity_notification_agent
       catch (Exception the_exception)
         {
         k.EscalatedException(the_exception);
+        throw;
         }
       }
 
@@ -260,6 +263,7 @@ namespace Class_ac_cad_activity_notification_agent
       catch (Exception the_exception)
         {
         k.EscalatedException(the_exception);
+        throw;
         }
       }
 
@@ -324,6 +328,7 @@ namespace Class_ac_cad_activity_notification_agent
         if (the_exception.Message != "Thread was being aborted.")
           {
           k.EscalatedException(the_exception);
+          throw;
           }
         }
       }
