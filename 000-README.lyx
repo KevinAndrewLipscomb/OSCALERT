@@ -538,6 +538,10 @@ NETWORK SERVICE
 \end_layout
 
 \begin_layout Section
+Establish a dedicated, specially-configured application pool
+\end_layout
+
+\begin_layout Section
 Set up cron jobs
 \end_layout
 
