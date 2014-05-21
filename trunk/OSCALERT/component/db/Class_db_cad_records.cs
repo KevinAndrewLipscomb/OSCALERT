@@ -181,9 +181,6 @@ namespace Class_db_cad_records
       string time_downloaded
       )
       {
-      //try
-      //  {
-
       //
       // Perform the Set in the usual fashion.
       //
@@ -244,11 +241,6 @@ namespace Class_db_cad_records
       Close();
       ////
       //return be_nature_unknown_after_set;
-
-      //  }
-      //catch (Exception the_exception)
-      //  {
-      //  }
       }
 
     internal object Summary(string id)
