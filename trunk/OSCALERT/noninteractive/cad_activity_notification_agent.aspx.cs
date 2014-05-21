@@ -18,11 +18,7 @@ namespace cad_activity_notification_agent
         //
         // Start the agent.  It will block until it terminates.
         //
-        // NOTE: The recommended Advanced Settings for the application pool in which the agent runs are:
-        //
-        // -  Process Model / Identity:  Administrator (this is not known to be the minimally-privileged setting)
-        // -  Process Model / Shutdown Time Limit (seconds):  86400
-        // -  Recycling / Request Limit:  1
+        // IMPORTANT:  See this app's 000-README regarding the recommendation to establish a dedicated, specially-configured application pool for this app to run in.
         //
         new TClass_ac_cad_activity_notification_agent(datetime_to_quit);
         //

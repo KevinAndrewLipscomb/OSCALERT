@@ -541,6 +541,65 @@ NETWORK SERVICE
 Establish a dedicated, specially-configured application pool
 \end_layout
 
+\begin_layout Standard
+OSCALERT is aberrant as an ASP.NET Web application because it presents no
+ useful GUI, uses a headless resource-intensive System.Windows.Forms.WebBrowser
+ object in an explicitly-launched separate thread, is very long-running,
+ and manages its own 
+\begin_inset Quotes eld
+\end_inset
+
+recycling
+\begin_inset Quotes erd
+\end_inset
+
+ when properly set up as a cron job.
+ Because of these peculiarities, you should not allow it to run in an IIS
+ application pool that also hosts other apps.
+ Instead, you should create a separate and distinct IIS application pool
+ just for OSCALERT.
+\end_layout
+
+\begin_layout Standard
+Furthermore, application pools with default settings do not support such
+ long-running applications or, in some environments, the use of the WebBrowser
+ object.
+ Consequently, the recommended Advanced Settings for OSCALERT's dedicated
+ application pool are:
+\end_layout
+
+\begin_layout Itemize
+Process Model / Identity: 
+\series bold
+Administrator
+\series default
+ (this is not known to be the minimally-privileged setting)
+\end_layout
+
+\begin_layout Itemize
+Process Model / Idle Time-out (minutes): 
+\series bold
+0
+\end_layout
+
+\begin_layout Itemize
+Process Model / Shutdown Time Limit (seconds): 
+\series bold
+86400
+\end_layout
+
+\begin_layout Itemize
+Recycling / Regular Time Interval (minutes): 
+\series bold
+0
+\end_layout
+
+\begin_layout Itemize
+Recycling / Request Limit: 
+\series bold
+1
+\end_layout
+
 \begin_layout Section
 Set up cron jobs
 \end_layout
