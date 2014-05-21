@@ -23,8 +23,11 @@ namespace Class_ac_cad_activity_notification_agent
     private TClass_biz_cad_records biz_cad_records = null;
     private TClass_biz_field_situations biz_field_situations = null;
     private WebBrowser master_browser;
+    private WebBrowserDocumentCompletedEventHandler master_browser_DocumentCompleted_event_handler;
+    private WebBrowserNavigatingEventHandler master_browser_Navigating_event_handler;
     private Thread master_browser_thread;
     private System.Timers.Timer master_browser_timer;
+    private ElapsedEventHandler master_browser_timer_Elapsed_event_handler;
     private Form form;
     private k.int_nonnegative master_navigation_counter = new k.int_nonnegative();
     private DateTime saved_datetime_to_quit;
@@ -239,8 +242,9 @@ namespace Class_ac_cad_activity_notification_agent
       try // Because this code only runs in the master_browser_thread, any exceptions will not bubble up to TGlobal.Application_Error(), so we must catch and escalate them within master_browser_thread (I think).
         {
         master_browser = new WebBrowser();
-        master_browser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(master_browser_DocumentCompleted);
-        master_browser.Navigating += new WebBrowserNavigatingEventHandler(master_browser_Navigating);
+        
+        master_browser.DocumentCompleted += master_browser_DocumentCompleted_event_handler = new WebBrowserDocumentCompletedEventHandler(master_browser_DocumentCompleted);
+        master_browser.Navigating += master_browser_Navigating_event_handler = new WebBrowserNavigatingEventHandler(master_browser_Navigating);
         //
         if (be_browser_surface_visible_for_debugging)
           {
@@ -274,7 +278,7 @@ namespace Class_ac_cad_activity_notification_agent
       //
       master_browser_timer = new System.Timers.Timer(interval:120000); // 2 minutes
       master_browser_timer.AutoReset = false;
-      master_browser_timer.Elapsed += new ElapsedEventHandler(master_browser_timer_Elapsed);
+      master_browser_timer.Elapsed += master_browser_timer_Elapsed_event_handler = new ElapsedEventHandler(master_browser_timer_Elapsed);
       //
       master_browser_thread = new Thread
         (
@@ -298,12 +302,15 @@ namespace Class_ac_cad_activity_notification_agent
       // Block until the master_browser_thread terminates.
       //
       master_browser_thread.Join();
+      master_browser_timer.Elapsed -= master_browser_timer_Elapsed_event_handler;
       }
 
     public new void Dispose()
       {
       try // Because this code only runs in the master_browser_thread, any exceptions will not bubble up to TGlobal.Application_Error(), so we must catch and escalate them within master_browser_thread (I think).
         {
+        master_browser.DocumentCompleted -= master_browser_DocumentCompleted_event_handler;
+        master_browser.Navigating -= master_browser_Navigating_event_handler;
         master_browser.Dispose();
         master_browser_thread.Abort();
         if (form != null)
