@@ -585,7 +585,13 @@ Process Model / Idle Time-out (minutes):
 \begin_layout Itemize
 Process Model / Shutdown Time Limit (seconds): 
 \series bold
-86400
+86340
+\end_layout
+
+\begin_layout Itemize
+Recycling / Disable Overlapped Recycle: 
+\series bold
+True
 \end_layout
 
 \begin_layout Itemize
