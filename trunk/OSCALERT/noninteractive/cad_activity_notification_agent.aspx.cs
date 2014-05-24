@@ -11,7 +11,10 @@ namespace cad_activity_notification_agent
     protected void Page_Load(object sender, System.EventArgs e)
       {
       var today_0326 = DateTime.Today.AddHours(3).AddMinutes(26);
-      var datetime_to_quit = (DateTime.Now < today_0326 ? today_0326 : today_0326.AddDays(1));
+      var today_1126 = DateTime.Today.AddHours(11).AddMinutes(26);
+      var today_1926 = DateTime.Today.AddHours(19).AddMinutes(26);
+      var now = DateTime.Now;
+      var datetime_to_quit = (now < today_0326 ? today_0326 : (now < today_1126 ? today_1126 : (now < today_1926 ? today_1926 : today_0326.AddDays(1))));
       //
       while (DateTime.Now < datetime_to_quit)
         {
