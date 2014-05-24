@@ -352,6 +352,11 @@ namespace Class_db_cad_records
         + " set invalid.be_current = FALSE"
         + ";"
         //
+        // Set be_current to FALSE on lingering "hold" designators.
+        //
+        + " update cad_record set be_current = FALSE where be_current and (call_sign REGEXP '^HOLD[[:digit:]]' or call_sign REGEXP '^HZC[[:digit:]]') and ABS(TIMESTAMPDIFF(MINUTE,time_of_alarm,CURTIME())) > 90"
+        + ";"
+        //
         // Delete records that are most likely inaccessible to us for updating.
         //
         + " delete from cad_record where incident_date < DATE_ADD(CURDATE(),INTERVAL -7 DAY)"
