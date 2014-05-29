@@ -616,7 +616,7 @@ namespace Class_db_field_situations
       my_sql_script.Delimiter = DELIMITER;
       my_sql_script.Query = code;
       Open();
-      my_sql_script.Execute();
+      ExecuteOneOffProcedureScriptWithTolerance(procedure_name,my_sql_script);
       //
       Close();
       }

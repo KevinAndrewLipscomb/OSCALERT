@@ -231,7 +231,7 @@ namespace Class_db_cad_records
       my_sql_script.Delimiter = DELIMITER;
       my_sql_script.Query = code;
       Open();
-      my_sql_script.Execute();
+      ExecuteOneOffProcedureScriptWithTolerance(procedure_name,my_sql_script);
       ////
       //// Determine if a Nature is known for this record.
       ////
