@@ -25,4 +25,4 @@ MAILTO=kevin.lipscomb@kvrs.org
 #
 # Other
 #
-@reboot wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/cad_activity_notification_agent.aspx
+@reboot sleep 120 && wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/cad_activity_notification_agent.aspx
