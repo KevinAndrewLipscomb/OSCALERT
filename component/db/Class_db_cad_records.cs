@@ -5,6 +5,7 @@ using Class_db_trail;
 using kix;
 using MySql.Data.MySqlClient;
 using System;
+using System.Configuration;
 using System.Web.UI.WebControls;
 
 namespace Class_db_cad_records
@@ -207,7 +208,7 @@ namespace Class_db_cad_records
       // The following code is adapted from Class_db_trail.MimicTraditionalInsertOnDuplicateKeyUpdate, but does not journal its activity.
       //
       const string DELIMITER = "~";
-      var procedure_name = "MTIODKU_" + DateTime.Now.Ticks.ToString("D19");
+      var procedure_name = "MTIODKU_" + ConfigurationManager.AppSettings["application_name"] + "_" + DateTime.Now.Ticks.ToString("D19");
       var code = "/* DELIMITER '" + DELIMITER + "' */"
       + " drop procedure if exists " + procedure_name
       + DELIMITER
@@ -225,7 +226,7 @@ namespace Class_db_cad_records
       + DELIMITER
       + " call " + procedure_name + "()"
       + DELIMITER
-      + " drop procedure " + procedure_name + "";
+      + " drop procedure if exists " + procedure_name;
       var my_sql_script = new MySqlScript();
       my_sql_script.Connection = connection;
       my_sql_script.Delimiter = DELIMITER;
