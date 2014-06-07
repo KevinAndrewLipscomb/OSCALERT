@@ -51,7 +51,34 @@ namespace Class_ac_cad_activity_notification_agent
         for (var i = new k.subtype<int>(2,rows.Count); i.val < i.LAST; i.val++)
           {
           cells = rows[i.val].GetElementsByTagName("td");
-          if ((cells.Count == 17) && (cells[5].InnerText != null)) // I don't know why the remote site sometimes provides a cell[5] with a null InnerText, but it does.
+          if(
+              (cells.Count == 17)
+            &&
+              (cells[0].InnerText != null)
+            &&
+              (cells[1].InnerText != null)
+            &&
+              (cells[4].InnerText != null)
+            &&
+              (cells[5].InnerText != null) // I don't know why the remote site sometimes provides a cell[5] with a null InnerText, but it does.
+            &&
+              (cells[8].InnerText != null)
+            &&
+              (cells[9].InnerText != null)
+            &&
+              (cells[10].InnerText != null)
+            &&
+              (cells[11].InnerText != null)
+            &&
+              (cells[12].InnerText != null)
+            &&
+              (cells[13].InnerText != null)
+            &&
+              (cells[14].InnerText != null)
+            &&
+              (cells[16].InnerText != null)
+            )
+          //then
             {
             biz_cad_records.Set
                 (
