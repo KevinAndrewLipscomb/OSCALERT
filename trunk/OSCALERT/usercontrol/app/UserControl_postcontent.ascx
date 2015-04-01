@@ -9,7 +9,7 @@
           <td>
             <table cellspacing="0" cellpadding="5" border="0">
               <tr>
-                <td style="border-left:2px dashed gray; border-top:2px dashed gray;" valign="top">
+                <td style="border-left:2px dashed lightsteelblue; border-top:2px dashed lightsteelblue;" valign="top">
                   <table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="0">
                     <tr>
                       <td>
@@ -21,11 +21,15 @@
                               <table cellspacing="0" cellpadding="5" border="0">
                                 <tr>
                                   <td valign="top">&bull;</td>
-                                  <td><small><a href="http://resource-1">External resource</a></small></td>
+                                  <td><small><a href="http://www.vbems.com/" target="_blank">vbems.com (non-government site)</a></small></td>
                                 </tr>
                                 <tr>
                                   <td valign="top">&bull;</td>
-                                  <td><small><a runat="server" href="~/resource/example.pdf" target="_blank">Internal resource</a></small></td>
+                                  <td><small><a href="http://www.vbgov.com/ems" target="_blank">vbgov.com/ems (government site)</a></small></td>
+                                </tr>
+                                <tr>
+                                  <td valign="top">&bull;</td>
+                                  <td><small><a href="http://www.vbrescuecouncil.org/" target="_blank">Council of Virginia Beach Volunteer Rescue Squads, Inc.</a></small></td>
                                 </tr>
                               </table>
                             </td>
@@ -36,7 +40,7 @@
                   </table>
                 </td>
                 <td>&nbsp;</td>
-                <td style="border-left:2px dashed gray; border-top:2px dashed gray;" valign="top">
+                <td style="border-left:2px dashed lightsteelblue; border-top:2px dashed lightsteelblue;" valign="top">
                   <table bordercolor="#dcdcdc" cellspacing="0" cellpadding="0" border="0">
                     <tr>
                       <td>

@@ -1,12 +1,12 @@
 // Derived from KiAspdotnetFramework/component/biz/Class~biz~~template~kicrudhelped~item.cs~template
 
+using Class_biz_notifications;
 using Class_db_field_situation_impressions;
 using Class_db_field_situations;
-using Class_biz_notifications;
 using kix;
 using System;
-using System.Collections;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace Class_biz_field_situations
   {
@@ -242,6 +242,22 @@ namespace Class_biz_field_situations
     public void BindDirectToListControl(object target)
       {
       db_field_situations.BindDirectToListControl(target);
+      }
+
+    internal string DeidentifiedRenditionOf(string address)
+      {
+      var deidentified_rendition_of = k.EMPTY;
+      var house_num = int.MaxValue;
+      var part_string_array = address.Split(k.SPACE.ToCharArray());
+      if (int.TryParse(part_string_array[0],out house_num))
+        {
+        deidentified_rendition_of = (house_num/100*100).ToString();
+        for (var i = new k.subtype<int>(1,part_string_array.Length); i.val < i.LAST; i.val++)
+          {
+          deidentified_rendition_of += k.SPACE + part_string_array[i.val];
+          }
+        }
+      return deidentified_rendition_of;
       }
 
     public bool Delete(string id)

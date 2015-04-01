@@ -72,10 +72,13 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Default.aspx" />
     <Content Include="exception.aspx" />
     <Content Include="Global.asax" />
     <Content Include="noninteractive\cad_activity_notification_agent.aspx" />
     <Content Include="timeout.aspx" />
+    <Content Include="usercontrol\app\UserControl_common_header_bar.ascx" />
+    <Content Include="usercontrol\app\UserControl_field_situation.ascx" />
     <Content Include="usercontrol\app\UserControl_postcontent.ascx" />
     <Content Include="usercontrol\app\UserControl_precontent.ascx" />
     <Content Include="usercontrol\app\UserControl_update_progress_blocker.ascx" />
@@ -110,6 +113,13 @@
     <Compile Include="component\db\Class_db_user.cs" />
     <Compile Include="component\db\Class_db_users.cs" />
     <Compile Include="component\db\Class_db__information_schema.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="exception.aspx.cs">
       <DependentUpon>exception.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -134,6 +144,20 @@
     </Compile>
     <Compile Include="timeout.aspx.designer.cs">
       <DependentUpon>timeout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrol\app\UserControl_common_header_bar.ascx.cs">
+      <DependentUpon>UserControl_common_header_bar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrol\app\UserControl_common_header_bar.ascx.designer.cs">
+      <DependentUpon>UserControl_common_header_bar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrol\app\UserControl_field_situation.ascx.cs">
+      <DependentUpon>UserControl_field_situation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usercontrol\app\UserControl_field_situation.ascx.designer.cs">
+      <DependentUpon>UserControl_field_situation.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_postcontent.ascx.cs">
       <DependentUpon>UserControl_postcontent.ascx</DependentUpon>
