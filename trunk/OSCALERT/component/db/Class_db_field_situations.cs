@@ -203,7 +203,7 @@ namespace Class_db_field_situations
         + " , sum(call_sign REGEXP '^CAR[[:digit:]]?') as num_cars"
         + " , sum(call_sign REGEXP '^N?E[[:digit:]]') as num_engines"
         + " , sum(call_sign REGEXP '^FBOA[[:digit:]]') as num_fboas"
-        + " , sum(call_sign REGEXP '^FRSQ[[:digit:]]') as num_frsqs"
+        + " , sum(call_sign REGEXP '^FR[[:digit:]]') as num_frsqs"
         + " , sum(call_sign REGEXP '^HAZ[[:digit:]]') as num_hazs"
         + " , sum(call_sign REGEXP '^L[[:digit:]]') as num_ladders"
         + " , sum(call_sign REGEXP '^SAFE[[:digit:]]') as num_safes"
@@ -232,7 +232,7 @@ namespace Class_db_field_situations
         +              " IF(call_sign REGEXP '^E[[:digit:]]',30," // engine
         +                 " IF(call_sign REGEXP '^NE[[:digit:]]',40," // navy engine
         +                    " IF(call_sign REGEXP '^L[[:digit:]]',50," // ladder
-        +                       " IF(call_sign REGEXP '^FRSQ[[:digit:]]',60," // fire squad
+        +                       " IF(call_sign REGEXP '^FR[[:digit:]]',60," // fire squad
         +                          " IF(call_sign REGEXP '^T[[:digit:]]',70," // tanker
         +                             " IF(call_sign REGEXP '^HAZ[[:digit:]]',80," // hazmat truck
         +                                " IF(call_sign REGEXP '^BTRK[[:digit:]]',90," // brush truck

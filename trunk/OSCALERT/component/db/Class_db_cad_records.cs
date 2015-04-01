@@ -319,7 +319,7 @@ namespace Class_db_cad_records
         +                  " 'S',''),"
         +               " 'P',''),"
         +            " 'D',''),"
-        +         " IF(invalid.call_sign REGEXP '(^E[[:digit:]])|(^L[[:digit:]])|(^FRSQ[[:digit:]])|(^T[[:digit:]])'," // engines, ladders, frsqs, tankers
+        +         " IF(invalid.call_sign REGEXP '(^E[[:digit:]])|(^L[[:digit:]])|(^FR[[:digit:]])|(^T[[:digit:]])'," // engines, ladders, frsqs, tankers
         +            " REPLACE(invalid.call_sign,'P',''),"
         +            " invalid.call_sign"
         +            " )"
@@ -341,7 +341,7 @@ namespace Class_db_cad_records
         +                 " 'S',''),"
         +               " 'P',''),"
         +            " 'D',''),"
-        +         " IF(full_table.call_sign REGEXP '(^E[[:digit:]])|(^L[[:digit:]])|(^FRSQ[[:digit:]])|(^T[[:digit:]])'," // engines, ladders, frsqs, tankers
+        +         " IF(full_table.call_sign REGEXP '(^E[[:digit:]])|(^L[[:digit:]])|(^FR[[:digit:]])|(^T[[:digit:]])'," // engines, ladders, frsqs, tankers
         +            " REPLACE(full_table.call_sign,'P',''),"
         +            " full_table.call_sign"
         +            " )"
