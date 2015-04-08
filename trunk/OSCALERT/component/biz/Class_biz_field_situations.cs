@@ -332,14 +332,16 @@ namespace Class_biz_field_situations
           {
           ss_broadcastify.AddAlert
             (
-            alert:Regex.Replace
-              (
-              input:impression_elaboration
-                .Replace(" http://goo.gl/lvMvXs",k.EMPTY)
-                .Replace(" Volunteers to your stations.",k.EMPTY),
-              pattern:" \\d+ ",
-              replacement:k.SPACE
-              )
+            alert:k.EMPTY
+            + Regex.Replace
+                (
+                input:impression_elaboration
+                  .Replace("OSCALERT: ",k.EMPTY)
+                  .Replace(" http://goo.gl/lvMvXs",k.EMPTY),
+                pattern:" \\d+ ",
+                replacement:k.SPACE
+                )
+            + " Active Case Board: http://goo.gl/StI8EX"
             );
           }
         }

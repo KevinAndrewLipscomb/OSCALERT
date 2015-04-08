@@ -36,7 +36,6 @@ namespace Class_ss_broadcastify
         request.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
 
 		    request.Accept = "text/html, application/xhtml+xml, */*";
-		    request.Referer = "http://www.broadcastify.com/manage/feed/14744";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
 		    request.ContentType = "application/x-www-form-urlencoded";
@@ -70,7 +69,7 @@ namespace Class_ss_broadcastify
 	    return true;
       }
 
-    private bool Request_www_broadcastify_com_Manage_Alert_Doupdatealerts
+    private bool Request_www_broadcastify_com_ManageFeed_Alert_Doupdatealerts
       (
       CookieContainer cookie_container,
       string alert,
@@ -81,12 +80,11 @@ namespace Class_ss_broadcastify
 
 	    try
 	      {
-		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.broadcastify.com/manage/");
+		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.broadcastify.com/manage/feed/14744");
         request.CookieContainer = cookie_container;
         request.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
 
 		    request.Accept = "text/html, application/xhtml+xml, */*";
-		    request.Referer = "http://www.broadcastify.com/manage/feed/14744";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
 		    request.ContentType = "application/x-www-form-urlencoded";
@@ -154,7 +152,7 @@ namespace Class_ss_broadcastify
       Login(cookie_container:cookie_container);
       //
       HttpWebResponse response;
-      if(!Request_www_broadcastify_com_Manage_Alert_Doupdatealerts
+      if(!Request_www_broadcastify_com_ManageFeed_Alert_Doupdatealerts
           (
           cookie_container:cookie_container,
           alert:alert,
