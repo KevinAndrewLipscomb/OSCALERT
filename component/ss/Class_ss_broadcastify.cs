@@ -80,11 +80,12 @@ namespace Class_ss_broadcastify
 
 	    try
 	      {
-		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.broadcastify.com/manage/feed/14744");
+		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.broadcastify.com/manage");
         request.CookieContainer = cookie_container;
         request.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
 
 		    request.Accept = "text/html, application/xhtml+xml, */*";
+        request.Referer = "http://www.broadcastify.com/manage/feed/14744";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
 		    request.ContentType = "application/x-www-form-urlencoded";
