@@ -3,4 +3,6 @@
   <add key="db_connection_string" value="Server=localhost;Database=oscardotnetdb;Uid=ki-oscalert;Pwd=~ki-oscalert-password~;Treat Tiny As Boolean=false;Respect Binary Flags=false;Allow User Variables=true;Default Command Timeout=300" />
   <add key="vbemsbridge_username" value="~"/>
   <add key="vbemsbridge_password" value="~"/>
+  <add key="broadcastify_username" value="~"/>
+  <add key="broadcastify_password" value="~"/>
 </appSettings>
