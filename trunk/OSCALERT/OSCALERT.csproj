@@ -49,6 +49,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files\Microsoft ASP.NET\AjaxControlToolkit.Binary.NET35\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.5.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\..\..\Program Files\MySQL\MySQL Connector Net 6.5.4\Assemblies\v2.0\MySql.Data.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -111,6 +115,8 @@
     <Compile Include="component\db\Class_db_user.cs" />
     <Compile Include="component\db\Class_db_users.cs" />
     <Compile Include="component\db\Class_db__information_schema.cs" />
+    <Compile Include="component\ss\Class_ss.cs" />
+    <Compile Include="component\ss\Class_ss_broadcastify.cs" />
     <Compile Include="exception.aspx.cs">
       <DependentUpon>exception.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -3,6 +3,7 @@
 using Class_biz_notifications;
 using Class_db_field_situation_impressions;
 using Class_db_field_situations;
+using Class_ss_broadcastify;
 using kix;
 using System;
 using System.Configuration;
@@ -20,9 +21,10 @@ namespace Class_biz_field_situations
     //
     //--
 
+    private TClass_biz_notifications biz_notifications = null;
     private TClass_db_field_situation_impressions db_field_situation_impressions = null;
     private TClass_db_field_situations db_field_situations = null;
-    private TClass_biz_notifications biz_notifications = null;
+    private TClass_ss_broadcastify ss_broadcastify = null;
 
     private void FormImpression
       (
@@ -219,9 +221,10 @@ namespace Class_biz_field_situations
 
     public TClass_biz_field_situations() : base()
       {
+      biz_notifications = new TClass_biz_notifications();
       db_field_situation_impressions = new TClass_db_field_situation_impressions();
       db_field_situations = new TClass_db_field_situations();
-      biz_notifications = new TClass_biz_notifications();
+      ss_broadcastify = new TClass_ss_broadcastify();
       }
 
     public bool Bind(string partial_spec, object target)
@@ -323,6 +326,20 @@ namespace Class_biz_field_situations
             elaboration:impression_elaboration
               .Replace("<address/>",digest.address)
               .Replace("<assignment/>",digest.assignment)
+            );
+          }
+        if (be_escalation && !impression_description.Contains("Need") && ! impression_description.Contains("Hold"))
+          {
+          ss_broadcastify.AddAlert
+            (
+            alert:Regex.Replace
+              (
+              input:impression_elaboration
+                .Replace(" http://goo.gl/lvMvXs",k.EMPTY)
+                .Replace(" Volunteers to your stations.",k.EMPTY),
+              pattern:" \\d+ ",
+              replacement:k.SPACE
+              )
             );
           }
         }
