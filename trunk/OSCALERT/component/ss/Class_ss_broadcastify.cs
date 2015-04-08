@@ -135,7 +135,6 @@ namespace Class_ss_broadcastify
         {
         throw new Exception("Request_www_broadcastify_com() returned FALSE.");
         }
-      response.Close();
       if (TitleOf(HtmlDocumentOf(ConsumedStreamOf(response))) != "Broadcastify - Manage Feed")
         {
         throw new Exception("Unexpected response from Request_www_broadcastify_com().");
