@@ -163,8 +163,7 @@ namespace Class_ss_broadcastify
           from:ConfigurationManager.AppSettings["sender_email_address"],
           to:ConfigurationManager.AppSettings["sender_email_address"],
           subject:"Response from Request_www_broadcastify_com_ManageFeed_Alert_Doupdatealerts()",
-          message_string:ConsumedStreamOf(response),
-          be_html:true
+          message_string:ConsumedStreamOf(response)
           );
         }
       else
