@@ -1,4 +1,5 @@
 using Class_ss;
+using kix;
 using System;
 using System.Configuration;
 using System.IO;
@@ -148,7 +149,7 @@ namespace Class_ss_broadcastify
       Login(cookie_container:cookie_container);
       //
       HttpWebResponse response;
-      if(!Request_www_broadcastify_com_ManageFeed_Alert_Doupdatealerts
+      if(Request_www_broadcastify_com_ManageFeed_Alert_Doupdatealerts
           (
           cookie_container:cookie_container,
           alert:alert,
@@ -156,6 +157,17 @@ namespace Class_ss_broadcastify
           )
         )
       //then
+        {
+        k.SmtpMailSend
+          (
+          from:ConfigurationManager.AppSettings["sender_email_address"],
+          to:ConfigurationManager.AppSettings["sender_email_address"],
+          subject:"Response from Request_www_broadcastify_com_ManageFeed_Alert_Doupdatealerts()",
+          message_string:ConsumedStreamOf(response),
+          be_html:true
+          );
+        }
+      else
         {
         throw new Exception("Request_www_broadcastify_com_Manage_Alert_Doupdatealerts() returned FALSE.");
         }
