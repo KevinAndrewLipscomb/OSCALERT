@@ -35,6 +35,7 @@ namespace Class_ss_broadcastify
 		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.broadcastify.com/login/");
         request.CookieContainer = cookie_container;
         request.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
+        request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 
 		    request.Accept = "text/html, application/xhtml+xml, */*";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
@@ -84,6 +85,7 @@ namespace Class_ss_broadcastify
 		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.broadcastify.com/manage");
         request.CookieContainer = cookie_container;
         request.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
+        request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 
 		    request.Accept = "text/html, application/xhtml+xml, */*";
         request.Referer = "http://www.broadcastify.com/manage/feed/14744";
