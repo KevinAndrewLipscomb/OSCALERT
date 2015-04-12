@@ -42,6 +42,7 @@ namespace Class_db_field_situations
       internal int num_safes;
       internal int num_sups;
       internal int num_tankers;
+      internal int num_zods;
       internal bool be_emtals;
       internal bool be_etby;
       internal bool be_mrt;
@@ -209,6 +210,7 @@ namespace Class_db_field_situations
         + " , sum(call_sign REGEXP '^SAFE[[:digit:]]') as num_safes"
         + " , sum(call_sign REGEXP '^SUP[[:digit:]]') as num_sups"
         + " , sum(call_sign REGEXP '^T[[:digit:]]') as num_tankers"
+        + " , sum(call_sign REGEXP '^ZOD[[:digit:]]') as num_zods"
         + " , sum(call_sign = 'EMTALS') as be_emtals"
         + " , sum(call_sign = 'ETBY') as be_etby"
         + " , sum(call_sign = 'MRT') as be_mrt"
@@ -314,6 +316,7 @@ namespace Class_db_field_situations
             num_safes = int.Parse(dr["num_safes"].ToString()),
             num_sups = int.Parse(dr["num_sups"].ToString()),
             num_tankers = int.Parse(dr["num_tankers"].ToString()),
+            num_zods = int.Parse(dr["num_zods"].ToString()),
             be_emtals = (dr["be_emtals"].ToString() == "1"),
             be_etby = (dr["be_etby"].ToString() == "1"),
             be_mrt = (dr["be_mrt"].ToString() == "1"),
@@ -373,7 +376,8 @@ namespace Class_db_field_situations
       out bool be_stech,
       out string num_sups,
       out string num_tankers,
-      out bool be_sart
+      out bool be_sart,
+      out string num_zods
       )
       {
       case_num = k.EMPTY;
@@ -414,6 +418,7 @@ namespace Class_db_field_situations
       num_sups = k.EMPTY;
       num_tankers = k.EMPTY;
       be_sart = false;
+      num_zods = k.EMPTY;
       var result = false;
       //
       Open();
@@ -458,6 +463,7 @@ namespace Class_db_field_situations
         num_sups = dr["num_sups"].ToString();
         num_tankers = dr["num_tankers"].ToString();
         be_sart = (dr["be_sart"].ToString() == "1");
+        num_zods = dr["num_zods"].ToString();
         result = true;
         }
       dr.Close();
@@ -521,7 +527,8 @@ namespace Class_db_field_situations
       bool be_stech,
       int num_sups,
       int num_tankers,
-      bool be_sart
+      bool be_sart,
+      int num_zods
       )
       {
       var childless_field_assignments_clause = k.EMPTY
@@ -564,6 +571,7 @@ namespace Class_db_field_situations
       + " , num_sups = NULLIF('" + num_sups.ToString() + "','')"
       + " , num_tankers = NULLIF('" + num_tankers.ToString() + "','')"
       + " , be_sart = " + be_sart.ToString()
+      + " , num_zods = NULLIF('" + num_zods.ToString() + "','')"
       + k.EMPTY;
       //
       var target_table_name = "field_situation";

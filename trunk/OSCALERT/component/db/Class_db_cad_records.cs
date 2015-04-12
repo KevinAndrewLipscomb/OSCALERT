@@ -285,7 +285,7 @@ namespace Class_db_cad_records
         +   " SELECT call_sign"
         +   " , max(incident_num) as max_incident_num"
         +   " FROM cad_record"
-        //+   " where call_sign not in ('ACPI','ANSH','ARSN','ECOMM','EYES','FAST','FCOMM','FIGP','INJ2','MISC','NBRU','OVD2','SICK','UNCO')"
+        +   " where call_sign not in (select designator from incident_nature)"
         +   " group by call_sign"
         +   " )"
         +   " as valid_record"
@@ -353,11 +353,13 @@ namespace Class_db_cad_records
         + " set invalid.be_current = FALSE"
         + ";"
         //
-        // Set be_current to FALSE on lingering "hold" and EMTALS designators.
+        // Set be_current to FALSE on lingering "hold", EMSALL, EMTALS, and "R#" designators.
         //
         + " update cad_record"
         + " set be_current = FALSE"
-        + " where be_current and (call_sign REGEXP '^HOLD[[:digit:]]' or call_sign REGEXP '^HZC[[:digit:]]' or call_sign = 'EMTALS') and ABS(TIMESTAMPDIFF(MINUTE,time_of_alarm,CURTIME())) > 90"
+        + " where be_current"
+        +   " and (call_sign REGEXP '^HOLD[[:digit:]]' or call_sign REGEXP '^HZC[[:digit:]]' or call_sign in ('EMSALL','EMTALS') or call_sign REGEXP '^R[[:digit:]]')"
+        +   " and ABS(TIMESTAMPDIFF(MINUTE,time_of_alarm,CURTIME())) > 90"
         + ";"
         //
         // Set be_current to FALSE on the CBNF designator.
