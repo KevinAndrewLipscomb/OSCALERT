@@ -48,7 +48,7 @@ namespace Class_ss_broadcastify
 
 		    request.Method = "POST";
 
-		    string postString = @"username=" + HttpUtility.UrlEncode(username) + "&password=" + HttpUtility.UrlEncode(password) + "&redirect=%2Fmanage%2Ffeed%2F14744&action=auth";
+		    string postString = @"username=" + HttpUtility.UrlEncode(username) + "&password=" + HttpUtility.UrlEncode(password) + "&redirect=%2Fmanage%2Ffeed%2F14744%23ui-tabs-2&action=auth";
 		    byte[] postBytes = System.Text.Encoding.UTF8.GetBytes(postString);
 		    request.ContentLength = postBytes.Length;
 		    Stream stream = request.GetRequestStream();
@@ -82,7 +82,7 @@ namespace Class_ss_broadcastify
 
 	    try
 	      {
-		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.broadcastify.com/manage");
+		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.broadcastify.com/manage/");
         request.CookieContainer = cookie_container;
         request.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
         request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
