@@ -58,7 +58,7 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("AlsEms");
           }
-        if (digest.be_mrt || (digest.num_fboas >= 1) || (digest.num_rbs >= 1))
+        if (digest.be_mrt || (digest.num_fboas >= 1) || (digest.num_rbs >= 1) || (digest.num_zods >= 1))
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MrtCall");
           }
@@ -313,7 +313,8 @@ namespace Class_biz_field_situations
           be_stech:digest.be_stech,
           num_sups:digest.num_sups,
           num_tankers:digest.num_tankers,
-          be_sart:digest.be_sart
+          be_sart:digest.be_sart,
+          num_zods:digest.num_zods
           );
         //
         if (be_escalation && (impression_description != "WorkingFire"))
@@ -425,7 +426,8 @@ namespace Class_biz_field_situations
       out bool be_stech,
       out string num_sups,
       out string num_tankers,
-      out bool be_sart
+      out bool be_sart,
+      out string num_zods
       )
       {
       return db_field_situations.Get
@@ -468,7 +470,8 @@ namespace Class_biz_field_situations
         out be_stech,
         out num_sups,
         out num_tankers,
-        out be_sart
+        out be_sart,
+        out num_zods
         );
       }
 
@@ -512,7 +515,8 @@ namespace Class_biz_field_situations
       bool be_stech,
       int num_sups,
       int num_tankers,
-      bool be_sart
+      bool be_sart,
+      int num_zods
       )
       {
       db_field_situations.Set
@@ -555,7 +559,8 @@ namespace Class_biz_field_situations
         be_stech,
         num_sups,
         num_tankers,
-        be_sart
+        be_sart,
+        num_zods
         );
       }
 
