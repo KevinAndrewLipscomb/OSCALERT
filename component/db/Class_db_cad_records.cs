@@ -353,9 +353,16 @@ namespace Class_db_cad_records
         + " set invalid.be_current = FALSE"
         + ";"
         //
-        // Set be_current to FALSE on lingering "hold" designators.
+        // Set be_current to FALSE on lingering "hold" and EMTALS designators.
         //
-        + " update cad_record set be_current = FALSE where be_current and (call_sign REGEXP '^HOLD[[:digit:]]' or call_sign REGEXP '^HZC[[:digit:]]') and ABS(TIMESTAMPDIFF(MINUTE,time_of_alarm,CURTIME())) > 90"
+        + " update cad_record"
+        + " set be_current = FALSE"
+        + " where be_current and (call_sign REGEXP '^HOLD[[:digit:]]' or call_sign REGEXP '^HZC[[:digit:]]' or call_sign = 'EMTALS') and ABS(TIMESTAMPDIFF(MINUTE,time_of_alarm,CURTIME())) > 90"
+        + ";"
+        //
+        // Set be_current to FALSE on the CBNF designator.
+        //
+        + " update cad_record set be_current = FALSE where be_current and call_sign = 'CBNF'"
         + ";"
         //
         // Delete records that are most likely inaccessible to us for updating.
