@@ -317,6 +317,11 @@ namespace Class_biz_field_situations
           num_zods:digest.num_zods
           );
         //
+        impression_elaboration = impression_elaboration
+        .Replace("<address/>",digest.address)
+        .Replace("<assignment/>",digest.assignment)
+        ;
+        //
         if (be_escalation && (impression_description != "WorkingFire"))
           {
           be_any_case_escalated = true;
@@ -325,8 +330,6 @@ namespace Class_biz_field_situations
             (
             description:impression_description,
             elaboration:impression_elaboration
-              .Replace("<address/>",digest.address)
-              .Replace("<assignment/>",digest.assignment)
             );
           }
         if (be_escalation && !impression_description.Contains("Need") && ! impression_description.Contains("Hold"))
