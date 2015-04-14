@@ -358,7 +358,12 @@ namespace Class_db_cad_records
         + " update cad_record"
         + " set be_current = FALSE"
         + " where be_current"
-        +   " and (call_sign REGEXP '^HOLD[[:digit:]]' or call_sign REGEXP '^HZC[[:digit:]]' or call_sign in ('EMSALL','EMTALS') or call_sign REGEXP '^R[[:digit:]]')"
+        +   " and"
+        +     " ("
+        +       " call_sign REGEXP '^HOLD[[:digit:]]' or call_sign REGEXP '^HZC[[:digit:]]' or call_sign REGEXP '^R[[:digit:]]'"
+        +     " or"
+        +       " call_sign in (select designator from ephemeral_dispatch)"
+        +     " )"
         +   " and ABS(TIMESTAMPDIFF(MINUTE,time_of_alarm,CURTIME())) > 90"
         + ";"
         //
