@@ -364,7 +364,7 @@ namespace Class_db_cad_records
         +     " or"
         +       " call_sign in (select designator from ephemeral_dispatch)"
         +     " )"
-        +   " and ABS(TIMESTAMPDIFF(MINUTE,time_of_alarm,CURTIME())) > 90"
+        +   " and ABS(TIMESTAMPDIFF(MINUTE,ADDTIME(incident_date,time_of_alarm),CURTIME())) > 90"
         + ";"
         //
         // Set be_current to FALSE on the CBNF designator.
