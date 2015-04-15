@@ -161,6 +161,10 @@ namespace Class_db_notifications
         {
         condition_clause = " do_oscalert_for_sart";
         }
+      else if (description == "WorkingFire")
+        {
+        condition_clause = " FALSE"; // Suppress notifications, as this in itself is not an EMS-alertable event.  Logging takes place anyway, because it is of interest on the Active Case Board.
+        }
       else
         {
         condition_clause = " min_oscalert_peck_order_general <= (select pecking_order from field_situation_impression where description = '" + description + "')";
