@@ -334,19 +334,39 @@ namespace Class_biz_field_situations
           }
         if (be_escalation && !impression_description.Contains("Need") && ! impression_description.Contains("Hold"))
           {
-          ss_broadcastify.AddAlert
+          var broadcastify_alert = impression_elaboration;
+          //
+          // Perform simple replacements.
+          //
+          broadcastify_alert = broadcastify_alert
+          .Replace("OSCALERT: ",k.EMPTY)
+          .Replace(" http://goo.gl/lvMvXs",k.EMPTY)
+          .Replace("Assgnmt=","Assgnmt: ")
+          ;
+          //
+          // Remove house numbers.
+          //
+          broadcastify_alert = Regex.Replace
             (
-            alert:k.EMPTY
-            + Regex.Replace
-                (
-                input:impression_elaboration
-                  .Replace("OSCALERT: ",k.EMPTY)
-                  .Replace(" http://goo.gl/lvMvXs",k.EMPTY),
-                pattern:" \\d+ ",
-                replacement:k.SPACE
-                )
-            + " Active Case Board: http://goo.gl/StI8EX"
+            input:broadcastify_alert,
+            pattern:" \\d+ ",
+            replacement:k.SPACE
             );
+          //
+          // Make "Assgnmt" clauses (which are the only places we'll encounter a comma not followed by a space) wrapable.
+          //
+          broadcastify_alert = Regex.Replace
+            (
+            input:broadcastify_alert,
+            pattern:",([^ ])",
+            replacement:" $1"
+            );
+          //
+          // Append short link to Active Case Board.
+          //
+          broadcastify_alert += " Active Case Board: http://goo.gl/StI8EX";
+          //
+          ss_broadcastify.AddAlert(broadcastify_alert);
           }
         }
       db_field_situations.DeleteAnyStillStale();
