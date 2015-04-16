@@ -1,6 +1,7 @@
 // Derived from KiAspdotnetFramework/component/biz/Class~biz~~template~kicrudhelped~item.cs~template
 
 using Class_biz_notifications;
+using Class_biz_publicity;
 using Class_db_field_situation_impressions;
 using Class_db_field_situations;
 using Class_ss_broadcastify;
@@ -22,6 +23,7 @@ namespace Class_biz_field_situations
     //--
 
     private TClass_biz_notifications biz_notifications = null;
+    private TClass_biz_publicity biz_publicity = null;
     private TClass_db_field_situation_impressions db_field_situation_impressions = null;
     private TClass_db_field_situations db_field_situations = null;
     private TClass_ss_broadcastify ss_broadcastify = null;
@@ -222,6 +224,7 @@ namespace Class_biz_field_situations
     public TClass_biz_field_situations() : base()
       {
       biz_notifications = new TClass_biz_notifications();
+      biz_publicity = new TClass_biz_publicity();
       db_field_situation_impressions = new TClass_db_field_situation_impressions();
       db_field_situations = new TClass_db_field_situations();
       ss_broadcastify = new TClass_ss_broadcastify();
@@ -322,7 +325,7 @@ namespace Class_biz_field_situations
         .Replace("<assignment/>",digest.assignment)
         ;
         //
-        if (be_escalation && (impression_description != "WorkingFire"))
+        if (be_escalation)
           {
           be_any_case_escalated = true;
           //
@@ -334,39 +337,7 @@ namespace Class_biz_field_situations
           }
         if (be_escalation && !impression_description.Contains("Need") && ! impression_description.Contains("Hold"))
           {
-          var broadcastify_alert = impression_elaboration;
-          //
-          // Perform simple replacements.
-          //
-          broadcastify_alert = broadcastify_alert
-          .Replace("OSCALERT: ",k.EMPTY)
-          .Replace(" http://goo.gl/lvMvXs",k.EMPTY)
-          .Replace("Assgnmt=","Assgnmt: ")
-          ;
-          //
-          // Remove house numbers.
-          //
-          broadcastify_alert = Regex.Replace
-            (
-            input:broadcastify_alert,
-            pattern:" \\d+ ",
-            replacement:k.SPACE
-            );
-          //
-          // Make "Assgnmt" clauses (which are the only places we'll encounter a comma not followed by a space) wrapable.
-          //
-          broadcastify_alert = Regex.Replace
-            (
-            input:broadcastify_alert,
-            pattern:",([^ ])",
-            replacement:" $1"
-            );
-          //
-          // Append short link to Active Case Board.
-          //
-          broadcastify_alert += " Active Case Board: http://goo.gl/StI8EX";
-          //
-          ss_broadcastify.AddAlert(broadcastify_alert);
+          ss_broadcastify.AddAlert(biz_publicity.RenditionOfOscalertLogContent(impression_elaboration) + " Active Case Board: http://goo.gl/StI8EX");
           }
         }
       db_field_situations.DeleteAnyStillStale();
