@@ -367,9 +367,9 @@ namespace Class_db_cad_records
         +   " and ABS(TIMESTAMPDIFF(MINUTE,ADDTIME(incident_date,time_of_alarm),CURTIME())) > 90"
         + ";"
         //
-        // Set be_current to FALSE on the CBNF designator.
+        // Set be_current to FALSE on the CBNF and COMITF designators.
         //
-        + " update cad_record set be_current = FALSE where be_current and call_sign = 'CBNF'"
+        + " update cad_record set be_current = FALSE where be_current and call_sign in ('CBNF','COMITF')"
         + ";"
         //
         // Delete records that are most likely inaccessible to us for updating.
