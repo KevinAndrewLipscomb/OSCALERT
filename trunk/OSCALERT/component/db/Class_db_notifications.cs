@@ -161,9 +161,9 @@ namespace Class_db_notifications
         {
         condition_clause = " do_oscalert_for_sart";
         }
-      else if (description == "WorkingFire")
+      else if (new ArrayList() {"CardiacArrest","WorkingFire"}.Contains(description))
         {
-        condition_clause = " FALSE"; // Suppress notifications, as this in itself is not an EMS-alertable event.  Logging takes place anyway, because it is of interest on the Active Case Board.
+        condition_clause = " FALSE"; // Suppress notifications.  Logging takes place anyway, because it is of interest on the Active Case Board.
         }
       else
         {
