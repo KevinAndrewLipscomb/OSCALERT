@@ -15,7 +15,7 @@ set min_oscalert_peck_order_general = 3500
 where min_oscalert_peck_order_general = 3000
 ;
 update member
-set min_oscalert_peck_order_general = 3000
-where min_oscalert_peck_order_general = 3500
+set min_oscalert_peck_order_als = 3000
+where min_oscalert_peck_order_als = 3500
 ;
 COMMIT
