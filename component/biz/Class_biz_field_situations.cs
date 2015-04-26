@@ -60,6 +60,20 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("AlsEms");
           }
+        if(
+            (digest.be_emtals)
+          &&
+            (digest.num_ambulances + digest.num_holds == 1)
+          &&
+            (digest.num_engines + digest.num_ladders + digest.num_frsqs + digest.num_hazs + digest.num_squad_trucks == 1)
+          &&
+            (digest.num_supervisors >= 1)
+          &&
+            (digest.num_zone_cars + digest.num_hzcs == 2)
+          )
+          {
+          impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("CardiacArrest");
+          }
         if (digest.be_mrt || (digest.num_fboas >= 1) || (digest.num_rbs >= 1) || (digest.num_zods >= 1))
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MrtCall");
@@ -335,7 +349,7 @@ namespace Class_biz_field_situations
             elaboration:impression_elaboration
             );
           }
-        if (be_escalation && !impression_description.Contains("Need") && ! impression_description.Contains("Hold"))
+        if (be_escalation && (impression_description != "CardiacArrest") && !impression_description.Contains("Need") && ! impression_description.Contains("Hold"))
           {
           ss_broadcastify.AddAlert(biz_publicity.RenditionOfOscalertLogContent(impression_elaboration) + " Active Case Board: http://goo.gl/StI8EX");
           }
