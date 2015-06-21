@@ -349,7 +349,7 @@ namespace Class_biz_field_situations
             elaboration:impression_elaboration
             );
           }
-        if (be_escalation && (impression_description != "CardiacArrest") && !impression_description.Contains("Need") && ! impression_description.Contains("Hold"))
+        if (be_escalation && (impression_description.EndsWith("AlarmFire") || impression_description.StartsWith("Mci")))
           {
           ss_broadcastify.AddAlert(biz_publicity.RenditionOfOscalertLogContent(impression_elaboration) + " Active Case Board: http://goo.gl/StI8EX");
           }
