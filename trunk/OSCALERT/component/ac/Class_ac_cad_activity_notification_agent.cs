@@ -1,9 +1,9 @@
 using Class_biz_cad_records;
 using Class_biz_field_situations;
+using Class_ss_emsbridge;
 using kix;
 using System;
 using System.Configuration;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
@@ -22,6 +22,7 @@ namespace Class_ac_cad_activity_notification_agent
 
     private TClass_biz_cad_records biz_cad_records = null;
     private TClass_biz_field_situations biz_field_situations = null;
+    private TClass_ss_emsbridge ss_emsbridge;
     private WebBrowser master_browser;
     private WebBrowserDocumentCompletedEventHandler master_browser_DocumentCompleted_event_handler;
     private WebBrowserNavigatingEventHandler master_browser_Navigating_event_handler;
@@ -47,7 +48,12 @@ namespace Class_ac_cad_activity_notification_agent
         //
         var doc = master_browser.Document;
         var rows = doc.GetElementById("ajax_container").GetElementsByTagName("tr");
-        HtmlElementCollection cells; // If we declare this within the below for-loop, it's values can't be checked at exception-time in the debugger, so leave the declaration here.
+        //
+        // If we declare these within the below for-loop, their values can't be checked at exception-time in the debugger, so leave the declarations here.
+        //
+        HtmlElementCollection cells;
+        HtmlElement row;
+        //
         for (var i = new k.subtype<int>(2,rows.Count); i.val < i.LAST; i.val++)
           {
           cells = rows[i.val].GetElementsByTagName("td");
@@ -80,6 +86,18 @@ namespace Class_ac_cad_activity_notification_agent
             )
           //then
             {
+            row = rows[i.val];
+            var part_array = row.OuterHtml.Split
+              (
+              separator: new string[] { "cadWindow('", "')" },
+              options: StringSplitOptions.None
+              );
+            var nature = ss_emsbridge.NatureOf
+              (
+              incident_id:k.Safe(part_array[1], k.safe_hint_type.NUM),
+              cookie:master_browser.Document.Cookie
+              );
+            //
             biz_cad_records.Set
                 (
                 id:k.EMPTY,
@@ -96,18 +114,6 @@ namespace Class_ac_cad_activity_notification_agent
                 time_available:k.Safe(cells[14].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
                 time_downloaded:k.Safe(cells[16].InnerText.Trim(),k.safe_hint_type.DATE_TIME)
                 );
-            //  )
-            ////then
-            //  {
-            //  var row = rows[i.val];
-            //  var part_array = row.OuterHtml.Split
-            //    (
-            //    separator:new string[] {"cadWindow('","')"},
-            //    options:StringSplitOptions.None
-            //    );
-            //  var incident_id = k.Safe(part_array[1],k.safe_hint_type.NUM);
-            //  browser.Navigate("https://vbems.emsbridge.com/resource/apps/caddispatch/cad_dispatch_history_detail.cfm?IncidentID=" + incident_id);
-            //  }
             }
           }
         //
@@ -306,6 +312,7 @@ namespace Class_ac_cad_activity_notification_agent
       //
       biz_cad_records = new TClass_biz_cad_records();
       biz_field_situations = new TClass_biz_field_situations();
+      ss_emsbridge = new TClass_ss_emsbridge();
       //
       master_browser_timer = new System.Timers.Timer(interval:120000); // 2 minutes
       master_browser_timer.AutoReset = false;
