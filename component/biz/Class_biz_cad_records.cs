@@ -27,6 +27,10 @@ namespace Class_biz_cad_records
         {
         active_case_board_rendition_of = "Diabetic";
         }
+      else if (nature == "Eye Problem / Injury")
+        {
+        active_case_board_rendition_of = "Eye injury";
+        }
       else if (nature == "Fall Victim")
         {
         active_case_board_rendition_of = "Fall";
