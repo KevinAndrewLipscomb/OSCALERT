@@ -39,6 +39,10 @@ namespace Class_biz_cad_records
         {
         active_case_board_rendition_of = "Bleeding";
         }
+      else if (nature == "Psychiatric Problems")
+        {
+        active_case_board_rendition_of = "Mental";
+        }
       else if (nature == "Seizure / Convulsions")
         {
         active_case_board_rendition_of = "Seizure";
