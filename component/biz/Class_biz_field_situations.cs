@@ -61,15 +61,19 @@ namespace Class_biz_field_situations
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("AlsEms");
           }
         if(
-            (digest.be_emtals)
-          &&
-            (digest.num_ambulances + digest.num_holds == 1)
-          &&
-            (digest.num_engines + digest.num_ladders + digest.num_frsqs + digest.num_hazs + digest.num_squad_trucks == 1)
-          &&
-            (digest.num_supervisors >= 1)
-          &&
-            (digest.num_zone_cars + digest.num_hzcs == 2)
+            (digest.nature == "Cardiac Arrest")
+          ||
+            (
+              (digest.be_emtals)
+            &&
+              (digest.num_ambulances + digest.num_holds == 1)
+            &&
+              (digest.num_engines + digest.num_ladders + digest.num_frsqs + digest.num_hazs + digest.num_squad_trucks == 1)
+            &&
+              (digest.num_supervisors >= 1)
+            &&
+              (digest.num_zone_cars + digest.num_hzcs == 2)
+            )
           )
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("CardiacArrest");
@@ -109,11 +113,17 @@ namespace Class_biz_field_situations
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("AlsNeeded");
           }
         if(
-            (digest.num_ambulances + digest.num_holds == 1)
-          &&
-            (digest.num_engines + digest.num_ladders + digest.num_frsqs + digest.num_hazs + digest.num_squad_trucks == 1)
-          &&
-            (digest.num_supervisors >= 1)
+            (
+              (digest.nature == "Cardiac Arrest")
+            ||
+              (
+                (digest.num_ambulances + digest.num_holds == 1)
+              &&
+                (digest.num_engines + digest.num_ladders + digest.num_frsqs + digest.num_hazs + digest.num_squad_trucks == 1)
+              &&
+                (digest.num_supervisors >= 1)
+              )
+            )
           &&
             (digest.num_zone_cars + digest.num_hzcs == 2)
           &&
@@ -125,11 +135,17 @@ namespace Class_biz_field_situations
         if(
             (digest.num_holds == 1)
           &&
-            (digest.num_engines + digest.num_ladders + digest.num_frsqs + digest.num_hazs + digest.num_squad_trucks == 1)
-          &&
-            (digest.num_supervisors >= 1)
-          &&
-            (digest.num_zone_cars + digest.num_hzcs == 2)
+            (
+              (digest.nature == "Cardiac Arrest")
+            ||
+              (
+                (digest.num_engines + digest.num_ladders + digest.num_frsqs + digest.num_hazs + digest.num_squad_trucks == 1)
+              &&
+                (digest.num_supervisors >= 1)
+              &&
+                (digest.num_zone_cars + digest.num_hzcs == 2)
+              )
+            )
           )
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("CardiacArrestAmbNeeded");
@@ -186,7 +202,7 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MultiAlarmFire");
           }
-        if(digest.be_sqtm)
+        if ((digest.nature == "Accident/Pin") || digest.be_sqtm)
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("Trap");
           }
