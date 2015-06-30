@@ -49,14 +49,13 @@ namespace Class_ac_cad_activity_notification_agent
         var doc = master_browser.Document;
         var rows = doc.GetElementById("ajax_container").GetElementsByTagName("tr");
         //
-        // If we declare these within the below for-loop, their values can't be checked at exception-time in the debugger, so leave the declarations here.
-        //
-        HtmlElementCollection cells;
-        HtmlElement row;
+        var current_incident_num = k.EMPTY;
+        var nature = k.EMPTY;
+        var saved_incident_num = k.EMPTY;
         //
         for (var i = new k.subtype<int>(2,rows.Count); i.val < i.LAST; i.val++)
           {
-          cells = rows[i.val].GetElementsByTagName("td");
+          var cells = rows[i.val].GetElementsByTagName("td");
           if(
               (cells.Count == 17)
             &&
@@ -86,34 +85,40 @@ namespace Class_ac_cad_activity_notification_agent
             )
           //then
             {
-            row = rows[i.val];
-            var part_array = row.OuterHtml.Split
-              (
-              separator: new string[] { "cadWindow('", "')" },
-              options: StringSplitOptions.None
-              );
-            var nature = ss_emsbridge.NatureOf
-              (
-              incident_id:k.Safe(part_array[1], k.safe_hint_type.NUM),
-              cookie:master_browser.Document.Cookie
-              );
             //
-            biz_cad_records.Set
+            current_incident_num = k.Safe(cells[1].InnerText.Trim(),k.safe_hint_type.NUM);
+            if (current_incident_num != saved_incident_num)
+              {
+              var row = rows[i.val];
+              var part_array = row.OuterHtml.Split
                 (
-                id:k.EMPTY,
-                incident_date:k.Safe(cells[0].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
-                incident_num:k.Safe(cells[1].InnerText.Trim(),k.safe_hint_type.NUM),
-                incident_address:k.Safe(cells[4].InnerText.Trim(),k.safe_hint_type.MAKE_MODEL),
-                call_sign:k.Safe(cells[5].InnerText.Trim(),k.safe_hint_type.ALPHANUM),
-                time_initialized:k.Safe(cells[8].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
-                time_of_alarm:k.Safe(cells[9].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
-                time_enroute:k.Safe(cells[10].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
-                time_on_scene:k.Safe(cells[11].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
-                time_transporting:k.Safe(cells[12].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
-                time_at_hospital:k.Safe(cells[13].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
-                time_available:k.Safe(cells[14].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
-                time_downloaded:k.Safe(cells[16].InnerText.Trim(),k.safe_hint_type.DATE_TIME)
+                separator: new string[] { "cadWindow('", "')" },
+                options: StringSplitOptions.None
                 );
+              nature = ss_emsbridge.NatureOf
+                (
+                incident_id:k.Safe(part_array[1], k.safe_hint_type.NUM),
+                cookie:master_browser.Document.Cookie
+                );
+              }
+            biz_cad_records.Set
+              (
+              id:k.EMPTY,
+              incident_date:k.Safe(cells[0].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
+              incident_num:current_incident_num,
+              incident_address:k.Safe(cells[4].InnerText.Trim(),k.safe_hint_type.MAKE_MODEL),
+              call_sign:k.Safe(cells[5].InnerText.Trim(),k.safe_hint_type.ALPHANUM),
+              time_initialized:k.Safe(cells[8].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
+              time_of_alarm:k.Safe(cells[9].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
+              time_enroute:k.Safe(cells[10].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
+              time_on_scene:k.Safe(cells[11].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
+              time_transporting:k.Safe(cells[12].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
+              time_at_hospital:k.Safe(cells[13].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
+              time_available:k.Safe(cells[14].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
+              time_downloaded:k.Safe(cells[16].InnerText.Trim(),k.safe_hint_type.DATE_TIME),
+              nature:nature
+              );
+            saved_incident_num = current_incident_num;
             }
           }
         //
