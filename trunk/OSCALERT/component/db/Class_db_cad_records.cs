@@ -179,7 +179,8 @@ namespace Class_db_cad_records
       string time_transporting,
       string time_at_hospital,
       string time_available,
-      string time_downloaded
+      string time_downloaded,
+      string nature
       )
       {
       //
@@ -198,6 +199,7 @@ namespace Class_db_cad_records
       + " , time_at_hospital = STR_TO_DATE(NULLIF('" + time_at_hospital + "',''),'%H:%i')"
       + " , time_available = STR_TO_DATE(NULLIF('" + time_available + "',''),'%H:%i')"
       + " , time_downloaded = STR_TO_DATE(NULLIF('" + time_downloaded + "',''),'%m/%d/%y %H:%i')"
+      + " , nature = NULLIF('" + nature + "','')"
       + k.EMPTY;
       //
       var target_table_name = "cad_record";

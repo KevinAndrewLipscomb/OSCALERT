@@ -297,7 +297,7 @@ namespace Class_biz_field_situations
           address:digest.address,
           assignment:digest.assignment,
           time_initialized:digest.time_initialized,
-          nature:k.EMPTY,
+          nature:digest.nature,
           impression_id:impression_id,
           num_ambulances:digest.num_ambulances,
           num_zone_cars:digest.num_zone_cars,
@@ -349,7 +349,7 @@ namespace Class_biz_field_situations
             elaboration:impression_elaboration
             );
           }
-        if (be_escalation && (impression_description.EndsWith("AlarmFire") || impression_description.StartsWith("Mci")))
+        if (be_escalation && (impression_description.EndsWith("Fire") || impression_description.StartsWith("Mci")))
           {
           ss_broadcastify.AddAlert(biz_publicity.RenditionOfOscalertLogContent(impression_elaboration) + " Active Case Board: http://goo.gl/StI8EX");
           }

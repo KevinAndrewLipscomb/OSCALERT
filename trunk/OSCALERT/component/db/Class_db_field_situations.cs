@@ -54,6 +54,7 @@ namespace Class_db_field_situations
       internal bool be_mirt;
       internal bool be_stech;
       internal bool be_sart;
+      internal string nature;
       }
 
     private class field_situation_summary
@@ -222,6 +223,7 @@ namespace Class_db_field_situations
         + " , sum(call_sign = 'MIRT') as be_mirt"
         + " , sum(call_sign = 'STECH') as be_stech"
         + " , sum(call_sign REGEXP '^SART') as be_sart" // Both SART and SARTM have appeared in the CAD records.
+        + " , nature"
         + " from"
         +   " ("
         +   " select incident_date"
@@ -275,6 +277,7 @@ namespace Class_db_field_situations
         +   " , DATE_FORMAT(time_on_scene,'%H:%i') as time_onscene"
         +   " , DATE_FORMAT(time_transporting,'%H:%i') as time_transporting"
         +   " , DATE_FORMAT(time_at_hospital,'%H:%i') as time_at_hospital"
+        +   " , nature"
         +   " from cad_record"
         +   " where be_current"
         +   " )"
@@ -327,7 +330,8 @@ namespace Class_db_field_situations
             be_ftby = (dr["be_ftby"].ToString() == "1"),
             be_mirt = (dr["be_mirt"].ToString() == "1"),
             be_stech = (dr["be_stech"].ToString() == "1"),
-            be_sart = (dr["be_sart"].ToString() == "1")
+            be_sart = (dr["be_sart"].ToString() == "1"),
+            nature = dr["nature"].ToString()
             }
           );
         }

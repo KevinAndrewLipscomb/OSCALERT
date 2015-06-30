@@ -90,7 +90,8 @@ namespace Class_biz_cad_records
       string time_transporting,
       string time_at_hospital,
       string time_available,
-      string time_downloaded
+      string time_downloaded,
+      string nature
       )
       {
       db_cad_records.Set
@@ -107,7 +108,8 @@ namespace Class_biz_cad_records
         time_transporting,
         time_at_hospital,
         time_available,
-        time_downloaded
+        time_downloaded,
+        nature
         );
       }
 
