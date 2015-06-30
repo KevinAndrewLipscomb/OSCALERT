@@ -95,10 +95,13 @@ namespace Class_ac_cad_activity_notification_agent
                 separator: new string[] { "cadWindow('", "')" },
                 options: StringSplitOptions.None
                 );
-              nature = ss_emsbridge.NatureOf
+              nature = biz_cad_records.ActiveCaseBoardRenditionOf
                 (
-                incident_id:k.Safe(part_array[1], k.safe_hint_type.NUM),
-                cookie:master_browser.Document.Cookie
+                ss_emsbridge.NatureOf
+                  (
+                  incident_id:k.Safe(part_array[1], k.safe_hint_type.NUM),
+                  cookie:master_browser.Document.Cookie
+                  )
                 );
               }
             biz_cad_records.Set
