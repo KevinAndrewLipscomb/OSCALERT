@@ -16,6 +16,60 @@ namespace Class_biz_cad_records
       db_cad_records = new TClass_db_cad_records();
       }
 
+    internal string ActiveCaseBoardRenditionOf(string nature)
+      {
+      var active_case_board_rendition_of = nature;
+      if (nature == "Chest Pain")
+        {
+        active_case_board_rendition_of = "Cardiac";
+        }
+      else if (nature == "Diabetic Problem")
+        {
+        active_case_board_rendition_of = "Diabetic";
+        }
+      else if (nature == "Fall Victim")
+        {
+        active_case_board_rendition_of = "Fall";
+        }
+      else if (nature == "Fire Standby")
+        {
+        active_case_board_rendition_of = "Fire Case";
+        }
+      else if (nature == "Hemorrhage / Laceration")
+        {
+        active_case_board_rendition_of = "Bleeding";
+        }
+      else if (nature == "Seizure / Convulsions")
+        {
+        active_case_board_rendition_of = "Seizure";
+        }
+      else if (nature == "Sick Person")
+        {
+        active_case_board_rendition_of = "Illness";
+        }
+      else if (nature == "Stroke / CVA")
+        {
+        active_case_board_rendition_of = "Stroke";
+        }
+      else if (nature == "Traffic Accident Pin / Entrapment")
+        {
+        active_case_board_rendition_of = "Accident/Pin";
+        }
+      else if (nature == "Traumatic Injury")
+        {
+        active_case_board_rendition_of = "Injury";
+        }
+      else if (nature == "Unconscious / Fainting")
+        {
+        active_case_board_rendition_of = "Unconscious";
+        }
+      else if (nature == "Unknown Problem / Man Down")
+        {
+        active_case_board_rendition_of = "Unknown";
+        }
+      return active_case_board_rendition_of;
+      }
+
     public bool Bind(string partial_spec, object target)
       {
       return db_cad_records.Bind(partial_spec, target);
