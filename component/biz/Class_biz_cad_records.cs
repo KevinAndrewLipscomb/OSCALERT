@@ -1,83 +1,30 @@
 // Derived from KiAspdotnetFramework/component/biz/Class~biz~~template~kicrudhelped~item.cs~template
 
+using Class_biz_incident_nature_translations;
 using Class_db_cad_records;
-using kix;
 using System;
-using System.Collections;
 
 namespace Class_biz_cad_records
   {
   public class TClass_biz_cad_records
     {
+
+    private TClass_biz_incident_nature_translations biz_incident_nature_translations = null;
     private TClass_db_cad_records db_cad_records = null;
 
     public TClass_biz_cad_records() : base()
       {
+      biz_incident_nature_translations = new TClass_biz_incident_nature_translations();
       db_cad_records = new TClass_db_cad_records();
       }
 
-    internal string ActiveCaseBoardRenditionOf(string nature)
+    internal string LocalRenditionOf(string nature)
       {
       var active_case_board_rendition_of = nature;
-      if (nature == "Anaphylactic Reaction")
+      var local_rendition = biz_incident_nature_translations.LocalOfForeign(nature);
+      if (local_rendition.Length > 0)
         {
-        active_case_board_rendition_of = "Anaphylactic Shock";
-        }
-      else if (nature == "Chest Pain")
-        {
-        active_case_board_rendition_of = "Cardiac";
-        }
-      else if (nature == "Diabetic Problem")
-        {
-        active_case_board_rendition_of = "Diabetic";
-        }
-      else if (nature == "Eye Problem / Injury")
-        {
-        active_case_board_rendition_of = "Eye injury";
-        }
-      else if (nature == "Fall Victim")
-        {
-        active_case_board_rendition_of = "Fall";
-        }
-      else if (nature == "Fire Standby")
-        {
-        active_case_board_rendition_of = "Fire Case";
-        }
-      else if (nature == "Hemorrhage / Laceration")
-        {
-        active_case_board_rendition_of = "Bleeding";
-        }
-      else if (nature == "Psychiatric Problems")
-        {
-        active_case_board_rendition_of = "Mental";
-        }
-      else if (nature == "Seizure / Convulsions")
-        {
-        active_case_board_rendition_of = "Seizure";
-        }
-      else if (nature == "Sick Person")
-        {
-        active_case_board_rendition_of = "Illness";
-        }
-      else if (nature == "Stroke / CVA")
-        {
-        active_case_board_rendition_of = "Stroke";
-        }
-      else if (nature == "Traffic Accident Pin / Entrapment")
-        {
-        active_case_board_rendition_of = "Accident/Pin";
-        }
-      else if (nature == "Traumatic Injury")
-        {
-        active_case_board_rendition_of = "Injury";
-        }
-      else if (nature == "Unconscious / Fainting")
-        {
-        active_case_board_rendition_of = "Unconscious";
-        }
-      else if (nature == "Unknown Problem / Man Down")
-        {
-        active_case_board_rendition_of = "Unknown";
+        active_case_board_rendition_of = local_rendition;
         }
       return active_case_board_rendition_of;
       }
