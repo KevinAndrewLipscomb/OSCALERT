@@ -60,6 +60,10 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("AlsEms");
           }
+        if (digest.nature == "Stabbing or Gunshot Wound")
+          {
+          impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("StabbingOrGunShotWound");
+          }
         if(
             (digest.nature == "Cardiac Arrest")
           ||
@@ -228,7 +232,7 @@ namespace Class_biz_field_situations
         var prior_impression_pecking_order = db_field_situations.PriorImpressionPeckingOrder(case_num:digest.case_num);
         if (impression_pecking_order.val > prior_impression_pecking_order.val)
           {
-          be_escalation = (impression_pecking_order.val > 1750);
+          be_escalation = (impression_pecking_order.val > 1599);
           }
         else
           {

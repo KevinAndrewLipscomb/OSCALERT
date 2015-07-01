@@ -161,7 +161,7 @@ namespace Class_db_notifications
         {
         condition_clause = " do_oscalert_for_sart";
         }
-      else if (new ArrayList() {"CardiacArrest","WorkingFire"}.Contains(description))
+      else if (new ArrayList() {"StabbingOrGunShotWound","CardiacArrest","WorkingFire"}.Contains(description))
         {
         condition_clause = " FALSE"; // Suppress notifications.  Logging takes place anyway, because it is of interest on the Active Case Board.
         }
