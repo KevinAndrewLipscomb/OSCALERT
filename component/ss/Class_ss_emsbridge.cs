@@ -60,12 +60,13 @@ namespace Class_ss_emsbridge
 
     internal string NatureOf(string incident_id, string cookie)
       {
+      var nature_of = k.EMPTY;
       HttpWebResponse response;
-      if (!Request_vbems_emsbridge_com_ResourceAppsCaddispatchCaddispatchhistorydetail(cookie, incident_id, out response))
+      if (Request_vbems_emsbridge_com_ResourceAppsCaddispatchCaddispatchhistorydetail(cookie, incident_id, out response))
         {
-        throw new Exception("Request_vbems_emsbridge_com_ResourceAppsCaddispatchCaddispatchhistorydetail() returned FALSE.");
+        nature_of = HtmlDocumentOf(ConsumedStreamOf(response)).DocumentNode.SelectSingleNode("/html/center/body/table/tr[9]/td[2]").InnerText.Trim();
         }
-      return HtmlDocumentOf(ConsumedStreamOf(response)).DocumentNode.SelectSingleNode("/html/center/body/table/tr[9]/td[2]").InnerText.Trim();
+      return nature_of;
       }
 
     }
