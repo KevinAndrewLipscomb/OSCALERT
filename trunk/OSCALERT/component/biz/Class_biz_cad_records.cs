@@ -19,7 +19,11 @@ namespace Class_biz_cad_records
     internal string ActiveCaseBoardRenditionOf(string nature)
       {
       var active_case_board_rendition_of = nature;
-      if (nature == "Chest Pain")
+      if (nature == "Anaphylactic Reaction")
+        {
+        active_case_board_rendition_of = "Anaphylactic Shock";
+        }
+      else if (nature == "Chest Pain")
         {
         active_case_board_rendition_of = "Cardiac";
         }
