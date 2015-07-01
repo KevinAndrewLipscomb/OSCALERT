@@ -95,7 +95,7 @@ namespace Class_ac_cad_activity_notification_agent
                 separator: new string[] { "cadWindow('", "')" },
                 options: StringSplitOptions.None
                 );
-              nature = biz_cad_records.ActiveCaseBoardRenditionOf
+              nature = biz_cad_records.LocalRenditionOf
                 (
                 ss_emsbridge.NatureOf
                   (
