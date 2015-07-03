@@ -62,7 +62,7 @@ namespace Class_biz_field_situations
           }
         if (digest.nature == "Stabbing or Gunshot Wound")
           {
-          impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("StabbingOrGunShotWound");
+          impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("StabbingOrGsw");
           }
         if(
             (digest.nature == "Cardiac Arrest")
