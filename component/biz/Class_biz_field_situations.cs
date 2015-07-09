@@ -108,13 +108,13 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("AirportAlert");
           }
-        if (digest.num_holds >= 1)
-          {
-          impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("AmbNeeded");
-          }
         if (digest.num_hzcs >= 1)
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("AlsNeeded");
+          }
+        if (digest.num_holds >= 1)
+          {
+          impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("AmbNeeded");
           }
         if(
             (
