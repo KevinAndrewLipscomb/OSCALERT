@@ -8,7 +8,6 @@ using Class_ss_broadcastify;
 using kix;
 using System;
 using System.Configuration;
-using System.Text.RegularExpressions;
 
 namespace Class_biz_field_situations
   {
@@ -369,7 +368,7 @@ namespace Class_biz_field_situations
             elaboration:impression_elaboration
             );
           }
-        if (be_escalation && (impression_description.EndsWith("Fire") || impression_description.StartsWith("Mci")))
+        if (be_escalation && (impression_description.EndsWith("AlarmFire") || impression_description.StartsWith("Mci")))
           {
           ss_broadcastify.AddAlert(biz_publicity.RenditionOfOscalertLogContent(impression_elaboration) + " Active Case Board: http://goo.gl/StI8EX");
           }
