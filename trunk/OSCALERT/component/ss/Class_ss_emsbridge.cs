@@ -64,7 +64,14 @@ namespace Class_ss_emsbridge
       HttpWebResponse response;
       if (Request_vbems_emsbridge_com_ResourceAppsCaddispatchCaddispatchhistorydetail(cookie, incident_id, out response))
         {
-        nature_of = HtmlDocumentOf(ConsumedStreamOf(response)).DocumentNode.SelectSingleNode("/html/center/body/table/tr[9]/td[2]").InnerText.Trim();
+        try
+          {
+          nature_of = HtmlDocumentOf(ConsumedStreamOf(response)).DocumentNode.SelectSingleNode("/html/center/body/table/tr[9]/td[2]").InnerText.Trim();
+          }
+        catch
+          {
+          nature_of = "-SCRAPE-ERROR-";
+          }
         }
       return nature_of;
       }
