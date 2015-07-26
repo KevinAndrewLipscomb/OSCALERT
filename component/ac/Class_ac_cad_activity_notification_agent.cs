@@ -341,10 +341,6 @@ namespace Class_ac_cad_activity_notification_agent
       master_browser_thread.SetApartmentState(ApartmentState.STA);
       master_browser_thread.Start();
       //
-      // I suspect a second thread with a second WebBrowser object will be required to navigate to the detail pages to get the natures.
-      //
-
-      //
       // Block until the master_browser_thread terminates.
       //
       master_browser_thread.Join();
