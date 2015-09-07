@@ -238,17 +238,20 @@ namespace Class_biz_notifications
       string elaboration
       )
       {
-      k.SmtpMailSend
-        (
-        from:ConfigurationManager.AppSettings["sender_email_address"],
-        to:k.EMPTY,
-        subject:k.EMPTY,
-        message_string:elaboration,
-        be_html:false,
-        cc:k.EMPTY,
-        bcc:db_notifications.TargetOfOscalert(description:description),
-        reply_to:ConfigurationManager.AppSettings["bouncer_email_address"]
-        );
+      foreach (var target in new TClass_biz_members().OscalertTargetQueue(description:description))
+        {
+        k.SmtpMailSend
+          (
+          from:ConfigurationManager.AppSettings["sender_email_address"],
+          to:target,
+          subject:k.EMPTY,
+          message_string:elaboration,
+          be_html:false,
+          cc:k.EMPTY,
+          bcc:k.EMPTY,
+          reply_to:ConfigurationManager.AppSettings["bouncer_email_address"]
+          );
+        }
       db_oscalert_logs.Enter(content:elaboration);
       }
 
