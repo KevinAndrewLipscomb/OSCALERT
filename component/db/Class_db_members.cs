@@ -2,8 +2,6 @@ using Class_db;
 using Class_db_trail;
 using kix;
 using MySql.Data.MySqlClient;
-using System.Collections;
-using System.Collections.Generic;
 using System.Web.UI.WebControls;
 
 namespace Class_db_members
@@ -155,50 +153,6 @@ namespace Class_db_members
       var last_name_of_member_id = new MySqlCommand("select last_name from member where id = '" + member_id + "'", connection).ExecuteScalar().ToString();
       Close();
       return last_name_of_member_id;
-      }
-
-    internal Queue<string> OscalertTargetQueue(string description)
-      {
-      var oscalert_target_queue = new Queue<string>();
-      var condition_clause = k.EMPTY;
-      if (new ArrayList() {"AlsNeeded","CardiacArrestAlsNeeded","MultAlsHolds"}.Contains(description))
-        {
-        condition_clause = " min_oscalert_peck_order_als <= (select pecking_order from field_situation_impression where description = '" + description + "')";
-        }
-      else if (description == "Trap")
-        {
-        condition_clause = " do_oscalert_for_trap";
-        }
-      else if (description == "AirportAlert")
-        {
-        condition_clause = " do_oscalert_for_airport_alert";
-        }
-      else if (description == "MrtCall")
-        {
-        condition_clause = " do_oscalert_for_mrt";
-        }
-      else if (description == "SarCall")
-        {
-        condition_clause = " do_oscalert_for_sart";
-        }
-      else if (new ArrayList() {"StabbingOrGsw","CardiacArrest","WorkingFire"}.Contains(description))
-        {
-        condition_clause = " FALSE"; // Suppress notifications.  Logging takes place anyway, because it is of interest on the Active Case Board.
-        }
-      else
-        {
-        condition_clause = " min_oscalert_peck_order_general <= (select pecking_order from field_situation_impression where description = '" + description + "')";
-        }
-      Open();
-      var dr = new MySqlCommand
-        ("select CONCAT(phone_num,'@',hostname) as sms_target from member join sms_gateway on (sms_gateway.id=member.phone_service_id) where " + condition_clause + " order by RAND()",connection).ExecuteReader();
-      while (dr.Read())
-        {
-        oscalert_target_queue.Enqueue(dr["sms_target"].ToString());
-        }
-      dr.Close();
-      Close();
-      return oscalert_target_queue;
       }
 
     public void SetEmailAddress(string id, string email_address)

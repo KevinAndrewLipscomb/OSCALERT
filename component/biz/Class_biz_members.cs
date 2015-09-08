@@ -1,6 +1,5 @@
 using Class_db_members;
 using kix;
-using System.Collections.Generic;
 
 namespace Class_biz_members
   {
@@ -99,11 +98,6 @@ namespace Class_biz_members
     public string LastNameOfMemberId(string member_id)
       {
       return db_members.LastNameOfMemberId(member_id);
-      }
-
-    internal Queue<string> OscalertTargetQueue(string description)
-      {
-      return db_members.OscalertTargetQueue(description);
       }
 
     public string UserIdOf(string member_id)
