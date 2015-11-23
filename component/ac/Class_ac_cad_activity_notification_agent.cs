@@ -332,8 +332,18 @@ namespace Class_ac_cad_activity_notification_agent
           (
           delegate
             {
-            MasterKickoff(be_browser_surface_visible_for_debugging:false);
-            Application.Run(this);
+            try
+              {
+              MasterKickoff(be_browser_surface_visible_for_debugging:false);
+              Application.Run(this);
+              }
+            catch (Exception the_exception)
+              {
+              //
+              // Send the_exception via email to (but do not page) the app admin and terminate the thread to fall back into the calling loop in hopes that the remote site will eventually return to normal behavior.
+              //
+              k.SilentAlarm(the_exception);
+              }
             }
           )
         );
