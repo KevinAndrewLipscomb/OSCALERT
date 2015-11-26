@@ -337,7 +337,7 @@ namespace Class_ac_cad_activity_notification_agent
               MasterKickoff(be_browser_surface_visible_for_debugging:false);
               Application.Run(this);
               }
-            catch (Exception the_exception)
+            catch (Exception the_exception) when (!(the_exception is ThreadAbortException))
               {
               //
               // Send the_exception via email to (but do not page) the app admin and terminate the thread to fall back into the calling loop in hopes that the remote site will eventually return to normal behavior.
