@@ -22,7 +22,7 @@ namespace Class_ss_emsbridge
 
     private bool Request_vbems_emsbridge_com_ResourceAppsCaddispatchCaddispatchhistorydetail
       (
-      string cookie,
+      CookieContainer cookie_container,
       string incident_id,
       out HttpWebResponse response
       )
@@ -32,15 +32,14 @@ namespace Class_ss_emsbridge
 	    try
 	    {
 		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://vbems.emsbridge.com/resource/apps/caddispatch/cad_dispatch_history_detail.cfm?IncidentID=" + incident_id);
+        request.CookieContainer = cookie_container;
         request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 
-		    request.Accept = "text/html, application/xhtml+xml, */*";
+		    request.Accept = "text/html, application/xhtml+xml, image/jxr, */*";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
-		    request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
+		    request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-		    request.Headers.Add("DNT", "1");
 		    request.Headers.Set(HttpRequestHeader.CacheControl, "no-cache");
-		    request.Headers.Set(HttpRequestHeader.Cookie,cookie);
 
 		    response = (HttpWebResponse)request.GetResponse();
 	    }
@@ -58,15 +57,20 @@ namespace Class_ss_emsbridge
 	    return true;
     }
 
-    internal string NatureOf(string incident_id, string cookie)
+    internal string NatureOf
+      (
+      string incident_id,
+      CookieContainer cookie_container
+      )
       {
       var nature_of = k.EMPTY;
       HttpWebResponse response;
-      if (Request_vbems_emsbridge_com_ResourceAppsCaddispatchCaddispatchhistorydetail(cookie, incident_id, out response))
+      if (Request_vbems_emsbridge_com_ResourceAppsCaddispatchCaddispatchhistorydetail(cookie_container, incident_id, out response))
         {
         try
           {
-          nature_of = HtmlDocumentOf(ConsumedStreamOf(response)).DocumentNode.SelectSingleNode("/html/center/body/table/tr[9]/td[2]").InnerText.Trim();
+          var document_node = HtmlDocumentOf(ConsumedStreamOf(response)).DocumentNode;
+          nature_of = document_node.SelectSingleNode("/html/center/body/table/tr[9]/td[2]").InnerText.Trim();
           }
         catch
           {

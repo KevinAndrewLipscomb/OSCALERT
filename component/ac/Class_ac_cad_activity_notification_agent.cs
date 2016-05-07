@@ -100,7 +100,7 @@ namespace Class_ac_cad_activity_notification_agent
                 ss_emsbridge.NatureOf
                   (
                   incident_id:k.Safe(part_array[1], k.safe_hint_type.NUM),
-                  cookie:master_browser.Document.Cookie
+                  cookie_container:TClass_ss_emsbridge.GetUriCookieContainer(master_browser.Document.Url)
                   )
                 );
               }
