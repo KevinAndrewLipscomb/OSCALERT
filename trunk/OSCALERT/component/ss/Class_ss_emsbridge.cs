@@ -1,11 +1,7 @@
 using Class_ss;
 using kix;
 using System;
-using System.Configuration;
-using System.IO;
 using System.Net;
-using System.Net.Cache;
-using System.Web;
 
 namespace Class_ss_emsbridge
   {
@@ -37,7 +33,7 @@ namespace Class_ss_emsbridge
 
 		    request.Accept = "text/html, application/xhtml+xml, image/jxr, */*";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
-		    request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
+		    request.UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 10.0; Win64; x64; Trident/7.0)";
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
 		    request.Headers.Set(HttpRequestHeader.CacheControl, "no-cache");
 
