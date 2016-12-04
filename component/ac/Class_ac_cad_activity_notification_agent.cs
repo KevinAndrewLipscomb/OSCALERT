@@ -286,7 +286,7 @@ namespace Class_ac_cad_activity_notification_agent
       try // Because this code only runs in the master_browser_thread, any exceptions will not bubble up to TGlobal.Application_Error(), so we must catch and escalate them within master_browser_thread (I think).
         {
         master_browser = new WebBrowser();
-        
+        //
         master_browser.DocumentCompleted += master_browser_DocumentCompleted_event_handler = new WebBrowserDocumentCompletedEventHandler(master_browser_DocumentCompleted);
         master_browser.Navigating += master_browser_Navigating_event_handler = new WebBrowserNavigatingEventHandler(master_browser_Navigating);
         //
@@ -297,6 +297,12 @@ namespace Class_ac_cad_activity_notification_agent
           form.Controls.Add(master_browser);
           form.Visible = true;
           }
+        //
+        //var javascript = "<script type='text/javascript'> function getUserAgent() {document.write(navigator.userAgent)} </script>";
+        //master_browser.Url = new Uri("about:blank");
+        //master_browser.Document.Write(javascript);
+        //master_browser.Document.InvokeScript("getUserAgent");
+        //var userAgent = master_browser.DocumentText.Substring(javascript.Length);
         //
         master_browser.Navigate("https://vbems.emsbridge.com");
         master_browser_timer.Start();
