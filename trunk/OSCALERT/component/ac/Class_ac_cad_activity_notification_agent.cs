@@ -196,7 +196,7 @@ namespace Class_ac_cad_activity_notification_agent
           //
           // Click the "Dispatch" link.
           //
-          doc.Links[1].InvokeMember("click");
+          doc.Links[2].InvokeMember("click");
           master_browser_timer.Start();
           }
         else if (master_navigation_counter.val == 6)
