@@ -377,9 +377,9 @@ namespace Class_ss_imagetrendelite
       EmsCadList current_ems_cad_list = null;
       try
         {
-        current_ems_cad_list = new JavaScriptSerializer(). Deserialize<EmsCadList>(HtmlDocumentOf(ConsumedStreamOf(response)).DocumentNode.InnerText);
+        current_ems_cad_list = new JavaScriptSerializer(). Deserialize<EmsCadList>(HtmlDocumentOf(ConsumedStreamOf(response)).DocumentNode.InnerText); // Keep enclosed in try-catch block since we've observed returned "Server Error"s.
         }
-      catch (Exception the_exception)
+      catch
         {
         }
       return current_ems_cad_list;
