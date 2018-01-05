@@ -3,6 +3,7 @@ using kix;
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Cache;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -150,6 +151,25 @@ namespace Class_ss
     protected static string ViewstateOf(HtmlDocument html_document)
       {
       return html_document.GetElementbyId("__VIEWSTATE").Attributes["value"].Value;
+      }
+
+    protected static void Normalize
+      (
+      HttpWebRequest request
+      )
+      {
+      request.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
+      request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+      }
+
+    protected static void NormalizeWithCookie
+      (
+      HttpWebRequest request,
+      CookieContainer cookie_container
+      )
+      {
+      Normalize(request);
+      request.CookieContainer = cookie_container;
       }
 
     }

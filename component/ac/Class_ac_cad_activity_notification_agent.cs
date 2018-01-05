@@ -1,9 +1,10 @@
 using Class_biz_cad_records;
 using Class_biz_field_situations;
-using Class_ss_emsbridge;
+using Class_ss_imagetrendelite;
 using kix;
 using System;
 using System.Configuration;
+using System.Net;
 using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
@@ -22,7 +23,7 @@ namespace Class_ac_cad_activity_notification_agent
 
     private TClass_biz_cad_records biz_cad_records = null;
     private TClass_biz_field_situations biz_field_situations = null;
-    private TClass_ss_emsbridge ss_emsbridge;
+    private TClass_ss_imagetrendelite ss_imagetrendelite;
     private WebBrowser master_browser;
     private WebBrowserDocumentCompletedEventHandler master_browser_DocumentCompleted_event_handler;
     private WebBrowserNavigatingEventHandler master_browser_Navigating_event_handler;
@@ -95,14 +96,14 @@ namespace Class_ac_cad_activity_notification_agent
                 separator: new string[] { "cadWindow('", "')" },
                 options: StringSplitOptions.None
                 );
-              nature = biz_cad_records.LocalRenditionOf
-                (
-                ss_emsbridge.NatureOf
-                  (
-                  incident_id:k.Safe(part_array[1], k.safe_hint_type.NUM),
-                  cookie_container:TClass_ss_emsbridge.GetUriCookieContainer(master_browser.Document.Url)
-                  )
-                );
+              //nature = biz_cad_records.LocalRenditionOf
+              //  (
+              //  ss_imagetrendelite.NatureOf
+              //    (
+              //    incident_id:k.Safe(part_array[1], k.safe_hint_type.NUM),
+              //    cookie_container:TClass_ss_emsbridge.GetUriCookieContainer(master_browser.Document.Url)
+              //    )
+              //  );
               }
             biz_cad_records.Set
               (
@@ -178,9 +179,9 @@ namespace Class_ac_cad_activity_notification_agent
           //
           // Log in.
           //
-          doc.GetElementById("UserId").SetAttribute("value", ConfigurationManager.AppSettings["vbemsbridge_username"]);
-          doc.GetElementById("Password").SetAttribute("value", ConfigurationManager.AppSettings["vbemsbridge_password"]);
-          doc.All["submit"].InvokeMember("click");
+          doc.GetElementById("username").SetAttribute("value", ConfigurationManager.AppSettings["vbemsbridge_username"]);
+          doc.GetElementById("password").SetAttribute("value", ConfigurationManager.AppSettings["vbemsbridge_password"]);
+          doc.All["login"].InvokeMember("click");
           master_browser_timer.Start();
           }
         else if (master_navigation_counter.val == 2)
@@ -304,7 +305,7 @@ namespace Class_ac_cad_activity_notification_agent
         //master_browser.Document.InvokeScript("getUserAgent");
         //var userAgent = master_browser.DocumentText.Substring(javascript.Length);
         //
-        master_browser.Navigate("https://vbems.emsbridge.com");
+        master_browser.Navigate("https://www.imagetrendelite.com/Elite/?organizationId=VBEMS");
         master_browser_timer.Start();
         }
       catch (Exception the_exception)
@@ -326,41 +327,101 @@ namespace Class_ac_cad_activity_notification_agent
       //
       biz_cad_records = new TClass_biz_cad_records();
       biz_field_situations = new TClass_biz_field_situations();
-      ss_emsbridge = new TClass_ss_emsbridge();
+      ss_imagetrendelite = new TClass_ss_imagetrendelite();
       //
-      master_browser_timer = new System.Timers.Timer(interval:120000); // 2 minutes
-      master_browser_timer.AutoReset = false;
-      master_browser_timer.Elapsed += master_browser_timer_Elapsed_event_handler = new ElapsedEventHandler(master_browser_timer_Elapsed);
-      //
-      master_browser_thread = new Thread
+      var authorization = ss_imagetrendelite.AuthorizationOf
         (
-        new ThreadStart
-          (
-          delegate
-            {
-            try
-              {
-              MasterKickoff(be_browser_surface_visible_for_debugging:false);
-              Application.Run(this);
-              }
-            catch (Exception the_exception) when (!(the_exception is ThreadAbortException))
-              {
-              //
-              // Send the_exception via email to (but do not page) the app admin and terminate the thread to fall back into the calling loop in hopes that the remote site will eventually return to normal behavior.
-              //
-              k.SilentAlarm(the_exception);
-              }
-            }
-          )
+        username:ConfigurationManager.AppSettings["vbemsbridge_username"],
+        password:ConfigurationManager.AppSettings["vbemsbridge_password"]
         );
-      master_browser_thread.Name = "cad_activity_notification_agent__master_browser";
-      master_browser_thread.SetApartmentState(ApartmentState.STA);
-      master_browser_thread.Start();
+      while (true)
+        {
+        var rows = ss_imagetrendelite.CurrentEmsCadList(authorization).Records;
+        //
+        var current_incident_num = k.EMPTY;
+        var nature = k.EMPTY;
+        var saved_incident_num = k.EMPTY;
+        //
+        for (var i = new k.subtype<int>(0,rows.Count); i.val < i.LAST; i.val++)
+          {
+          var cells = rows[i.val].Columns;
+          current_incident_num = cells[1].Value;
+          //if (current_incident_num != saved_incident_num)
+          //  {
+          //  //
+          //  // Determine nature, if supported.
+          //  //
+          //  }
+          biz_cad_records.Set
+            (
+            id:k.EMPTY,
+            incident_date:(cells[10].Value.Split())[0],
+            incident_num:current_incident_num,
+            incident_address:cells[5].Value,
+            call_sign:cells[7].Value,
+            time_initialized:(cells[10].Value.Length > 1 ? (cells[10].Value.Split())[1] : k.EMPTY),
+            time_of_alarm:(cells[0].Value.Length > 1 ? (cells[0].Value.Split())[1] : k.EMPTY),
+            time_enroute:(cells[11].Value.Length > 1 ? (cells[11].Value.Split())[1] : k.EMPTY),
+            time_on_scene:(cells[17].Value.Length > 1 ? (cells[17].Value.Split())[1] : k.EMPTY),
+            time_transporting:(cells[13].Value.Length > 1 ? (cells[13].Value.Split())[1] : k.EMPTY),
+            time_at_hospital:(cells[14].Value.Length > 1 ? (cells[14].Value.Split())[1] : k.EMPTY),
+            time_available:(cells[15].Value.Length > 1 ? (cells[15].Value.Split())[1] : k.EMPTY),
+            time_downloaded:k.EMPTY,
+            nature:nature
+            );
+          saved_incident_num = current_incident_num;
+          }
+        //
+        // Validate and trim the cad_records.
+        //
+        biz_cad_records.ValidateAndTrim();
+        //
+        // Notify members as appropriate.
+        //
+        biz_field_situations.DetectAndNotify
+          (
+          saved_multambholds_alert_timestamp:ref saved_meta_surge_alert_timestamp_ems,
+          saved_multalsholds_alert_timestamp:ref saved_meta_surge_alert_timestamp_als,
+          saved_firesurge_alert_timestamp:ref saved_meta_surge_alert_timestamp_fire
+          );
+        //
+        Thread.Sleep(millisecondsTimeout:int.Parse(ConfigurationManager.AppSettings["vbemsbridge_refresh_rate_in_seconds"])*1000);
+        //
+        }
       //
-      // Block until the master_browser_thread terminates.
-      //
-      master_browser_thread.Join();
-      master_browser_timer.Elapsed -= master_browser_timer_Elapsed_event_handler;
+      //master_browser_timer = new System.Timers.Timer(interval:120000); // 2 minutes
+      //master_browser_timer.AutoReset = false;
+      //master_browser_timer.Elapsed += master_browser_timer_Elapsed_event_handler = new ElapsedEventHandler(master_browser_timer_Elapsed);
+      ////
+      //master_browser_thread = new Thread
+      //  (
+      //  new ThreadStart
+      //    (
+      //    delegate
+      //      {
+      //      try
+      //        {
+      //        MasterKickoff(be_browser_surface_visible_for_debugging:false);
+      //        Application.Run(this);
+      //        }
+      //      catch (Exception the_exception) when (!(the_exception is ThreadAbortException))
+      //        {
+      //        //
+      //        // Send the_exception via email to (but do not page) the app admin and terminate the thread to fall back into the calling loop in hopes that the remote site will eventually return to normal behavior.
+      //        //
+      //        k.SilentAlarm(the_exception);
+      //        }
+      //      }
+      //    )
+      //  );
+      //master_browser_thread.Name = "cad_activity_notification_agent__master_browser";
+      //master_browser_thread.SetApartmentState(ApartmentState.STA);
+      //master_browser_thread.Start();
+      ////
+      //// Block until the master_browser_thread terminates.
+      ////
+      //master_browser_thread.Join();
+      //master_browser_timer.Elapsed -= master_browser_timer_Elapsed_event_handler;
       }
 
     public new void Dispose()

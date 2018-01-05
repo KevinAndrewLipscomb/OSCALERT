@@ -187,18 +187,18 @@ namespace Class_db_cad_records
       // Perform the Set in the usual fashion.
       //
       var childless_field_assignments_clause = k.EMPTY
-      + "incident_date = STR_TO_DATE(NULLIF('" + incident_date + "',''),'%m/%d/%y')"
+      + "incident_date = STR_TO_DATE(NULLIF('" + incident_date + "',''),'%m/%d/%Y')"
       + " , incident_num = NULLIF('" + incident_num + "','')"
       + " , incident_address = NULLIF('" + incident_address + "','')"
       + " , call_sign = NULLIF('" + call_sign + "','')"
-      + " , time_initialized = STR_TO_DATE(NULLIF('" + time_initialized + "',''),'%H:%i')"
-      + " , time_of_alarm = STR_TO_DATE(NULLIF('" + time_of_alarm + "',''),'%H:%i')"
-      + " , time_enroute = STR_TO_DATE(NULLIF('" + time_enroute + "',''),'%H:%i')"
-      + " , time_on_scene = STR_TO_DATE(NULLIF('" + time_on_scene + "',''),'%H:%i')"
-      + " , time_transporting = STR_TO_DATE(NULLIF('" + time_transporting + "',''),'%H:%i')"
-      + " , time_at_hospital = STR_TO_DATE(NULLIF('" + time_at_hospital + "',''),'%H:%i')"
-      + " , time_available = STR_TO_DATE(NULLIF('" + time_available + "',''),'%H:%i')"
-      + " , time_downloaded = STR_TO_DATE(NULLIF('" + time_downloaded + "',''),'%m/%d/%y %H:%i')"
+      + " , time_initialized = STR_TO_DATE(NULLIF('" + time_initialized + "',''),'%H:%i:%s')"
+      + " , time_of_alarm = STR_TO_DATE(NULLIF('" + time_of_alarm + "',''),'%H:%i:%s')"
+      + " , time_enroute = STR_TO_DATE(NULLIF('" + time_enroute + "',''),'%H:%i:%s')"
+      + " , time_on_scene = STR_TO_DATE(NULLIF('" + time_on_scene + "',''),'%H:%i:%s')"
+      + " , time_transporting = STR_TO_DATE(NULLIF('" + time_transporting + "',''),'%H:%i:%s')"
+      + " , time_at_hospital = STR_TO_DATE(NULLIF('" + time_at_hospital + "',''),'%H:%i:%s')"
+      + " , time_available = STR_TO_DATE(NULLIF('" + time_available + "',''),'%H:%i:%s')"
+      + " , time_downloaded = STR_TO_DATE(NULLIF('" + time_downloaded + "',''),'%m/%d/%y %H:%i:%s')"
       + " , nature = NULLIF('" + nature + "','')"
       + k.EMPTY;
       //
