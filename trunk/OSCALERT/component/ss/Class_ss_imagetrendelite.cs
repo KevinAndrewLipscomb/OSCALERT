@@ -107,9 +107,9 @@ namespace Class_ss_imagetrendelite
 	    return true;
       }
 
-    private bool Request_www_imagetrendelite_com_EliteOrganizationvbemsAuthapiSlideauthwindow
+    private bool Request_www_imagetrendelite_com_Load
       (
-      CookieContainer cookie_container,
+      string authorization,
       out HttpWebResponse response
       )
       {
@@ -117,12 +117,14 @@ namespace Class_ss_imagetrendelite
 
 	    try
 	    {
-		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/AuthAPI/SlideAuthWindow");
-        NormalizeWithCookie(request,cookie_container);
+		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/LoadDynamicListRecords?skip=0&pageSize=300&search=&comparisonType=STARTSWITH&sortColumn=UnitNotifiedByDispatch&sortAscending=false&viewID=910a358f-b03d-489a-bbe0-39d64ebc08cb&includeTotalRecordCount=false");
+          // The following addition GET parameter appears not to be strictly necessary:  &RequestIdentifier=8513f56b-e453-4ae7-8ffd-be1a46975429
+        Normalize(request);
 
 		    request.Accept = "*/*";
 		    request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
-		    request.Referer = "https://www.imagetrendelite.com/Elite/?organizationId=VBEMS";
+		    request.Headers.Set(HttpRequestHeader.Authorization, authorization);
+		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
 		    request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
@@ -141,202 +143,6 @@ namespace Class_ss_imagetrendelite
 	    }
 
 	    return true;
-      }
-
-    private bool Request_www_imagetrendelite_com_Cad
-      (
-      CookieContainer cookie_container,
-      out HttpWebResponse response
-      )
-      {
-	      response = null;
-
-	      try
-	      {
-		      HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems");
-          NormalizeWithCookie(request,cookie_container);
-
-		      request.Accept = "text/html, application/xhtml+xml, image/jxr, */*";
-		      request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/Dashboard";
-		      request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
-		      request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
-		      request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-
-		      response = (HttpWebResponse)request.GetResponse();
-	      }
-	      catch (WebException e)
-	      {
-		      if (e.Status == WebExceptionStatus.ProtocolError) response = (HttpWebResponse)e.Response;
-		      else return false;
-	      }
-	      catch (Exception)
-	      {
-		      if(response != null) response.Close();
-		      return false;
-	      }
-
-	      return true;
-      }
-
-      private bool Request_www_imagetrendelite_com_Get1
-        (
-        CookieContainer cookie_container,
-        string authorization,
-        out HttpWebResponse response
-        )
-        {
-	      response = null;
-
-	      try
-	      {
-		      HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/GetDynamicListViews?dynamicListViewTypeName=ViewAllEMSCADList");
-          NormalizeWithCookie(request,cookie_container);
-
-		      request.Accept = "*/*";
-		      request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
-		      request.Headers.Set(HttpRequestHeader.Authorization, authorization);
-		      request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
-		      request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
-		      request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-		      request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
-
-		      response = (HttpWebResponse)request.GetResponse();
-	      }
-	      catch (WebException e)
-	      {
-		      if (e.Status == WebExceptionStatus.ProtocolError) response = (HttpWebResponse)e.Response;
-		      else return false;
-	      }
-	      catch (Exception)
-	      {
-		      if(response != null) response.Close();
-		      return false;
-	      }
-
-	      return true;
-        }
-
-      private bool Request_www_imagetrendelite_com_Get2
-        (
-        CookieContainer cookie_container,
-        string authorization,
-        out HttpWebResponse response
-        )
-        {
-	      response = null;
-
-	      try
-	      {
-		      HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/GetDynamicListViewByID?dynamicListViewModelID=910a358f-b03d-489a-bbe0-39d64ebc08cb");
-          NormalizeWithCookie(request,cookie_container);
-
-		      request.Accept = "*/*";
-		      request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
-		      request.Headers.Set(HttpRequestHeader.Authorization, authorization);
-		      request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
-		      request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
-		      request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-		      request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
-
-		      response = (HttpWebResponse)request.GetResponse();
-	      }
-	      catch (WebException e)
-	      {
-		      if (e.Status == WebExceptionStatus.ProtocolError) response = (HttpWebResponse)e.Response;
-		      else return false;
-	      }
-	      catch (Exception)
-	      {
-		      if(response != null) response.Close();
-		      return false;
-	      }
-
-	      return true;
-        }
-
-      private bool Request_www_imagetrendelite_com_Load
-        (
-        string authorization,
-        out HttpWebResponse response
-        )
-        {
-	      response = null;
-
-	      try
-	      {
-		      HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/LoadDynamicListRecords?skip=0&pageSize=300&search=&comparisonType=STARTSWITH&sortColumn=UnitNotifiedByDispatch&sortAscending=false&viewID=910a358f-b03d-489a-bbe0-39d64ebc08cb&includeTotalRecordCount=false");
-            // The following addition GET parameter appears not to be strictly necessary:  &RequestIdentifier=8513f56b-e453-4ae7-8ffd-be1a46975429
-          Normalize(request);
-
-		      request.Accept = "*/*";
-		      request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
-		      request.Headers.Set(HttpRequestHeader.Authorization, authorization);
-		      request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
-		      request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
-		      request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-		      request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
-
-		      response = (HttpWebResponse)request.GetResponse();
-	      }
-	      catch (WebException e)
-	      {
-		      if (e.Status == WebExceptionStatus.ProtocolError) response = (HttpWebResponse)e.Response;
-		      else return false;
-	      }
-	      catch (Exception)
-	      {
-		      if(response != null) response.Close();
-		      return false;
-	      }
-
-	      return true;
-        }
-
-    internal void Login()
-      {
-      HttpWebResponse response;
-      if(!Request_www_imagetrendelite_com_Signin
-          (
-          username:ConfigurationManager.AppSettings["vbemsbridge_username"],
-          password:ConfigurationManager.AppSettings["vbemsbridge_password"],
-          response:out response
-          )
-        )
-        {
-        throw new Exception("Request_www_imagetrendelite_com_Signin() returned FALSE.");
-        }
-      //var uri = new Uri("http://www.imagetrendelite.com");
-      //var login_time = DateTime.Now;
-      var authorization = response.Headers.Get("Authorization");
-	    //cookie_container.Add(uri,new Cookie("IT_VBEMS_expirationDate",login_time.AddHours(4).ToString("ddd MMM dd yyyy HH:mm:ss \\G\\M\\Tzz") + "00 (Eastern Standard Time)"));
-	    //cookie_container.Add(uri,new Cookie("IT_VBEMS_inactivityWarning","15"));
-     // cookie_container.Add(uri,new Cookie("IT_VBEMS_jsonWebToken",authorization));
-	    //cookie_container.Add(uri,new Cookie("IT_VBEMS_loginMode","shell"));
-	    //cookie_container.Add(uri,new Cookie("IT_VBEMS_loginTime",login_time.ToString("ddd MMM dd yyyy HH:mm:ss \\G\\M\\Tzz") + "00 (Eastern Standard Time)"));
-     // cookie_container.Add(uri,new Cookie("IT_VBEMS_organizationId","vbems"));
-	    //cookie_container.Add(uri,new Cookie("IT_VBEMS_performerId","f5e689c1-d7da-4b53-8f16-9a37749fb5c8"));
-	    //cookie_container.Add(uri,new Cookie("IT_VBEMS_timeoutInterval","240"));
-	    //cookie_container.Add(uri,new Cookie("IT_VBEMS_userName","klipscomb"));
-      HtmlDocumentOf(ConsumedStreamOf(response));
-      //
-      //Request_www_imagetrendelite_com_EliteOrganizationvbemsAuthapiSlideauthwindow(cookie_container, out response);
-      //var doc2 = HtmlDocumentOf(ConsumedStreamOf(response));
-      //Request_www_imagetrendelite_com_Cad(cookie_container, out response);
-      //var doc3 = HtmlDocumentOf(ConsumedStreamOf(response));
-      //Request_www_imagetrendelite_com_Get1(cookie_container, authorization, out response);
-      //var doc4 = HtmlDocumentOf(ConsumedStreamOf(response));
-      //Request_www_imagetrendelite_com_Get2(cookie_container, authorization, out response);
-      //var doc5 = HtmlDocumentOf(ConsumedStreamOf(response));
-      if(!Request_www_imagetrendelite_com_Load
-          (
-          authorization:authorization,
-          response:out response
-          )
-        )
-        {
-        throw new Exception("Request_www_imagetrendelite_com_Load() returned FALSE.");
-        }
-      var data = new JavaScriptSerializer().Deserialize<EmsCadList>(HtmlDocumentOf(ConsumedStreamOf(response)).DocumentNode.InnerText);
       }
 
     internal string AuthorizationOf
