@@ -25,6 +25,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -118,6 +119,7 @@
     <Compile Include="component\ss\Class_ss.cs" />
     <Compile Include="component\ss\Class_ss_broadcastify.cs" />
     <Compile Include="component\ss\Class_ss_emsbridge.cs" />
+    <Compile Include="component\ss\Class_ss_imagetrendelite.cs" />
     <Compile Include="exception.aspx.cs">
       <DependentUpon>exception.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
