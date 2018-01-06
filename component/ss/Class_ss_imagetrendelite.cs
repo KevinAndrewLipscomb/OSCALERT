@@ -109,7 +109,7 @@ namespace Class_ss_imagetrendelite
 
     private bool Request_www_imagetrendelite_com_Load
       (
-      string authorization,
+      string authorization_token,
       out HttpWebResponse response
       )
       {
@@ -123,7 +123,7 @@ namespace Class_ss_imagetrendelite
 
 		    request.Accept = "*/*";
 		    request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
-		    request.Headers.Set(HttpRequestHeader.Authorization, authorization);
+		    request.Headers.Set(HttpRequestHeader.Authorization, authorization_token);
 		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
@@ -145,7 +145,7 @@ namespace Class_ss_imagetrendelite
 	    return true;
       }
 
-    internal string AuthorizationOf
+    internal string AuthorizationTokenOf
       (
       string username,
       string password
@@ -162,17 +162,17 @@ namespace Class_ss_imagetrendelite
         {
         throw new Exception("Request_www_imagetrendelite_com_Signin() returned FALSE.");
         }
-      var authorization = response.Headers.Get("Authorization");
+      var authorization_token = response.Headers.Get("Authorization");
       HtmlDocumentOf(ConsumedStreamOf(response));
-      return authorization;
+      return authorization_token;
       }
     
-    internal EmsCadList CurrentEmsCadList(string authorization)
+    internal EmsCadList CurrentEmsCadList(string authorization_token)
       {
       HttpWebResponse response;
       if(!Request_www_imagetrendelite_com_Load
           (
-          authorization:authorization,
+          authorization_token:authorization_token,
           response:out response
           )
         )

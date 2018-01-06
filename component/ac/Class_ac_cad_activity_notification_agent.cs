@@ -12,39 +12,24 @@ namespace Class_ac_cad_activity_notification_agent
   public class TClass_ac_cad_activity_notification_agent
     {
 
-    //--
-    //
-    // PRIVATE
-    //
-    //--
-
-    private TClass_biz_cad_records biz_cad_records = null;
-    private TClass_biz_field_situations biz_field_situations = null;
-    private TClass_ss_imagetrendelite ss_imagetrendelite;
-    private DateTime saved_meta_surge_alert_timestamp_ems;
-    private DateTime saved_meta_surge_alert_timestamp_als;
-    private DateTime saved_meta_surge_alert_timestamp_fire;
-
-    //--
-    //
-    // PUBLIC
-    //
-    //--
-
-    public TClass_ac_cad_activity_notification_agent()
+    public TClass_ac_cad_activity_notification_agent(DateTime datetime_to_quit)
       {
-      biz_cad_records = new TClass_biz_cad_records();
-      biz_field_situations = new TClass_biz_field_situations();
-      ss_imagetrendelite = new TClass_ss_imagetrendelite();
+      var saved_meta_surge_alert_timestamp_ems = DateTime.MinValue;
+      var saved_meta_surge_alert_timestamp_als = DateTime.MinValue;
+      var saved_meta_surge_alert_timestamp_fire = DateTime.MinValue;
       //
-      var authorization = ss_imagetrendelite.AuthorizationOf
+      var biz_cad_records = new TClass_biz_cad_records();
+      var biz_field_situations = new TClass_biz_field_situations();
+      var ss_imagetrendelite = new TClass_ss_imagetrendelite();
+      //
+      var authorization_token = ss_imagetrendelite.AuthorizationTokenOf
         (
         username:ConfigurationManager.AppSettings["vbemsbridge_username"],
         password:ConfigurationManager.AppSettings["vbemsbridge_password"]
         );
-      while (true)
+      while (DateTime.Now < datetime_to_quit)
         {
-        var current_ems_cad_list = ss_imagetrendelite.CurrentEmsCadList(authorization);
+        var current_ems_cad_list = ss_imagetrendelite.CurrentEmsCadList(authorization_token);
         if (current_ems_cad_list != null)
           {
           var rows = current_ems_cad_list.Records;
@@ -101,7 +86,6 @@ namespace Class_ac_cad_activity_notification_agent
           }
         //
         Thread.Sleep(millisecondsTimeout:int.Parse(ConfigurationManager.AppSettings["vbemsbridge_refresh_rate_in_seconds"])*1000);
-        //
         }
       }
 
