@@ -56,31 +56,34 @@ namespace Class_ac_cad_activity_notification_agent
           for (var i = new k.subtype<int>(0,rows.Count); i.val < i.LAST; i.val++)
             {
             var cells = rows[i.val].Columns;
-            current_incident_num = cells[1].Value;
-            //if (current_incident_num != saved_incident_num)
-            //  {
-            //  //
-            //  // Determine nature, if supported.
-            //  //
-            //  }
-            biz_cad_records.Set
-              (
-              id:k.EMPTY,
-              incident_date:(cells[10].Value.Split())[0],
-              incident_num:current_incident_num,
-              incident_address:cells[5].Value,
-              call_sign:cells[7].Value,
-              time_initialized:(cells[10].Value.Length > 1 ? (cells[10].Value.Split())[1] : k.EMPTY),
-              time_of_alarm:(cells[0].Value.Length > 1 ? (cells[0].Value.Split())[1] : k.EMPTY),
-              time_enroute:(cells[11].Value.Length > 1 ? (cells[11].Value.Split())[1] : k.EMPTY),
-              time_on_scene:(cells[17].Value.Length > 1 ? (cells[17].Value.Split())[1] : k.EMPTY),
-              time_transporting:(cells[13].Value.Length > 1 ? (cells[13].Value.Split())[1] : k.EMPTY),
-              time_at_hospital:(cells[14].Value.Length > 1 ? (cells[14].Value.Split())[1] : k.EMPTY),
-              time_available:(cells[15].Value.Length > 1 ? (cells[15].Value.Split())[1] : k.EMPTY),
-              time_downloaded:k.EMPTY,
-              nature:nature
-              );
-            saved_incident_num = current_incident_num;
+            if (cells[10].Value.Length > 1) // incident_date/time_initialized
+              {
+              current_incident_num = cells[1].Value;
+              //if (current_incident_num != saved_incident_num)
+              //  {
+              //  //
+              //  // Determine nature, if supported.
+              //  //
+              //  }
+              biz_cad_records.Set
+                (
+                id:k.EMPTY,
+                incident_date:(cells[10].Value.Split())[0],
+                incident_num:current_incident_num,
+                incident_address:cells[5].Value,
+                call_sign:cells[7].Value,
+                time_initialized:(cells[10].Value.Split())[1],
+                time_of_alarm:(cells[0].Value.Length > 1 ? (cells[0].Value.Split())[1] : k.EMPTY),
+                time_enroute:(cells[11].Value.Length > 1 ? (cells[11].Value.Split())[1] : k.EMPTY),
+                time_on_scene:(cells[17].Value.Length > 1 ? (cells[17].Value.Split())[1] : k.EMPTY),
+                time_transporting:(cells[13].Value.Length > 1 ? (cells[13].Value.Split())[1] : k.EMPTY),
+                time_at_hospital:(cells[14].Value.Length > 1 ? (cells[14].Value.Split())[1] : k.EMPTY),
+                time_available:(cells[15].Value.Length > 1 ? (cells[15].Value.Split())[1] : k.EMPTY),
+                time_downloaded:k.EMPTY,
+                nature:nature
+                );
+              saved_incident_num = current_incident_num;
+              }
             }
           //
           // Validate and trim the cad_records.
