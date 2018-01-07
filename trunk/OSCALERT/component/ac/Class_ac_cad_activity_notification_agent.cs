@@ -4,6 +4,7 @@ using Class_ss_imagetrendelite;
 using kix;
 using System;
 using System.Configuration;
+using System.IO;
 using System.Threading;
 
 namespace Class_ac_cad_activity_notification_agent
@@ -12,8 +13,14 @@ namespace Class_ac_cad_activity_notification_agent
   public class TClass_ac_cad_activity_notification_agent
     {
 
-    public TClass_ac_cad_activity_notification_agent(DateTime datetime_to_quit)
+    public TClass_ac_cad_activity_notification_agent
+      (
+      DateTime datetime_to_quit,
+      StreamWriter log
+      )
       {
+      log.WriteLine(DateTime.Now.ToString("s") + ">Reached TClass_ac_cad_activity_notification_agent.");
+      //
       var saved_meta_surge_alert_timestamp_ems = DateTime.MinValue;
       var saved_meta_surge_alert_timestamp_als = DateTime.MinValue;
       var saved_meta_surge_alert_timestamp_fire = DateTime.MinValue;
@@ -27,10 +34,15 @@ namespace Class_ac_cad_activity_notification_agent
         username:ConfigurationManager.AppSettings["vbemsbridge_username"],
         password:ConfigurationManager.AppSettings["vbemsbridge_password"]
         );
+      log.WriteLine(DateTime.Now.ToString("s") + ">From ss_imagetrendelite.AuthorizationTokenOf, got: " + authorization_token);
       while (DateTime.Now < datetime_to_quit)
         {
         var current_ems_cad_list = ss_imagetrendelite.CurrentEmsCadList(authorization_token);
-        if (current_ems_cad_list != null)
+        if (current_ems_cad_list == null)
+          {
+          log.WriteLine(DateTime.Now.ToString("s") + "***ss_imagetrendelite.CurrentEmsCadList returned null.");
+          }
+        else
           {
           var rows = current_ems_cad_list.Records;
           //
