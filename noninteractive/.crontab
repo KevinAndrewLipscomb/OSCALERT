@@ -7,9 +7,14 @@ MAILTO=kevin.lipscomb@kvrs.org
 #
 # Daily
 #
+30 00  *  * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/cad_activity_notification_agent.aspx
 30 03  *  * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/cad_activity_notification_agent.aspx
-30 11  *  * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/cad_activity_notification_agent.aspx
-30 19  *  * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/cad_activity_notification_agent.aspx
+30 06  *  * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/cad_activity_notification_agent.aspx
+30 09  *  * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/cad_activity_notification_agent.aspx
+30 12  *  * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/cad_activity_notification_agent.aspx
+30 15  *  * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/cad_activity_notification_agent.aspx
+30 18  *  * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/cad_activity_notification_agent.aspx
+30 21  *  * * wget --output-document=/dev/null --no-check-certificate --timeout=14400 --tries=1 https://localhost/OSCALERT/noninteractive/cad_activity_notification_agent.aspx
 #
 # Weekly
 #

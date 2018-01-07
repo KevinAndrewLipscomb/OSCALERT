@@ -1,6 +1,9 @@
-using Class_ac_cad_activity_notification_agent;
+using Class_biz_cad_activity_notification_agent;
 using System;
+using System.Configuration;
+using System.IO;
 using System.Threading;
+using System.Web;
 
 namespace cad_activity_notification_agent
   {
@@ -10,20 +13,30 @@ namespace cad_activity_notification_agent
 
     protected void Page_Load(object sender, EventArgs e)
       {
+      var biz_cad_activity_notification_agent = new TClass_biz_cad_activity_notification_agent();
+      //
+      var today_0026 = DateTime.Today.AddMinutes(26);
       var today_0326 = DateTime.Today.AddHours(3).AddMinutes(26);
-      var today_1126 = DateTime.Today.AddHours(11).AddMinutes(26);
-      var today_1926 = DateTime.Today.AddHours(19).AddMinutes(26);
+      var today_0626 = DateTime.Today.AddHours(6).AddMinutes(26);
+      var today_0926 = DateTime.Today.AddHours(9).AddMinutes(26);
+      var today_1226 = DateTime.Today.AddHours(12).AddMinutes(26);
+      var today_1526 = DateTime.Today.AddHours(15).AddMinutes(26);
+      var today_1826 = DateTime.Today.AddHours(18).AddMinutes(26);
+      var today_2126 = DateTime.Today.AddHours(21).AddMinutes(26);
       var now = DateTime.Now;
-      var datetime_to_quit = (now < today_0326 ? today_0326 : (now < today_1126 ? today_1126 : (now < today_1926 ? today_1926 : today_0326.AddDays(1))));
+      var datetime_to_quit = (now < today_0026 ? today_0026 : (now < today_0326 ? today_0326 : (now < today_0626 ? today_0626 : (now < today_0926 ? today_0926 : (now < today_1226 ? today_1226 : (now < today_1526 ? today_1526 : (now < today_1826 ? today_1826 : (now < today_2126 ? today_2126 : today_0026.AddDays(1)))))))));
+      //
+      var log = new StreamWriter(path:HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["scratch_folder"] + "/cad_activity_notification_agent.log"),append:true);
+      log.AutoFlush = true;
+      log.WriteLine(DateTime.Now.ToString("s") + ">Reached cad_activity_notification_agent.Page_Load, planning to quit at " + datetime_to_quit.ToString("s"));
       //
       while (DateTime.Now < datetime_to_quit)
         {
         //
         // Start the agent.  It will block until it terminates.
         //
-        // IMPORTANT:  See this app's 000-README regarding the recommendation to establish a dedicated, specially-configured application pool for this app to run in.
-        //
-        new TClass_ac_cad_activity_notification_agent(datetime_to_quit);
+        biz_cad_activity_notification_agent.Work(datetime_to_quit,log);
+        log.WriteLine(DateTime.Now.ToString("s") + ">biz_cad_activity_notification_agent.Work terminated.");
         //
         // If the agent terminates, wait one minute prior to launching a new one, to make sure the remote site has had time to properly reset itself (since we haven't built a login re-try
         // mechanism), then loop back to start a new agent (if it's not quitting time).
