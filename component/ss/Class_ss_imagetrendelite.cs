@@ -37,7 +37,7 @@ namespace Class_ss_imagetrendelite
       public List<Record> Records { get; set; }
       public object ChildView { get; set; }
       public string RequestIdentifier { get; set; }
-     }
+      }
     //
     //--
     //
