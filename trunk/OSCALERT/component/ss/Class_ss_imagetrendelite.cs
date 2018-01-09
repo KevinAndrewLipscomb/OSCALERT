@@ -178,7 +178,7 @@ namespace Class_ss_imagetrendelite
       //
       EmsCadList current_ems_cad_list = null;
       var text = HtmlDocumentOf(ConsumedStreamOf(response)).DocumentNode.InnerText;
-      if (!text.Contains("Server Error"))
+      if (!text.Contains("Server Error") || !text.Contains("Site Temporarily Offline"))
         {
         try
           {
