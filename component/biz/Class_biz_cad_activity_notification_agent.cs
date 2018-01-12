@@ -21,13 +21,18 @@ namespace Class_biz_cad_activity_notification_agent
       {
       log.WriteLine(DateTime.Now.ToString("s") + ">Reached Class_biz_cad_activity_notification_agent.Work.");
       //
+      var biz_cad_records = new TClass_biz_cad_records();
+      var biz_field_situations = new TClass_biz_field_situations();
+      var ss_imagetrendelite = new TClass_ss_imagetrendelite();
+      //
+      var current_incident_num = k.EMPTY;
+      var nature = k.EMPTY;
+      //var saved_incident_num = k.EMPTY; // for use managing nature
       var saved_meta_surge_alert_timestamp_ems = DateTime.MinValue;
       var saved_meta_surge_alert_timestamp_als = DateTime.MinValue;
       var saved_meta_surge_alert_timestamp_fire = DateTime.MinValue;
       //
-      var biz_cad_records = new TClass_biz_cad_records();
-      var biz_field_situations = new TClass_biz_field_situations();
-      var ss_imagetrendelite = new TClass_ss_imagetrendelite();
+      TClass_ss_imagetrendelite.EmsCadList current_ems_cad_list;
       //
       var authorization_token = ss_imagetrendelite.AuthorizationTokenOf
         (
@@ -37,18 +42,16 @@ namespace Class_biz_cad_activity_notification_agent
       log.WriteLine(DateTime.Now.ToString("s") + ">From ss_imagetrendelite.AuthorizationTokenOf, got: " + authorization_token);
       while (DateTime.Now < datetime_to_quit)
         {
-        var current_ems_cad_list = ss_imagetrendelite.CurrentEmsCadList(authorization_token,log);
+        log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is requesting the CurrentEmsCadList...");
+        current_ems_cad_list = ss_imagetrendelite.CurrentEmsCadList(authorization_token,log);
         if (current_ems_cad_list == null)
           {
           log.WriteLine(DateTime.Now.ToString("s") + "***ss_imagetrendelite.CurrentEmsCadList returned null.");
           }
         else
           {
+          log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is processing records...");
           var rows = current_ems_cad_list.Records;
-          //
-          var current_incident_num = k.EMPTY;
-          var nature = k.EMPTY;
-          var saved_incident_num = k.EMPTY;
           //
           for (var i = new k.subtype<int>(0,rows.Count); i.val < i.LAST; i.val++)
             {
@@ -79,9 +82,11 @@ namespace Class_biz_cad_activity_notification_agent
                 time_downloaded:k.EMPTY,
                 nature:nature
                 );
-              saved_incident_num = current_incident_num;
+              //saved_incident_num = current_incident_num; // for use managing nature
               }
+            cells.Clear();
             }
+          rows.Clear();
           //
           // Validate and trim the cad_records.
           //
@@ -97,6 +102,7 @@ namespace Class_biz_cad_activity_notification_agent
             );
           }
         //
+        log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is sleeping...");
         Thread.Sleep(millisecondsTimeout:int.Parse(ConfigurationManager.AppSettings["vbemsbridge_refresh_rate_in_seconds"])*1000);
         }
       }
