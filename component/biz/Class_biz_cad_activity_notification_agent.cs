@@ -50,9 +50,8 @@ namespace Class_biz_cad_activity_notification_agent
           }
         else
           {
-          log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is processing records...");
           var rows = current_ems_cad_list.Records;
-          //
+          log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is processing " + rows.Count + "records...");
           for (var i = new k.subtype<int>(0,rows.Count); i.val < i.LAST; i.val++)
             {
             var cells = rows[i.val].Columns;
