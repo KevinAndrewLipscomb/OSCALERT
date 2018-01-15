@@ -51,11 +51,11 @@ namespace Class_biz_cad_activity_notification_agent
         else
           {
           var rows = current_ems_cad_list.Records;
-          log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is processing " + rows.Count + "records...");
+          log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is processing " + rows.Count + " records...");
           for (var i = new k.subtype<int>(0,rows.Count); i.val < i.LAST; i.val++)
             {
             var cells = rows[i.val].Columns;
-            if (cells[10].Value.Length > 1) // incident_date/time_initialized
+            if (cells[10].Value.Length > 1) // then there is an incident_date/time_initialized
               {
               current_incident_num = cells[1].Value;
               //if (current_incident_num != saved_incident_num)
@@ -99,6 +99,8 @@ namespace Class_biz_cad_activity_notification_agent
             saved_multalsholds_alert_timestamp:ref saved_meta_surge_alert_timestamp_als,
             saved_firesurge_alert_timestamp:ref saved_meta_surge_alert_timestamp_fire
             );
+          //
+          log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work: " + biz_field_situations.NumConsideredActive() + " field situation(s) considered active");
           }
         //
         log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is sleeping...");

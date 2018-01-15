@@ -502,6 +502,11 @@ namespace Class_biz_field_situations
         );
       }
 
+    internal string NumConsideredActive()
+      {
+      return db_field_situations.NumConsideredActive();
+      }
+
     public void Set
       (
       string id,
