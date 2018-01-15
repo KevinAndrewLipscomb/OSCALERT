@@ -475,6 +475,30 @@ namespace Class_db_field_situations
       return result;
       }
 
+    internal string NumConsideredActive()
+      {
+      Open();
+      var num_considered_active = new MySqlCommand
+        (
+        "select count(*)"
+        + " from field_situation"
+        +   " join field_situation_impression on (field_situation_impression.id=field_situation.impression_id)"
+        + " where assignment not like '%FAST%'"
+        +   " and assignment not rlike '^R[[:digit:]]+$'"
+        +   " and assignment not in ('ECOMM','FCOMM')"
+        +   " and"
+        +     " ("
+        +       " time_initialized >= DATE_SUB(NOW(),INTERVAL 3 HOUR)"
+        +     " or"
+        +       " assignment like '%,%'"
+        +     " )",
+        connection
+        )
+        .ExecuteScalar().ToString();
+      Close();
+      return num_considered_active;
+      }
+
     internal k.int_nonnegative PriorImpressionPeckingOrder(string case_num)
       {
       Open();
