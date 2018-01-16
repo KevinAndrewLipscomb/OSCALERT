@@ -107,7 +107,7 @@ namespace Class_biz_cad_activity_notification_agent
             saved_firesurge_alert_timestamp:ref saved_meta_surge_alert_timestamp_fire
             );
           //
-          log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work: " + biz_field_situations.NumConsideredActive() + " field situation(s) considered active");
+          log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work: field situation(s) considered active = " + biz_field_situations.NumConsideredActive());
           }
         //
         log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is sleeping...");
