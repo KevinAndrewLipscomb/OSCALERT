@@ -278,7 +278,19 @@ namespace Class_ss_imagetrendelite
       //
       EmsCadList current_ems_cad_list = null;
       var text = HtmlDocumentOf(ConsumedStreamOf(response)).DocumentNode.InnerText;
-      if (!text.Contains("Server Error") || !text.Contains("Site Temporarily Offline"))
+      if (text.Contains("Server Error"))
+        {
+        log.WriteLine(DateTime.Now.ToString("s") + "***From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: SERVER ERROR");
+        }
+      else if (text.Contains("Site Temporarily Offline"))
+        {
+        log.WriteLine(DateTime.Now.ToString("s") + "***From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: SITE TEMPORARILY OFFLINE");
+        }
+      else if (text.Contains("Service Unavailable"))
+        {
+        log.WriteLine(DateTime.Now.ToString("s") + "***From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: SERVICE UNAVAILABLE");
+        }
+      else
         {
         try
           {
