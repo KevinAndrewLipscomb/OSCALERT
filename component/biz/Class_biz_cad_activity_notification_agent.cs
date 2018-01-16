@@ -40,8 +40,15 @@ namespace Class_biz_cad_activity_notification_agent
         password:ConfigurationManager.AppSettings["vbemsbridge_password"]
         );
       log.WriteLine(DateTime.Now.ToString("s") + ">From ss_imagetrendelite.AuthorizationTokenOf, got: " + authorization_token);
+      var datetime_of_last_nudge = DateTime.Now;
       while (DateTime.Now < datetime_to_quit)
         {
+        if (DateTime.Now > datetime_of_last_nudge.AddMinutes(double.Parse(ConfigurationManager.AppSettings["nudge_interval_minutes"])))
+          {
+          log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is nudging the DynamicListAPIController...");
+          ss_imagetrendelite.Nudge(authorization_token);
+          datetime_of_last_nudge = DateTime.Now;
+          }
         log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is requesting the CurrentEmsCadList...");
         current_ems_cad_list = ss_imagetrendelite.CurrentEmsCadList(authorization_token,log);
         if (current_ems_cad_list == null)

@@ -99,6 +99,80 @@ namespace Class_ss_imagetrendelite
 	    return true;
       }
 
+    private bool Request_www_imagetrendelite_com_Get1
+      (
+      string authorization_token,
+      out HttpWebResponse response
+      )
+      {
+	    response = null;
+
+	    try
+	    {
+		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/GetDynamicListViews?dynamicListViewTypeName=ViewAllEMSCADList");
+        Normalize(request);
+
+		    request.Accept = "*/*";
+		    request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
+		    request.Headers.Set(HttpRequestHeader.Authorization, authorization_token);
+		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
+		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
+		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
+		    request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
+
+		    response = (HttpWebResponse)request.GetResponse();
+	    }
+	    catch (WebException e)
+	    {
+		    if (e.Status == WebExceptionStatus.ProtocolError) response = (HttpWebResponse)e.Response;
+		    else return false;
+	    }
+	    catch (Exception)
+	    {
+		    if(response != null) response.Close();
+		    return false;
+	    }
+
+	    return true;
+      }
+
+    private bool Request_www_imagetrendelite_com_Get2
+      (
+      string authorization_token,
+      out HttpWebResponse response
+      )
+      {
+	    response = null;
+
+	    try
+	    {
+		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/GetDynamicListViewByID?dynamicListViewModelID=910a358f-b03d-489a-bbe0-39d64ebc08cb");
+        Normalize(request);
+
+		    request.Accept = "*/*";
+		    request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
+		    request.Headers.Set(HttpRequestHeader.Authorization, authorization_token);
+		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
+		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
+		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
+		    request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
+
+		    response = (HttpWebResponse)request.GetResponse();
+	    }
+	    catch (WebException e)
+	    {
+		    if (e.Status == WebExceptionStatus.ProtocolError) response = (HttpWebResponse)e.Response;
+		    else return false;
+	    }
+	    catch (Exception)
+	    {
+		    if(response != null) response.Close();
+		    return false;
+	    }
+
+	    return true;
+      }
+
     private bool Request_www_imagetrendelite_com_Load
       (
       string authorization_token,
@@ -110,7 +184,7 @@ namespace Class_ss_imagetrendelite
 	    try
 	    {
 		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/LoadDynamicListRecords?skip=0&pageSize=300&search=&comparisonType=STARTSWITH&sortColumn=UnitNotifiedByDispatch&sortAscending=false&viewID=910a358f-b03d-489a-bbe0-39d64ebc08cb&includeTotalRecordCount=false");
-          // The following addition GET parameter appears not to be strictly necessary:  &RequestIdentifier=8513f56b-e453-4ae7-8ffd-be1a46975429
+          // The following additional GET parameter appears not to be strictly necessary:  &RequestIdentifier=8513f56b-e453-4ae7-8ffd-be1a46975429
         Normalize(request);
 
 		    request.Accept = "*/*";
@@ -158,7 +232,33 @@ namespace Class_ss_imagetrendelite
       HtmlDocumentOf(ConsumedStreamOf(response));
       return authorization_token;
       }
-    
+
+    internal void Nudge(string authorization_token)
+      {
+      HttpWebResponse response;
+      if(!Request_www_imagetrendelite_com_Get1
+          (
+          authorization_token:authorization_token,
+          response:out response
+          )
+        )
+        {
+        throw new Exception("Request_www_imagetrendelite_com_Get1() returned FALSE.");
+        }
+      HtmlDocumentOf(ConsumedStreamOf(response));
+      //
+      if(!Request_www_imagetrendelite_com_Get2
+          (
+          authorization_token:authorization_token,
+          response:out response
+          )
+        )
+        {
+        throw new Exception("Request_www_imagetrendelite_com_Get2() returned FALSE.");
+        }
+      HtmlDocumentOf(ConsumedStreamOf(response));
+      }
+
     internal EmsCadList CurrentEmsCadList
       (
       string authorization_token,
