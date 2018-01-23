@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \begin_preamble
 \date{}
@@ -12,16 +14,16 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman default
-\font_sans default
-\font_typewriter default
-\font_math auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
 \font_default_family sfdefault
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -110,8 +112,7 @@ target "https://en.wikipedia.org/wiki/NTFS_reparse_point"
  violating Subversion rules.
  If you simply exported OSCALERT from its repository and you do not intend
  to perform subsequent updates or any other Subversion operations on it
- (not recommended), you can simply make copies instead of NTFS reparse
- points.
+ (not recommended), you can simply make copies instead of NTFS reparse points.
 \end_layout
 
 \begin_layout Section
@@ -543,9 +544,7 @@ Establish a dedicated, specially-configured application pool
 
 \begin_layout Standard
 OSCALERT is aberrant as an ASP.NET Web application because it presents no
- useful GUI, uses a headless resource-intensive System.Windows.Forms.WebBrowser
- object in an explicitly-launched separate thread, is very long-running,
- and manages its own 
+ useful GUI, is very long-running, and manages its own 
 \begin_inset Quotes eld
 \end_inset
 
@@ -562,18 +561,9 @@ recycling
 
 \begin_layout Standard
 Furthermore, application pools with default settings do not support such
- long-running applications or, in some environments, the use of the WebBrowser
- object.
+ long-running applications.
  Consequently, the recommended Advanced Settings for OSCALERT's dedicated
  application pool are:
-\end_layout
-
-\begin_layout Itemize
-Process Model / Identity: 
-\series bold
-Administrator
-\series default
- (this is not known to be the minimally-privileged setting)
 \end_layout
 
 \begin_layout Itemize
@@ -585,7 +575,9 @@ Process Model / Idle Time-out (minutes):
 \begin_layout Itemize
 Process Model / Shutdown Time Limit (seconds): 
 \series bold
-86340
+691200
+\series default
+ (8 days, which is one day longer than the server's reboot cycle)
 \end_layout
 
 \begin_layout Itemize
