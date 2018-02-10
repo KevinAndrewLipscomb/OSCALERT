@@ -19,7 +19,6 @@ namespace Class_biz_cad_activity_notification_agent
       StreamWriter log
       )
       {
-      log.WriteLine(DateTime.Now.ToString("s") + ">Reached Class_biz_cad_activity_notification_agent.Work.");
       //
       var biz_cad_records = new TClass_biz_cad_records();
       var biz_field_situations = new TClass_biz_field_situations();
@@ -39,17 +38,14 @@ namespace Class_biz_cad_activity_notification_agent
         username:ConfigurationManager.AppSettings["vbemsbridge_username"],
         password:ConfigurationManager.AppSettings["vbemsbridge_password"]
         );
-      log.WriteLine(DateTime.Now.ToString("s") + ">From ss_imagetrendelite.AuthorizationTokenOf, got: " + authorization_token);
       var datetime_of_last_nudge = DateTime.Now;
       while (DateTime.Now < datetime_to_quit)
         {
         if (DateTime.Now > datetime_of_last_nudge.AddMinutes(double.Parse(ConfigurationManager.AppSettings["nudge_interval_minutes"])))
           {
-          log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is nudging the DynamicListAPIController...");
           ss_imagetrendelite.Nudge(authorization_token);
           datetime_of_last_nudge = DateTime.Now;
           }
-        log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is requesting the CurrentEmsCadList...");
         current_ems_cad_list = ss_imagetrendelite.CurrentEmsCadList(authorization_token,log);
         if (current_ems_cad_list == null)
           {
@@ -58,7 +54,6 @@ namespace Class_biz_cad_activity_notification_agent
         else
           {
           var rows = current_ems_cad_list.Records;
-          log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is processing " + rows.Count + " records...");
           for (var i = new k.subtype<int>(0,rows.Count); i.val < i.LAST; i.val++)
             {
             var cells = rows[i.val].Columns;
@@ -107,10 +102,8 @@ namespace Class_biz_cad_activity_notification_agent
             saved_firesurge_alert_timestamp:ref saved_meta_surge_alert_timestamp_fire
             );
           //
-          log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work: field situation(s) considered active = " + biz_field_situations.NumConsideredActive());
           }
         //
-        log.WriteLine(DateTime.Now.ToString("s") + ">Class_biz_cad_activity_notification_agent.Work is sleeping...");
         Thread.Sleep(millisecondsTimeout:int.Parse(ConfigurationManager.AppSettings["vbemsbridge_refresh_rate_in_seconds"])*1000);
         }
       }

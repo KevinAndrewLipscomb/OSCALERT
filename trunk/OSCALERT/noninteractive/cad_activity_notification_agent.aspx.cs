@@ -28,7 +28,6 @@ namespace cad_activity_notification_agent
       //
       var log = new StreamWriter(path:HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["scratch_folder"] + "/cad_activity_notification_agent.log"),append:true);
       log.AutoFlush = true;
-      log.WriteLine(DateTime.Now.ToString("s") + ">Reached cad_activity_notification_agent.Page_Load, planning to quit at " + datetime_to_quit.ToString("s"));
       //
       while (DateTime.Now < datetime_to_quit)
         {
@@ -36,7 +35,6 @@ namespace cad_activity_notification_agent
         // Start the agent.  It will block until it terminates.
         //
         biz_cad_activity_notification_agent.Work(datetime_to_quit,log);
-        log.WriteLine(DateTime.Now.ToString("s") + ">biz_cad_activity_notification_agent.Work terminated.");
         //
         // If the agent terminates, wait one minute prior to launching a new one, to make sure the remote site has had time to properly reset itself (since we haven't built a login re-try
         // mechanism), then loop back to start a new agent (if it's not quitting time).
