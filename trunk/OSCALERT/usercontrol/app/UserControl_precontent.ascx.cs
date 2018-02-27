@@ -1,5 +1,6 @@
 using Class_db__information_schema;
 using kix;
+using System;
 using System.Configuration;
 using System.Web;
 using System.Web.Security;
@@ -12,6 +13,8 @@ namespace UserControl_precontent
         {
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.Cache.SetNoStore();
+            Response.Cache.AppendCacheExtension("must-revalidate");
+            Response.Cache.SetMaxAge(TimeSpan.Zero);
             //
             if (!IsPostBack)
             {

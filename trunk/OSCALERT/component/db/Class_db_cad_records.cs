@@ -311,7 +311,7 @@ namespace Class_db_cad_records
                   //
                   // Unqualified transformation (ie, "120R"->"120", "L01"->"L01") of invalid.call_sign
                   //
-        +       " IF(invalid.call_sign REGEXP '^[[:digit:]]'," // ambulances
+        +       " IF(invalid.call_sign REGEXP '^A[[:digit:]]'," // ambulances
         +         " REPLACE("
         +            " REPLACE("
         +               " REPLACE("
@@ -333,7 +333,7 @@ namespace Class_db_cad_records
                   //
                   // Unqualified transformation (ie, "120S"->"120", "L01P"->"L01") of full_table.call_sign
                   //
-        +       " IF(full_table.call_sign REGEXP '^[[:digit:]]'," // ambulances
+        +       " IF(full_table.call_sign REGEXP '^A[[:digit:]]'," // ambulances
         +         " REPLACE("
         +            " REPLACE("
         +               " REPLACE("
