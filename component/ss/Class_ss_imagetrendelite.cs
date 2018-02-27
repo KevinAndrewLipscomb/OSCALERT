@@ -294,7 +294,7 @@ namespace Class_ss_imagetrendelite
         {
         try
           {
-          current_ems_cad_list = new JavaScriptSerializer(). Deserialize<EmsCadList>(text);
+          current_ems_cad_list = new JavaScriptSerializer().Deserialize<EmsCadList>(text);
           }
         catch (Exception the_exception)
           {
