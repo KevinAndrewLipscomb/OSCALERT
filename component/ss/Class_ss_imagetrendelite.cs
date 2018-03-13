@@ -290,6 +290,10 @@ namespace Class_ss_imagetrendelite
         {
         log.WriteLine(DateTime.Now.ToString("s") + "***From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: SERVICE UNAVAILABLE");
         }
+      else if (text.Contains("Forbidden Access"))
+        {
+        log.WriteLine(DateTime.Now.ToString("s") + "***From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: FORBIDDEN ACCESS");
+        }
       else
         {
         try
@@ -298,8 +302,7 @@ namespace Class_ss_imagetrendelite
           }
         catch (Exception the_exception)
           {
-          log.WriteLine(DateTime.Now.ToString("s") + "***From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: " + text);
-          throw the_exception;
+          log.WriteLine(DateTime.Now.ToString("s") + "***From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: UNHANDLED " + the_exception.ToString() + k.NEW_LINE + text);
           }
         }
       return current_ems_cad_list;
