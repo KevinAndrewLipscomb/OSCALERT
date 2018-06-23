@@ -1,5 +1,5 @@
 <%@ Page language="c#" Debug="true" Codebehind="cad_activity_notification_agent.aspx.cs" AutoEventWireup="True" Inherits="cad_activity_notification_agent.TWebForm_cad_activity_notification_agent" %>
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 
 <html>
   <head>
