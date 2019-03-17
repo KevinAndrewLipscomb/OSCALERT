@@ -42,7 +42,7 @@ namespace Class_biz_field_situations
       //
       // Set up the default impression.
       //
-      if (digest.be_etby || digest.be_ftby)
+      if (digest.be_etby || digest.be_ftby || digest.num_acarts >= 1 || digest.num_matvs >= 1 || digest.num_mbks >= 1)
         {
         impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("Standby");
         //
@@ -350,7 +350,10 @@ namespace Class_biz_field_situations
           num_sups:digest.num_sups,
           num_tankers:digest.num_tankers,
           be_sart:digest.be_sart,
-          num_zods:digest.num_zods
+          num_zods:digest.num_zods,
+          num_acarts:digest.num_acarts,
+          num_matvs:digest.num_matvs,
+          num_mbks:digest.num_mbks
           );
         //
         impression_elaboration = impression_elaboration
@@ -454,7 +457,10 @@ namespace Class_biz_field_situations
       out string num_sups,
       out string num_tankers,
       out bool be_sart,
-      out string num_zods
+      out string num_zods,
+      out string num_acarts,
+      out string num_matvs,
+      out string num_mbks
       )
       {
       return db_field_situations.Get
@@ -498,7 +504,10 @@ namespace Class_biz_field_situations
         out num_sups,
         out num_tankers,
         out be_sart,
-        out num_zods
+        out num_zods,
+        out num_acarts,
+        out num_matvs,
+        out num_mbks
         );
       }
 
@@ -548,7 +557,10 @@ namespace Class_biz_field_situations
       int num_sups,
       int num_tankers,
       bool be_sart,
-      int num_zods
+      int num_zods,
+      int num_acarts,
+      int num_matvs,
+      int num_mbks
       )
       {
       db_field_situations.Set
@@ -592,7 +604,10 @@ namespace Class_biz_field_situations
         num_sups,
         num_tankers,
         be_sart,
-        num_zods
+        num_zods,
+        num_acarts,
+        num_matvs,
+        num_mbks
         );
       }
 

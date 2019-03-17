@@ -27,6 +27,9 @@ namespace Class_db_field_situations
       internal int num_supervisors;
       internal int num_holds;
       internal int num_hzcs;
+      internal int num_acarts;
+      internal int num_matvs;
+      internal int num_mbks;
       internal int num_lifeguards;
       internal int num_mci_trucks;
       internal int num_mrtks;
@@ -196,6 +199,9 @@ namespace Class_db_field_situations
         + " , sum(call_sign REGEXP '^EMS[[:digit:]]') as num_supervisors"
         + " , sum(call_sign REGEXP '^HOLD[[:digit:]]') as num_holds"
         + " , sum(call_sign REGEXP '^HZC[[:digit:]]') as num_hzcs"
+        + " , sum(call_sign REGEXP '^ACART[[:digit:]]') as num_acarts"
+        + " , sum(call_sign REGEXP '^MATV[[:digit:]]') as num_matvs"
+        + " , sum(call_sign REGEXP '^MBK[[:digit:]]') as num_mbks"
         + " , sum(call_sign REGEXP '^LG[[:alnum:]]') as num_lifeguards"
         + " , sum(call_sign REGEXP '^MCI[[:digit:]]') as num_mci_trucks"
         + " , sum(call_sign REGEXP '^MMTK[[:digit:]]') as num_mrtks"
@@ -246,11 +252,17 @@ namespace Class_db_field_situations
         +                                            " IF(call_sign REGEXP '^HOLD[[:digit:]]',130," // holding for ambulance
         +                                               " IF(call_sign REGEXP '^ZM[[:digit:]]',140," // zone car
         +                                                  " IF(call_sign REGEXP '^HZC[[:digit:]]',150," // holding for zone car
-        +                                                     " IF(call_sign REGEXP '^EMS[[:digit:]]',160," // EMS supervisor or chief
-        +                                                        " IF(call_sign REGEXP '^ECH[[:digit:]]',170," // EMS chief
-        +                                                           " IF(call_sign REGEXP '^BAT[[:digit:]]',180," // battalion chief
-        +                                                              " IF(call_sign REGEXP '^CAR[[:digit:]]?',190," // fire >=div chief
-        +                                                                 " 200" // anybody else, alphabetically
+        +                                                     " IF(call_sign REGEXP '^ACART[[:digit:]]',160," // ambulance cart
+        +                                                        " IF(call_sign REGEXP '^MATV[[:digit:]]',170," // medical atv
+        +                                                           " IF(call_sign REGEXP '^MBK[[:digit:]]',180," // medical bike team
+        +                                                              " IF(call_sign REGEXP '^EMS[[:digit:]]',190," // EMS supervisor or chief
+        +                                                                 " IF(call_sign REGEXP '^ECH[[:digit:]]',200," // EMS chief
+        +                                                                    " IF(call_sign REGEXP '^BAT[[:digit:]]',210," // battalion chief
+        +                                                                       " IF(call_sign REGEXP '^CAR[[:digit:]]?',220," // fire >=div chief
+        +                                                                          " 300" // anybody else, alphabetically
+        +                                                                          " )"
+        +                                                                       " )"
+        +                                                                    " )"
         +                                                                 " )"
         +                                                              " )"
         +                                                           " )"
@@ -304,6 +316,9 @@ namespace Class_db_field_situations
             num_supervisors = int.Parse(dr["num_supervisors"].ToString()),
             num_holds = int.Parse(dr["num_holds"].ToString()),
             num_hzcs = int.Parse(dr["num_hzcs"].ToString()),
+            num_acarts = int.Parse(dr["num_acarts"].ToString()),
+            num_matvs = int.Parse(dr["num_matvs"].ToString()),
+            num_mbks = int.Parse(dr["num_mbks"].ToString()),
             num_lifeguards = int.Parse(dr["num_lifeguards"].ToString()),
             num_mci_trucks = int.Parse(dr["num_mci_trucks"].ToString()),
             num_mrtks = int.Parse(dr["num_mrtks"].ToString()),
@@ -381,7 +396,10 @@ namespace Class_db_field_situations
       out string num_sups,
       out string num_tankers,
       out bool be_sart,
-      out string num_zods
+      out string num_zods,
+      out string num_acarts,
+      out string num_matvs,
+      out string num_mbks
       )
       {
       case_num = k.EMPTY;
@@ -423,6 +441,9 @@ namespace Class_db_field_situations
       num_tankers = k.EMPTY;
       be_sart = false;
       num_zods = k.EMPTY;
+      num_acarts = k.EMPTY;
+      num_matvs = k.EMPTY;
+      num_mbks = k.EMPTY;
       var result = false;
       //
       Open();
@@ -468,6 +489,9 @@ namespace Class_db_field_situations
         num_tankers = dr["num_tankers"].ToString();
         be_sart = (dr["be_sart"].ToString() == "1");
         num_zods = dr["num_zods"].ToString();
+        num_acarts = dr["num_acarts"].ToString();
+        num_matvs = dr["num_matvs"].ToString();
+        num_mbks = dr["num_mbks"].ToString();
         result = true;
         }
       dr.Close();
@@ -556,7 +580,10 @@ namespace Class_db_field_situations
       int num_sups,
       int num_tankers,
       bool be_sart,
-      int num_zods
+      int num_zods,
+      int num_acarts,
+      int num_matvs,
+      int num_mbks
       )
       {
       var childless_field_assignments_clause = k.EMPTY
@@ -600,6 +627,9 @@ namespace Class_db_field_situations
       + " , num_tankers = NULLIF('" + num_tankers.ToString() + "','')"
       + " , be_sart = " + be_sart.ToString()
       + " , num_zods = NULLIF('" + num_zods.ToString() + "','')"
+      + " , num_acarts = NULLIF('" + num_acarts.ToString() + "','')"
+      + " , num_matvs = NULLIF('" + num_matvs.ToString() + "','')"
+      + " , num_mbks = NULLIF('" + num_mbks.ToString() + "','')"
       + k.EMPTY;
       //
       var target_table_name = "field_situation";
