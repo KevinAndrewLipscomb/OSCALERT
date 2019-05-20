@@ -1,4 +1,4 @@
-create user if not exists 'ki-oscalert-x'@'::1' identified by '~ki-oscalert-x-password~';
+create user if not exists 'ki-oscalert-x'@'127.0.0.1' identified by '~ki-oscalert-x-password~';
 grant select
  , insert
  , update
@@ -9,7 +9,7 @@ grant select
  , create routine
  , alter routine
   on oscardotnetdb_x.*
-  to 'ki-oscalert-x'@'::1'
+  to 'ki-oscalert-x'@'127.0.0.1'
 ;
 --
 -- Must grant PROCESS priv to primary user to include SHOW ENGINE INNODB
@@ -18,4 +18,4 @@ grant select
 ;
 grant process
   on *.*
-  to 'ki-oscalert-x'@'::1'
+  to 'ki-oscalert-x'@'127.0.0.1'
