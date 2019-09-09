@@ -33,7 +33,8 @@ namespace Class_biz_field_situations
       out string impression_id,
       out string impression_description,
       out string impression_elaboration,
-      out bool be_escalation
+      out bool be_escalation,
+      out bool be_address_of_particular_interest
       )
       {
       be_escalation = false;
@@ -246,6 +247,8 @@ namespace Class_biz_field_situations
         description:out impression_description,
         elaboration:out impression_elaboration
         );
+      //
+      be_address_of_particular_interest = ConfigurationManager.AppSettings["addresses_of_particular_interest"].Contains(digest.address);
       }
 
     //--
@@ -295,6 +298,7 @@ namespace Class_biz_field_situations
       var impression_elaboration = k.EMPTY;
       var impression_id = k.EMPTY;
       var be_escalation = false;
+      var be_address_of_particular_interest = false;
       var be_any_case_escalated = false;
       while (digest_q.Count > 0)
         {
@@ -306,7 +310,8 @@ namespace Class_biz_field_situations
           impression_id:out impression_id,
           impression_description:out impression_description,
           impression_elaboration:out impression_elaboration,
-          be_escalation:out be_escalation
+          be_escalation:out be_escalation,
+          be_address_of_particular_interest:out be_address_of_particular_interest
           );
         //
         db_field_situations.Set
@@ -374,6 +379,14 @@ namespace Class_biz_field_situations
         if (be_escalation && (impression_description.EndsWith("AlarmFire") || impression_description.StartsWith("Mci")))
           {
           ss_broadcastify.AddAlert(biz_publicity.RenditionOfOscalertLogContent(impression_elaboration) + " Active Case Board: http://goo.gl/StI8EX");
+          }
+        if (be_address_of_particular_interest)
+          {
+          biz_notifications.IssueOscalertForAddressOfParticlarInterest
+            (
+            description:impression_description,
+            elaboration:impression_elaboration
+            );
           }
         }
       db_field_situations.DeleteAnyStillStale();

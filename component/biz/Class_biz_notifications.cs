@@ -252,6 +252,25 @@ namespace Class_biz_notifications
       db_oscalert_logs.Enter(content:elaboration);
       }
 
+    internal void IssueOscalertForAddressOfParticlarInterest
+      (
+      string description,
+      string elaboration
+      )
+      {
+      k.SmtpMailSend
+        (
+        from:ConfigurationManager.AppSettings["sender_email_address"],
+        to:ConfigurationManager.AppSettings["sysadmin_sms_address"],
+        subject:k.EMPTY,
+        message_string:elaboration,
+        be_html:false,
+        cc:k.EMPTY,
+        bcc:k.EMPTY,
+        reply_to:ConfigurationManager.AppSettings["bouncer_email_address"]
+        );
+      }
+
     } // end TClass_biz_notifications
 
   }
