@@ -38,6 +38,7 @@ namespace Class_biz_field_situations
       )
       {
       be_escalation = false;
+      be_address_of_particular_interest = false;
       //
       var impression_pecking_order = new k.int_nonnegative();
       //
@@ -233,6 +234,7 @@ namespace Class_biz_field_situations
         if (impression_pecking_order.val > prior_impression_pecking_order.val)
           {
           be_escalation = (impression_pecking_order.val > 1599);
+          be_address_of_particular_interest = ConfigurationManager.AppSettings["addresses_of_particular_interest"].Contains(digest.address);
           }
         else
           {
@@ -247,8 +249,6 @@ namespace Class_biz_field_situations
         description:out impression_description,
         elaboration:out impression_elaboration
         );
-      //
-      be_address_of_particular_interest = ConfigurationManager.AppSettings["addresses_of_particular_interest"].Contains(digest.address);
       }
 
     //--
@@ -382,11 +382,7 @@ namespace Class_biz_field_situations
           }
         if (be_address_of_particular_interest)
           {
-          biz_notifications.IssueOscalertForAddressOfParticlarInterest
-            (
-            description:impression_description,
-            elaboration:impression_elaboration
-            );
+          biz_notifications.IssueOscalertForAddressOfParticlarInterest(elaboration:impression_elaboration);
           }
         }
       db_field_situations.DeleteAnyStillStale();
