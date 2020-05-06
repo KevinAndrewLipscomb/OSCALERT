@@ -184,7 +184,7 @@ namespace Class_ss_imagetrendelite
 
 	    try
 	    {
-		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/LoadDynamicListRecords?skip=0&pageSize=300&search=&comparisonType=STARTSWITH&sortColumn=UnitNotifiedByDispatch&sortAscending=false&viewID=910a358f-b03d-489a-bbe0-39d64ebc08cb&includeTotalRecordCount=false");
+		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/LoadDynamicListRecords?skip=0&pageSize=200&search=&comparisonType=STARTSWITH&sortColumn=UnitNotifiedByDispatch&sortAscending=false&viewID=910a358f-b03d-489a-bbe0-39d64ebc08cb&includeTotalRecordCount=false");
           // The following additional GET parameter appears not to be strictly necessary:  &RequestIdentifier=8513f56b-e453-4ae7-8ffd-be1a46975429
         Normalize(request);
 
