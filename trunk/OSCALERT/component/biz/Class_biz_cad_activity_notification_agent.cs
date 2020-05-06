@@ -69,17 +69,17 @@ namespace Class_biz_cad_activity_notification_agent
               biz_cad_records.Set
                 (
                 id:k.EMPTY,
-                incident_date:(cells[10].Value.Split())[0],
+                incident_date:(cells[9].Value.Split())[0],
                 incident_num:current_incident_num,
-                incident_address:cells[5].Value,
-                call_sign:cells[7].Value,
-                time_initialized:(cells[10].Value.Split())[1],
+                incident_address:cells[4].Value,
+                call_sign:cells[6].Value,
+                time_initialized:(cells[9].Value.Split())[1],
                 time_of_alarm:(cells[0].Value.Length > 1 ? (cells[0].Value.Split())[1] : k.EMPTY),
-                time_enroute:(cells[11].Value.Length > 1 ? (cells[11].Value.Split())[1] : k.EMPTY),
-                time_on_scene:(cells[17].Value.Length > 1 ? (cells[17].Value.Split())[1] : k.EMPTY),
-                time_transporting:(cells[13].Value.Length > 1 ? (cells[13].Value.Split())[1] : k.EMPTY),
-                time_at_hospital:(cells[14].Value.Length > 1 ? (cells[14].Value.Split())[1] : k.EMPTY),
-                time_available:(cells[15].Value.Length > 1 ? (cells[15].Value.Split())[1] : k.EMPTY),
+                time_enroute:(cells[10].Value.Length > 1 ? (cells[10].Value.Split())[1] : k.EMPTY),
+                time_on_scene:(cells[16].Value.Length > 1 ? (cells[16].Value.Split())[1] : k.EMPTY),
+                time_transporting:(cells[12].Value.Length > 1 ? (cells[12].Value.Split())[1] : k.EMPTY),
+                time_at_hospital:(cells[13].Value.Length > 1 ? (cells[13].Value.Split())[1] : k.EMPTY),
+                time_available:(cells[14].Value.Length > 1 ? (cells[14].Value.Split())[1] : k.EMPTY),
                 time_downloaded:k.EMPTY,
                 nature:nature
                 );
