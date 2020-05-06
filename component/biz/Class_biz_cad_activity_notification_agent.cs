@@ -66,7 +66,7 @@ namespace Class_biz_cad_activity_notification_agent
               //  // Determine nature, if supported.
               //  //
               //  }
-              if (current_incident_num.StartsWith("EMS"))
+              if (current_incident_num.StartsWith("EMS") || current_incident_num.StartsWith("FD"))
                 {
                 biz_cad_records.Set
                   (
