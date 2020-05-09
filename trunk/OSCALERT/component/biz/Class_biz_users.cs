@@ -1,20 +1,18 @@
-using System.Configuration;
-
-using kix;
-
-using System;
-
-using Class_db_members;
-using Class_db_users;
 using Class_biz_notifications;
 using Class_biz_user;
+using Class_db_members;
+using Class_db_users;
+using kix;
+using System.Configuration;
+
 namespace Class_biz_users
-{
-    public class TClass_biz_users
+  {
+  public class TClass_biz_users
     {
-        private TClass_db_members db_members = null;
-        private TClass_db_users db_users = null;
-        private TClass_biz_notifications biz_notifications = null;
+        private readonly TClass_db_members db_members = null;
+        private readonly TClass_db_users db_users = null;
+        private readonly TClass_biz_notifications biz_notifications = null;
+        
         //Constructor  Create()
         public TClass_biz_users() : base()
         {
@@ -23,6 +21,7 @@ namespace Class_biz_users
             db_members = new TClass_db_members();
             db_users = new TClass_db_users();
         }
+        
         public bool AcceptAsMember(string shared_secret, string id)
         {
             bool result;

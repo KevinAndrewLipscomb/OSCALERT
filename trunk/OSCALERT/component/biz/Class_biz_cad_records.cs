@@ -9,8 +9,8 @@ namespace Class_biz_cad_records
   public class TClass_biz_cad_records
     {
 
-    private TClass_biz_incident_nature_translations biz_incident_nature_translations = null;
-    private TClass_db_cad_records db_cad_records = null;
+    private readonly TClass_biz_incident_nature_translations biz_incident_nature_translations = null;
+    private readonly TClass_db_cad_records db_cad_records = null;
 
     public TClass_biz_cad_records() : base()
       {

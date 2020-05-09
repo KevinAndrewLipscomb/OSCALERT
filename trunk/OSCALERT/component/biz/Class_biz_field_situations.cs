@@ -21,11 +21,11 @@ namespace Class_biz_field_situations
     //
     //--
 
-    private TClass_biz_notifications biz_notifications = null;
-    private TClass_biz_publicity biz_publicity = null;
-    private TClass_db_field_situation_impressions db_field_situation_impressions = null;
-    private TClass_db_field_situations db_field_situations = null;
-    private TClass_ss_broadcastify ss_broadcastify = null;
+    private readonly TClass_biz_notifications biz_notifications = null;
+    private readonly TClass_biz_publicity biz_publicity = null;
+    private readonly TClass_db_field_situation_impressions db_field_situation_impressions = null;
+    private readonly TClass_db_field_situations db_field_situations = null;
+    private readonly TClass_ss_broadcastify ss_broadcastify = null;
 
     private void FormImpression
       (

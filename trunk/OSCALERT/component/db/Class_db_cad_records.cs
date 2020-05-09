@@ -17,7 +17,7 @@ namespace Class_db_cad_records
       public string id;
       }
 
-    private TClass_db_trail db_trail = null;
+    private readonly TClass_db_trail db_trail = null;
 
     public TClass_db_cad_records() : base()
       {
@@ -29,7 +29,7 @@ namespace Class_db_cad_records
       var concat_clause = "concat(IFNULL(incident_date,'-'),'|',IFNULL(incident_num,'-'),'|',IFNULL(incident_address,'-'),'|',IFNULL(call_sign,'-'),'|',IFNULL(time_initialized,'-'),'|',IFNULL(time_of_alarm,'-'),'|',IFNULL(time_enroute,'-'),'|',IFNULL(time_on_scene,'-'),'|',IFNULL(time_transporting,'-'),'|',IFNULL(time_at_hospital,'-'),'|',IFNULL(time_available,'-'),'|',IFNULL(time_downloaded,'-'))";
       Open();
       ((target) as ListControl).Items.Clear();
-      var dr = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "select id"
         + " , CONVERT(" + concat_clause + " USING utf8) as spec"
@@ -37,8 +37,8 @@ namespace Class_db_cad_records
         + " where " + concat_clause + " like '%" + partial_spec.ToUpper() + "%'"
         + " order by spec",
         connection
-        )
-        .ExecuteReader();
+        );
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         ((target) as ListControl).Items.Add(new ListItem(dr["spec"].ToString(), dr["id"].ToString()));
@@ -56,13 +56,13 @@ namespace Class_db_cad_records
       )
       {
       Open();
-      ((target) as BaseDataList).DataSource = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "select cad_record.id as id"
         + " from cad_record",
         connection
-        )
-        .ExecuteReader();
+        );
+      ((target) as BaseDataList).DataSource = my_sql_command.ExecuteReader();
       ((target) as BaseDataList).DataBind();
       Close();
       }
@@ -71,15 +71,15 @@ namespace Class_db_cad_records
       {
       Open();
       ((target) as ListControl).Items.Clear();
-      var dr = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "SELECT id"
         + " , CONVERT(concat(IFNULL(incident_date,'-'),'|',IFNULL(incident_num,'-'),'|',IFNULL(incident_address,'-'),'|',IFNULL(call_sign,'-'),'|',IFNULL(time_initialized,'-'),'|',IFNULL(time_of_alarm,'-'),'|',IFNULL(time_enroute,'-'),'|',IFNULL(time_on_scene,'-'),'|',IFNULL(time_transporting,'-'),'|',IFNULL(time_at_hospital,'-'),'|',IFNULL(time_available,'-'),'|',IFNULL(time_downloaded,'-')) USING utf8) as spec"
         + " FROM cad_record"
         + " order by spec",
         connection
-        )
-        .ExecuteReader();
+        );
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         ((target) as ListControl).Items.Add(new ListItem(dr["spec"].ToString(), dr["id"].ToString()));
@@ -94,7 +94,8 @@ namespace Class_db_cad_records
       Open();
       try
         {
-        new MySqlCommand(db_trail.Saved("delete from cad_record where id = \"" + id + "\""), connection).ExecuteNonQuery();
+        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from cad_record where id = \"" + id + "\""), connection);
+        my_sql_command.ExecuteNonQuery();
         }
       catch(System.Exception e)
         {
@@ -143,7 +144,8 @@ namespace Class_db_cad_records
       var result = false;
       //
       Open();
-      var dr = new MySqlCommand("select * from cad_record where CAST(id AS CHAR) = \"" + id + "\"", connection).ExecuteReader();
+      using var my_sql_command = new MySqlCommand("select * from cad_record where CAST(id AS CHAR) = \"" + id + "\"", connection);
+      var dr = my_sql_command.ExecuteReader();
       if (dr.Read())
         {
         incident_date = DateTime.Parse(dr["incident_date"].ToString());
@@ -238,8 +240,8 @@ namespace Class_db_cad_records
       ////
       //// Determine if a Nature is known for this record.
       ////
-      //var be_nature_unknown_after_set = DBNull.Value == new MySqlCommand
-      //  ("select nature from cad_record where id = '" + id + "' or (incident_num = '" + incident_num + "' and call_sign = '" + call_sign + "')",connection).ExecuteScalar();
+      //var be_nature_unknown_after_set = DBNull.Value == using var my_sql_command = new MySqlCommand
+      //  ("select nature from cad_record where id = '" + id + "' or (incident_num = '" + incident_num + "' and call_sign = '" + call_sign + "')",connection); my_sql_command.ExecuteScalar();
       ////
       Close();
       ////
@@ -249,17 +251,14 @@ namespace Class_db_cad_records
     internal object Summary(string id)
       {
       Open();
-      var dr =
+      using var my_sql_command = new MySqlCommand
         (
-        new MySqlCommand
-          (
-          "SELECT *"
-          + " FROM cad_record"
-          + " where id = '" + id + "'",
-          connection
-          )
-          .ExecuteReader()
+        "SELECT *"
+        + " FROM cad_record"
+        + " where id = '" + id + "'",
+        connection
         );
+      var dr = my_sql_command.ExecuteReader();
       dr.Read();
       var the_summary = new cad_record_summary()
         {
@@ -276,7 +275,7 @@ namespace Class_db_cad_records
       //  {
 
       Open();
-      new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         k.EMPTY
         //
@@ -379,8 +378,8 @@ namespace Class_db_cad_records
         + " delete from cad_record where incident_date < DATE_ADD(CURDATE(),INTERVAL -7 DAY)"
         ,
         connection
-        )
-        .ExecuteNonQuery();
+        );
+      my_sql_command.ExecuteNonQuery();
       Close();
 
       //  }

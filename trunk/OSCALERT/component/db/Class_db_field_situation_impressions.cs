@@ -15,7 +15,7 @@ namespace Class_db_field_situation_impressions
       public string id;
       }
 
-    private TClass_db_trail db_trail = null;
+    private readonly TClass_db_trail db_trail = null;
 
     public TClass_db_field_situation_impressions() : base()
       {
@@ -27,7 +27,7 @@ namespace Class_db_field_situation_impressions
       var concat_clause = "concat(IFNULL(description,'-'))";
       Open();
       ((target) as ListControl).Items.Clear();
-      var dr = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "select id"
         + " , CONVERT(" + concat_clause + " USING utf8) as spec"
@@ -35,8 +35,8 @@ namespace Class_db_field_situation_impressions
         + " where " + concat_clause + " like '%" + partial_spec.ToUpper() + "%'"
         + " order by spec",
         connection
-        )
-        .ExecuteReader();
+        );
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         ((target) as ListControl).Items.Add(new ListItem(dr["spec"].ToString(), dr["id"].ToString()));
@@ -54,13 +54,13 @@ namespace Class_db_field_situation_impressions
       )
       {
       Open();
-      ((target) as BaseDataList).DataSource = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "select field_situation_impression.id as id"
         + " from field_situation_impression",
         connection
-        )
-        .ExecuteReader();
+        );
+      ((target) as BaseDataList).DataSource = my_sql_command.ExecuteReader();
       ((target) as BaseDataList).DataBind();
       Close();
       }
@@ -69,15 +69,15 @@ namespace Class_db_field_situation_impressions
       {
       Open();
       ((target) as ListControl).Items.Clear();
-      var dr = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "SELECT id"
         + " , CONVERT(concat(IFNULL(description,'-')) USING utf8) as spec"
         + " FROM field_situation_impression"
         + " order by spec",
         connection
-        )
-        .ExecuteReader();
+        );
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         ((target) as ListControl).Items.Add(new ListItem(dr["spec"].ToString(), dr["id"].ToString()));
@@ -92,7 +92,8 @@ namespace Class_db_field_situation_impressions
       Open();
       try
         {
-        new MySqlCommand(db_trail.Saved("delete from field_situation_impression where id = \"" + id + "\""), connection).ExecuteNonQuery();
+        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from field_situation_impression where id = \"" + id + "\""), connection);
+        my_sql_command.ExecuteNonQuery();
         }
       catch(System.Exception e)
         {
@@ -112,7 +113,8 @@ namespace Class_db_field_situation_impressions
     internal string ElaborationOfDescription(string description)
       {
       Open();
-      var elaboration_of_description = new MySqlCommand("select elaboration from field_situation_impression where description = '" + description + "'",connection).ExecuteScalar().ToString();
+      using var my_sql_command = new MySqlCommand("select elaboration from field_situation_impression where description = '" + description + "'",connection);
+      var elaboration_of_description = my_sql_command.ExecuteScalar().ToString();
       Close();
       return elaboration_of_description;
       }
@@ -129,7 +131,8 @@ namespace Class_db_field_situation_impressions
       var result = false;
       //
       Open();
-      var dr = new MySqlCommand("select * from field_situation_impression where CAST(id AS CHAR) = \"" + id + "\"", connection).ExecuteReader();
+      using var my_sql_command = new MySqlCommand("select * from field_situation_impression where CAST(id AS CHAR) = \"" + id + "\"", connection);
+      var dr = my_sql_command.ExecuteReader();
       if (dr.Read())
         {
         description = dr["description"].ToString();
@@ -150,7 +153,8 @@ namespace Class_db_field_situation_impressions
       )
       {
       Open();
-      var dr = new MySqlCommand("select id,description,elaboration from field_situation_impression where pecking_order = '" + pecking_order.val + "'",connection).ExecuteReader();
+      using var my_sql_command = new MySqlCommand("select id,description,elaboration from field_situation_impression where pecking_order = '" + pecking_order.val + "'",connection);
+      var dr = my_sql_command.ExecuteReader();
       dr.Read();
       id = dr["id"].ToString();
       description = dr["description"].ToString();
@@ -162,7 +166,8 @@ namespace Class_db_field_situation_impressions
     public int PeckingOrderValOfDescription(string description)
       {
       Open();
-      var pecking_order_val_of_description = int.Parse(new MySqlCommand("select pecking_order from field_situation_impression where description = '" + description + "'",connection).ExecuteScalar().ToString());
+      using var my_sql_command = new MySqlCommand("select pecking_order from field_situation_impression where description = '" + description + "'",connection);
+      var pecking_order_val_of_description = int.Parse(my_sql_command.ExecuteScalar().ToString());
       Close();
       return pecking_order_val_of_description;
       }
@@ -190,17 +195,14 @@ namespace Class_db_field_situation_impressions
     public object Summary(string id)
       {
       Open();
-      var dr =
+      using var my_sql_command = new MySqlCommand
         (
-        new MySqlCommand
-          (
-          "SELECT *"
-          + " FROM field_situation_impression"
-          + " where id = '" + id + "'",
-          connection
-          )
-          .ExecuteReader()
+        "SELECT *"
+        + " FROM field_situation_impression"
+        + " where id = '" + id + "'",
+        connection
         );
+      var dr = my_sql_command.ExecuteReader();
       dr.Read();
       var the_summary = new field_situation_impression_summary()
         {

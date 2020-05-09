@@ -9,7 +9,7 @@ namespace Class_biz_oscalert_logs
   {
   public class TClass_biz_oscalert_logs
     {
-    private TClass_db_oscalert_logs db_oscalert_logs = null;
+    private readonly TClass_db_oscalert_logs db_oscalert_logs = null;
 
     public TClass_biz_oscalert_logs() : base()
       {

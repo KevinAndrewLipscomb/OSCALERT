@@ -9,7 +9,7 @@ namespace Class_biz_field_situation_impressions
   {
   public class TClass_biz_field_situation_impressions
     {
-    private TClass_db_field_situation_impressions db_field_situation_impressions = null;
+    private readonly TClass_db_field_situation_impressions db_field_situation_impressions = null;
 
     public TClass_biz_field_situation_impressions() : base()
       {

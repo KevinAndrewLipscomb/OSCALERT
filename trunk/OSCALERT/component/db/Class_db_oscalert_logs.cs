@@ -18,7 +18,7 @@ namespace Class_db_oscalert_logs
       public string id;
       }
 
-    private TClass_db_trail db_trail = null;
+    private readonly TClass_db_trail db_trail = null;
 
     public TClass_db_oscalert_logs() : base()
       {
@@ -30,7 +30,7 @@ namespace Class_db_oscalert_logs
       var concat_clause = "concat(IFNULL(timestamp,'-'),'|',IFNULL(content,'-'))";
       Open();
       ((target) as ListControl).Items.Clear();
-      var dr = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "select id"
         + " , CONVERT(" + concat_clause + " USING utf8) as spec"
@@ -38,8 +38,8 @@ namespace Class_db_oscalert_logs
         + " where " + concat_clause + " like '%" + partial_spec.ToUpper() + "%'"
         + " order by spec",
         connection
-        )
-        .ExecuteReader();
+        );
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         ((target) as ListControl).Items.Add(new ListItem(dr["spec"].ToString(), dr["id"].ToString()));
@@ -57,13 +57,13 @@ namespace Class_db_oscalert_logs
       )
       {
       Open();
-      ((target) as BaseDataList).DataSource = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "select oscalert_log.id as id"
         + " from oscalert_log",
         connection
-        )
-        .ExecuteReader();
+        );
+      ((target) as BaseDataList).DataSource = my_sql_command.ExecuteReader();
       ((target) as BaseDataList).DataBind();
       Close();
       }
@@ -72,15 +72,15 @@ namespace Class_db_oscalert_logs
       {
       Open();
       ((target) as ListControl).Items.Clear();
-      var dr = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "SELECT id"
         + " , CONVERT(concat(IFNULL(timestamp,'-'),'|',IFNULL(content,'-')) USING utf8) as spec"
         + " FROM oscalert_log"
         + " order by spec",
         connection
-        )
-        .ExecuteReader();
+        );
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         ((target) as ListControl).Items.Add(new ListItem(dr["spec"].ToString(), dr["id"].ToString()));
@@ -95,7 +95,8 @@ namespace Class_db_oscalert_logs
       Open();
       try
         {
-        new MySqlCommand(db_trail.Saved("delete from oscalert_log where id = \"" + id + "\""), connection).ExecuteNonQuery();
+        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from oscalert_log where id = \"" + id + "\""), connection);
+        my_sql_command.ExecuteNonQuery();
         }
       catch(System.Exception e)
         {
@@ -115,7 +116,8 @@ namespace Class_db_oscalert_logs
     internal void Enter(string content)
       {
       Open();
-      new MySqlCommand("insert oscalert_log set content = '" + content + "'",connection).ExecuteNonQuery();
+      using var my_sql_command = new MySqlCommand("insert oscalert_log set content = '" + content + "'",connection);
+      my_sql_command.ExecuteNonQuery();
       Close();
       }
 
@@ -131,7 +133,8 @@ namespace Class_db_oscalert_logs
       var result = false;
       //
       Open();
-      var dr = new MySqlCommand("select * from oscalert_log where CAST(id AS CHAR) = \"" + id + "\"", connection).ExecuteReader();
+      using var my_sql_command = new MySqlCommand("select * from oscalert_log where CAST(id AS CHAR) = \"" + id + "\"", connection);
+      var dr = my_sql_command.ExecuteReader();
       if (dr.Read())
         {
         timestamp = dr["timestamp"].ToString();
@@ -166,17 +169,14 @@ namespace Class_db_oscalert_logs
     internal object Summary(string id)
       {
       Open();
-      var dr =
+      using var my_sql_command = new MySqlCommand
         (
-        new MySqlCommand
-          (
-          "SELECT *"
-          + " FROM oscalert_log"
-          + " where id = '" + id + "'",
-          connection
-          )
-          .ExecuteReader()
+        "SELECT *"
+        + " FROM oscalert_log"
+        + " where id = '" + id + "'",
+        connection
         );
+      var dr = my_sql_command.ExecuteReader();
       dr.Read();
       var the_summary = new oscalert_log_summary()
         {
