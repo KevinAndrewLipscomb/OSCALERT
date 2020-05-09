@@ -128,8 +128,7 @@ namespace UserControl_precontent
         // / </summary>
         private void InitializeComponent()
         {
-            this.ScriptManager_control.AsyncPostBackError += this.ScriptManager_control_AsyncPostBackError;
-            //this.Load += this.Page_Load;
+            ScriptManager_control.AsyncPostBackError += ScriptManager_control_AsyncPostBackError;
         }
 
     } // end TWebUserControl_precontent

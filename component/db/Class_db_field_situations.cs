@@ -65,7 +65,7 @@ namespace Class_db_field_situations
       public string id;
       }
 
-    private TClass_db_trail db_trail = null;
+    private readonly TClass_db_trail db_trail = null;
 
     public TClass_db_field_situations() : base()
       {
@@ -75,7 +75,7 @@ namespace Class_db_field_situations
     internal bool BeFireSurge()
       {
       Open();
-      var be_meta_surge_fire = "1" == new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "select"
         + " IF(((sum(num_engines) + sum(num_ladders) + sum(num_frsqs) >= 10) and (sum(num_tacs) >= 2) and (sum(num_bats) >= 2) and (sum(num_ambulances) + sum(num_holds) >= 2) and (sum(num_supervisors) >= 2) and (sum(num_safes) >= 1))"
@@ -85,8 +85,8 @@ namespace Class_db_field_situations
         +   " join field_situation_impression on (field_situation_impression.id=field_situation.impression_id)"
         ,
         connection
-        )
-        .ExecuteScalar().ToString();
+        );
+      var be_meta_surge_fire = "1" == my_sql_command.ExecuteScalar().ToString();
       Close();
       return be_meta_surge_fire;
       }
@@ -94,7 +94,8 @@ namespace Class_db_field_situations
     internal bool BeMultAlsHolds()
       {
       Open();
-      var be_meta_surge_als = "1" == new MySqlCommand("select IF(sum(num_hzcs) >= 2, 1, 0) from field_situation",connection).ExecuteScalar().ToString();
+      using var my_sql_command = new MySqlCommand("select IF(sum(num_hzcs) >= 2, 1, 0) from field_situation",connection);
+      var be_meta_surge_als = "1" == my_sql_command.ExecuteScalar().ToString();
       Close();
       return be_meta_surge_als;
       }
@@ -102,7 +103,8 @@ namespace Class_db_field_situations
     internal bool BeMultAmbHolds()
       {
       Open();
-      var be_meta_surge_ems = "1" == new MySqlCommand("select IF(sum(num_holds) >= 2, 1, 0) from field_situation",connection).ExecuteScalar().ToString();
+      using var my_sql_command = new MySqlCommand("select IF(sum(num_holds) >= 2, 1, 0) from field_situation",connection);
+      var be_meta_surge_ems = "1" == my_sql_command.ExecuteScalar().ToString();
       Close();
       return be_meta_surge_ems;
       }
@@ -112,7 +114,7 @@ namespace Class_db_field_situations
       var concat_clause = "concat(IFNULL(case_num,'-'),'|',IFNULL(address,'-'),'|',IFNULL(assignment,'-'),'|',IFNULL(time_initialized,'-'),'|',IFNULL(nature,'-'),'|',IFNULL(impression_id,'-'),'|',IFNULL(be_etby,'-'))";
       Open();
       ((target) as ListControl).Items.Clear();
-      var dr = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "select id"
         + " , CONVERT(" + concat_clause + " USING utf8) as spec"
@@ -120,8 +122,8 @@ namespace Class_db_field_situations
         + " where " + concat_clause + " like '%" + partial_spec.ToUpper() + "%'"
         + " order by spec",
         connection
-        )
-        .ExecuteReader();
+        );
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         ((target) as ListControl).Items.Add(new ListItem(dr["spec"].ToString(), dr["id"].ToString()));
@@ -135,15 +137,15 @@ namespace Class_db_field_situations
       {
       Open();
       ((target) as ListControl).Items.Clear();
-      var dr = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "SELECT id"
         + " , CONVERT(concat(IFNULL(case_num,'-'),'|',IFNULL(address,'-'),'|',IFNULL(assignment,'-'),'|',IFNULL(time_initialized,'-'),'|',IFNULL(nature,'-'),'|',IFNULL(impression_id,'-'),'|',IFNULL(be_etby,'-')) USING utf8) as spec"
         + " FROM field_situation"
         + " order by spec",
         connection
-        )
-        .ExecuteReader();
+        );
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         ((target) as ListControl).Items.Add(new ListItem(dr["spec"].ToString(), dr["id"].ToString()));
@@ -158,7 +160,8 @@ namespace Class_db_field_situations
       Open();
       try
         {
-        new MySqlCommand(db_trail.Saved("delete from field_situation where id = \"" + id + "\""), connection).ExecuteNonQuery();
+        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from field_situation where id = \"" + id + "\""), connection);
+        my_sql_command.ExecuteNonQuery();
         }
       catch(System.Exception e)
         {
@@ -178,7 +181,8 @@ namespace Class_db_field_situations
     internal void DeleteAnyStillStale()
       {
       Open();
-      new MySqlCommand("delete from field_situation where be_stale",connection).ExecuteNonQuery();
+      using var my_sql_command = new MySqlCommand("delete from field_situation where be_stale",connection);
+      my_sql_command.ExecuteNonQuery();
       Close();
       }
 
@@ -187,7 +191,7 @@ namespace Class_db_field_situations
       var digest_q = new Queue<digest>();
       //
       Open();
-      var dr = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "select incident_num as case_num"
         + " , incident_address as address"
@@ -298,8 +302,8 @@ namespace Class_db_field_situations
         + " order by incident_num desc"
         ,
         connection
-        )
-        .ExecuteReader();
+        );
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         digest_q.Enqueue
@@ -447,7 +451,8 @@ namespace Class_db_field_situations
       var result = false;
       //
       Open();
-      var dr = new MySqlCommand("select * from field_situation where CAST(id AS CHAR) = \"" + id + "\"", connection).ExecuteReader();
+      using var my_sql_command = new MySqlCommand("select * from field_situation where CAST(id AS CHAR) = \"" + id + "\"", connection);
+      var dr = my_sql_command.ExecuteReader();
       if (dr.Read())
         {
         case_num = dr["case_num"].ToString();
@@ -502,7 +507,7 @@ namespace Class_db_field_situations
     internal string NumConsideredActive()
       {
       Open();
-      var num_considered_active = new MySqlCommand
+      using var my_sql_command = new MySqlCommand
         (
         "select count(*)"
         + " from field_situation"
@@ -517,8 +522,8 @@ namespace Class_db_field_situations
         +       " assignment like '%,%'"
         +     " )",
         connection
-        )
-        .ExecuteScalar().ToString();
+        );
+      var num_considered_active = my_sql_command.ExecuteScalar().ToString();
       Close();
       return num_considered_active;
       }
@@ -526,8 +531,9 @@ namespace Class_db_field_situations
     internal k.int_nonnegative PriorImpressionPeckingOrder(string case_num)
       {
       Open();
-      var pecking_order_obj = new MySqlCommand
-        ("select pecking_order from field_situation join field_situation_impression on (field_situation_impression.id=field_situation.impression_id) where case_num = '" + case_num + "'",connection).ExecuteScalar();
+      using var my_sql_command = new MySqlCommand
+        ("select pecking_order from field_situation join field_situation_impression on (field_situation_impression.id=field_situation.impression_id) where case_num = '" + case_num + "'",connection);
+      var pecking_order_obj = my_sql_command.ExecuteScalar();
       Close();
       return new k.int_nonnegative((pecking_order_obj == null ? 0 : int.Parse(pecking_order_obj.ToString())));
       }
@@ -535,7 +541,8 @@ namespace Class_db_field_situations
     internal void MarkAllStale()
       {
       Open();
-      new MySqlCommand("update field_situation set be_stale = TRUE",connection).ExecuteNonQuery();
+      using var my_sql_command = new MySqlCommand("update field_situation set be_stale = TRUE",connection);
+      my_sql_command.ExecuteNonQuery();
       Close();
       }
 
@@ -672,17 +679,14 @@ namespace Class_db_field_situations
     internal object Summary(string id)
       {
       Open();
-      var dr =
+      using var my_sql_command = new MySqlCommand
         (
-        new MySqlCommand
-          (
-          "SELECT *"
-          + " FROM field_situation"
-          + " where id = '" + id + "'",
-          connection
-          )
-          .ExecuteReader()
+        "SELECT *"
+        + " FROM field_situation"
+        + " where id = '" + id + "'",
+        connection
         );
+      var dr = my_sql_command.ExecuteReader();
       dr.Read();
       var the_summary = new field_situation_summary()
         {

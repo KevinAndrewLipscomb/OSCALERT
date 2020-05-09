@@ -12,8 +12,10 @@ namespace Class_db_notifications
   public class TClass_db_notifications: TClass_db
     {
 
-    private string tier_2_match_field = k.EMPTY;
-    private string tier_3_match_field = k.EMPTY;
+    #pragma warning disable IDE0052 // Remove unread private members
+    private readonly string tier_2_match_field = k.EMPTY;
+    private readonly string tier_3_match_field = k.EMPTY;
+    #pragma warning restore IDE0052 // Remove unread private members
 
     //Constructor  Create()
     public TClass_db_notifications() : base()
@@ -35,7 +37,8 @@ namespace Class_db_notifications
         ((target) as ListControl).Items.Add(new ListItem(unselected_literal, k.EMPTY));
         }
       Open();
-      var dr = new MySqlCommand("select notification.id as notification_id" + " , name as notification_name" + " from notification" + " order by notification_name",connection).ExecuteReader();
+      using var my_sql_command = new MySqlCommand("select notification.id as notification_id" + " , name as notification_name" + " from notification" + " order by notification_name",connection);
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         ((target) as ListControl).Items.Add(new ListItem(dr["notification_name"].ToString(), dr["notification_id"].ToString()));
@@ -77,7 +80,8 @@ namespace Class_db_notifications
       // dr.Close();
       // Tier 1 stakeholders
       // + ' where tier_id = 1'
-      var dr = new MySqlCommand("select email_address" + " from member" + " join role_member_map on (role_member_map.member_id=member.id)" + " join role_notification_map on (role_notification_map.role_id=role_member_map.role_id)" + " join role on (role.id=role_member_map.role_id)" + " join notification on (notification.id=role_notification_map.notification_id)" + " and notification.name = \"" + name + "\"",connection).ExecuteReader();
+      using var my_sql_command = new MySqlCommand("select email_address" + " from member" + " join role_member_map on (role_member_map.member_id=member.id)" + " join role_notification_map on (role_notification_map.role_id=role_member_map.role_id)" + " join role on (role.id=role_member_map.role_id)" + " join notification on (notification.id=role_notification_map.notification_id)" + " and notification.name = \"" + name + "\"",connection);
+      var dr = my_sql_command.ExecuteReader();
       if (dr != null)
         {
         while (dr.Read())
@@ -170,7 +174,8 @@ namespace Class_db_notifications
         condition_clause = " min_oscalert_peck_order_general <= (select pecking_order from field_situation_impression where description = '" + description + "')";
         }
       Open();
-      var dr = new MySqlCommand("select CONCAT(phone_num,'@',hostname) as sms_target from member join sms_gateway on (sms_gateway.id=member.phone_service_id) where " + condition_clause,connection).ExecuteReader();
+      using var my_sql_command = new MySqlCommand("select CONCAT(phone_num,'@',hostname) as sms_target from member join sms_gateway on (sms_gateway.id=member.phone_service_id) where " + condition_clause,connection);
+      var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
         target_of_oscalert += dr["sms_target"].ToString() + k.COMMA;

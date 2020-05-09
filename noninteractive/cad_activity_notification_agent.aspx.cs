@@ -26,7 +26,7 @@ namespace cad_activity_notification_agent
       var now = DateTime.Now;
       var datetime_to_quit = (now < today_0026 ? today_0026 : (now < today_0326 ? today_0326 : (now < today_0626 ? today_0626 : (now < today_0926 ? today_0926 : (now < today_1226 ? today_1226 : (now < today_1526 ? today_1526 : (now < today_1826 ? today_1826 : (now < today_2126 ? today_2126 : today_0026.AddDays(1)))))))));
       //
-      var log = new StreamWriter(path:HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["scratch_folder"] + "/cad_activity_notification_agent.log"),append:true);
+      using var log = new StreamWriter(path:HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["scratch_folder"] + "/cad_activity_notification_agent.log"),append:true);
       log.AutoFlush = true;
       //
       while (DateTime.Now < datetime_to_quit)
