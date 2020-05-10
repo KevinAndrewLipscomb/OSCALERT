@@ -1,6 +1,7 @@
 using Class_ss;
 using kix;
 using System;
+using System.Configuration;
 using System.Net;
 
 namespace Class_ss_emsbridge
@@ -10,6 +11,7 @@ namespace Class_ss_emsbridge
 
     private static class Static
       {
+      public static string USER_AGENT_DESIGNATOR = ConfigurationManager.AppSettings["ss_user_agent_designator"];
       }
 
     public TClass_ss_emsbridge() : base()
@@ -33,7 +35,7 @@ namespace Class_ss_emsbridge
 
 		    request.Accept = "text/html, application/xhtml+xml, image/jxr, */*";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
-		    request.UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 10.0; Win64; x64; Trident/7.0)";
+		    request.UserAgent = Static.USER_AGENT_DESIGNATOR;
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
 		    request.Headers.Set(HttpRequestHeader.CacheControl, "no-cache");
 

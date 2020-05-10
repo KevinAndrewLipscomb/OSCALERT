@@ -46,6 +46,11 @@ namespace Class_ss_imagetrendelite
     //
     //--
 
+    private static class Static
+      {
+      public static string USER_AGENT_DESIGNATOR = ConfigurationManager.AppSettings["ss_user_agent_designator"];
+      }
+
     private bool Request_www_imagetrendelite_com_Signin
       (
       string username,
@@ -66,7 +71,7 @@ namespace Class_ss_imagetrendelite
 		    request.Referer = "https://www.imagetrendelite.com/Elite/?organizationId=VBEMS";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-		    request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
+		    request.UserAgent = Static.USER_AGENT_DESIGNATOR;
 		    request.Headers.Set(HttpRequestHeader.CacheControl, "no-cache");
 
 		    request.Method = "POST";
@@ -119,7 +124,7 @@ namespace Class_ss_imagetrendelite
 		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-		    request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
+		    request.UserAgent = Static.USER_AGENT_DESIGNATOR;
 
 		    response = (HttpWebResponse)request.GetResponse();
 	    }
@@ -156,7 +161,7 @@ namespace Class_ss_imagetrendelite
 		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-		    request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
+		    request.UserAgent = Static.USER_AGENT_DESIGNATOR;
 
 		    response = (HttpWebResponse)request.GetResponse();
 	    }
@@ -194,7 +199,7 @@ namespace Class_ss_imagetrendelite
 		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-		    request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko";
+		    request.UserAgent = Static.USER_AGENT_DESIGNATOR;
 
 		    response = (HttpWebResponse)request.GetResponse();
 	    }
