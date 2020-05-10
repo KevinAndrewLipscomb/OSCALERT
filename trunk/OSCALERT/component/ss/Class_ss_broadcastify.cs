@@ -14,6 +14,7 @@ namespace Class_ss_broadcastify
 
     private static class Static
       {
+      public static string USER_AGENT_DESIGNATOR = ConfigurationManager.AppSettings["ss_user_agent_designator"];
       }
 
     public TClass_ss_broadcastify() : base()
@@ -39,7 +40,7 @@ namespace Class_ss_broadcastify
 
 		    request.Accept = "text/html, application/xhtml+xml, */*";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
-		    request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
+		    request.UserAgent = Static.USER_AGENT_DESIGNATOR;
 		    request.ContentType = "application/x-www-form-urlencoded";
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
 		    request.Headers.Add("DNT", "1");
@@ -90,7 +91,7 @@ namespace Class_ss_broadcastify
 		    request.Accept = "text/html, application/xhtml+xml, */*";
         request.Referer = "http://www.broadcastify.com/manage/feed/14744";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
-		    request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
+		    request.UserAgent = Static.USER_AGENT_DESIGNATOR;
 		    request.ContentType = "application/x-www-form-urlencoded";
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
 		    request.Headers.Add("DNT", "1");
