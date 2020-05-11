@@ -182,6 +182,7 @@ namespace Class_ss_imagetrendelite
     private bool Request_www_imagetrendelite_com_Load
       (
       string authorization_token,
+      StreamWriter log,
       out HttpWebResponse response
       )
       {
@@ -205,12 +206,20 @@ namespace Class_ss_imagetrendelite
 	    }
 	    catch (WebException e)
 	    {
-		    if (e.Status == WebExceptionStatus.ProtocolError) response = (HttpWebResponse)e.Response;
-		    else return false;
+		    if (e.Status == WebExceptionStatus.ProtocolError)
+          {
+          response = (HttpWebResponse)e.Response;
+          }
+		    else
+          {
+          log.WriteLine(DateTime.Now.ToString("s") + "TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load: " + e.ToString() + k.NEW_LINE);
+          return false;
+          }
 	    }
-	    catch (Exception)
+	    catch (Exception e)
 	    {
-		    if(response != null) response.Close();
+		    if (response != null) response.Close();
+        log.WriteLine(DateTime.Now.ToString("s") + "TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load: " + e.ToString() + k.NEW_LINE);
 		    return false;
 	    }
 
@@ -275,6 +284,7 @@ namespace Class_ss_imagetrendelite
       if(!Request_www_imagetrendelite_com_Load
           (
           authorization_token:authorization_token,
+          log:log,
           response:out response
           )
         )
