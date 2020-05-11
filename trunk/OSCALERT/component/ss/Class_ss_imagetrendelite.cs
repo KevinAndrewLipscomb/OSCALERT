@@ -212,14 +212,14 @@ namespace Class_ss_imagetrendelite
           }
 		    else
           {
-          log.WriteLine(DateTime.Now.ToString("s") + "TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load: " + e.ToString() + k.NEW_LINE);
+          log.WriteLine(DateTime.Now.ToString("s") + " TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load encountered a WebException: " + e.ToString() + k.NEW_LINE);
           return false;
           }
 	    }
 	    catch (Exception e)
 	    {
 		    if (response != null) response.Close();
-        log.WriteLine(DateTime.Now.ToString("s") + "TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load: " + e.ToString() + k.NEW_LINE);
+        log.WriteLine(DateTime.Now.ToString("s") + " TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load encountered a non-web Exception: " + e.ToString() + k.NEW_LINE);
 		    return false;
 	    }
 
