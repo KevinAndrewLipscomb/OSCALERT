@@ -41,7 +41,7 @@ namespace Class_biz_cad_activity_notification_agent
         password:ConfigurationManager.AppSettings["vbemsbridge_password"]
         );
       var datetime_of_last_nudge = DateTime.Now;
-      var request_identifier = k.EMPTY;
+      var request_identifier = Guid.NewGuid().ToString();
       while (DateTime.Now < datetime_to_quit)
         {
         if (DateTime.Now > datetime_of_last_nudge.AddMinutes(double.Parse(ConfigurationManager.AppSettings["nudge_interval_minutes"])))

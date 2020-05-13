@@ -193,6 +193,8 @@ namespace Class_ss_imagetrendelite
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
 
+        request.Timeout = int.Parse(ConfigurationManager.AppSettings["Request_www_imagetrendelite_com_Load_timeout_milliseconds"]);
+
 		    response = (HttpWebResponse)request.GetResponse();
 	    }
 	    catch (WebException e)
