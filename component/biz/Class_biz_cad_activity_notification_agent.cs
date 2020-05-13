@@ -41,6 +41,7 @@ namespace Class_biz_cad_activity_notification_agent
         password:ConfigurationManager.AppSettings["vbemsbridge_password"]
         );
       var datetime_of_last_nudge = DateTime.Now;
+      var request_identifier = k.EMPTY;
       while (DateTime.Now < datetime_to_quit)
         {
         if (DateTime.Now > datetime_of_last_nudge.AddMinutes(double.Parse(ConfigurationManager.AppSettings["nudge_interval_minutes"])))
@@ -48,13 +49,14 @@ namespace Class_biz_cad_activity_notification_agent
           ss_imagetrendelite.Nudge(authorization_token);
           datetime_of_last_nudge = DateTime.Now;
           }
-        current_ems_cad_list = ss_imagetrendelite.CurrentEmsCadList(authorization_token,log);
+        current_ems_cad_list = ss_imagetrendelite.CurrentEmsCadList(authorization_token,request_identifier,log);
         if (current_ems_cad_list == null)
           {
           log.WriteLine(DateTime.Now.ToString("s") + "***ss_imagetrendelite.CurrentEmsCadList returned null.");
           }
         else
           {
+          request_identifier = current_ems_cad_list.RequestIdentifier;
           var rows = current_ems_cad_list.Records;
           for (var i = new k.subtype<int>(0,rows.Count); i.val < i.LAST; i.val++)
             {

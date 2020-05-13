@@ -1,6 +1,7 @@
 using HtmlAgilityPack;
 using kix;
 using System;
+using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Net.Cache;
@@ -23,6 +24,7 @@ namespace Class_ss
       {
       public const Int32 INTERNET_COOKIE_HTTPONLY = 0x2000;
       public const Int32 INTERNET_COOKIE_THIRD_PARTY = 0x10;
+      public static string USER_AGENT_DESIGNATOR = ConfigurationManager.AppSettings["ss_user_agent_designator"];
       }
 
     [DllImport("wininet.dll", SetLastError = true)]
@@ -160,6 +162,7 @@ namespace Class_ss
       {
       request.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
       request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+      request.UserAgent = Static.USER_AGENT_DESIGNATOR;
       }
 
     protected static void NormalizeWithCookie
