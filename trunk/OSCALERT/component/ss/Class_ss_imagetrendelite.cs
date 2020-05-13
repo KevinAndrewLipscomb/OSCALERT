@@ -46,11 +46,6 @@ namespace Class_ss_imagetrendelite
     //
     //--
 
-    private static class Static
-      {
-      public static string USER_AGENT_DESIGNATOR = ConfigurationManager.AppSettings["ss_user_agent_designator"];
-      }
-
     private bool Request_www_imagetrendelite_com_Signin
       (
       string username,
@@ -71,7 +66,6 @@ namespace Class_ss_imagetrendelite
 		    request.Referer = "https://www.imagetrendelite.com/Elite/?organizationId=VBEMS";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-		    request.UserAgent = Static.USER_AGENT_DESIGNATOR;
 		    request.Headers.Set(HttpRequestHeader.CacheControl, "no-cache");
 
 		    request.Method = "POST";
@@ -124,7 +118,6 @@ namespace Class_ss_imagetrendelite
 		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-		    request.UserAgent = Static.USER_AGENT_DESIGNATOR;
 
 		    response = (HttpWebResponse)request.GetResponse();
 	    }
@@ -161,7 +154,6 @@ namespace Class_ss_imagetrendelite
 		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-		    request.UserAgent = Static.USER_AGENT_DESIGNATOR;
 
 		    response = (HttpWebResponse)request.GetResponse();
 	    }
@@ -182,6 +174,7 @@ namespace Class_ss_imagetrendelite
     private bool Request_www_imagetrendelite_com_Load
       (
       string authorization_token,
+      string request_identifier,
       StreamWriter log,
       out HttpWebResponse response
       )
@@ -190,8 +183,7 @@ namespace Class_ss_imagetrendelite
 
 	    try
 	    {
-		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/LoadDynamicListRecords?skip=0&pageSize=200&search=&comparisonType=STARTSWITH&sortColumn=UnitNotifiedByDispatch&sortAscending=false&viewID=910a358f-b03d-489a-bbe0-39d64ebc08cb&includeTotalRecordCount=false");
-          // The following additional GET parameter appears not to be strictly necessary:  &RequestIdentifier=8513f56b-e453-4ae7-8ffd-be1a46975429
+		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/LoadDynamicListRecords?skip=0&pageSize=200&search=&comparisonType=STARTSWITH&sortColumn=UnitNotifiedByDispatch&sortAscending=false&viewID=910a358f-b03d-489a-bbe0-39d64ebc08cb&includeTotalRecordCount=false&RequestIdentifier=" + request_identifier);
         Normalize(request);
 
 		    request.Accept = "*/*";
@@ -200,7 +192,6 @@ namespace Class_ss_imagetrendelite
 		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-		    request.UserAgent = Static.USER_AGENT_DESIGNATOR;
 
 		    response = (HttpWebResponse)request.GetResponse();
 	    }
@@ -277,6 +268,7 @@ namespace Class_ss_imagetrendelite
     internal EmsCadList CurrentEmsCadList
       (
       string authorization_token,
+      string request_identifier,
       StreamWriter log
       )
       {
@@ -284,6 +276,7 @@ namespace Class_ss_imagetrendelite
       if(!Request_www_imagetrendelite_com_Load
           (
           authorization_token:authorization_token,
+          request_identifier:request_identifier,
           log:log,
           response:out response
           )
@@ -315,6 +308,10 @@ namespace Class_ss_imagetrendelite
         try
           {
           current_ems_cad_list = new JavaScriptSerializer().Deserialize<EmsCadList>(text);
+          if (current_ems_cad_list.ErrorMessage != null)
+            {
+            log.WriteLine(DateTime.Now.ToString("s") + " TClass_ss_imagetrendelite.CurrentEmsCadList got an EmsCadList with ErrorMessage: " + current_ems_cad_list.ErrorMessage.ToString() + k.NEW_LINE);
+            }
           }
         catch (Exception the_exception)
           {
