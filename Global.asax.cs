@@ -21,7 +21,6 @@ namespace Global
             // Required for Designer support
             InitializeComponent();
             // TODO: Add any constructor code after InitializeComponent call
-
         }
         protected void Application_Start(object sender, EventArgs e)
         {
