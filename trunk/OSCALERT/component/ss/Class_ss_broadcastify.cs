@@ -1,5 +1,4 @@
 using Class_ss;
-using kix;
 using System;
 using System.Configuration;
 using System.IO;
@@ -20,6 +19,15 @@ namespace Class_ss_broadcastify
     public TClass_ss_broadcastify() : base()
       {      
       }
+
+    //--
+    //
+    // BEGIN code generated initially by Fiddler extension "Request to Code"
+    //
+    #pragma warning disable CA1031 // Do not catch general exception types
+    #pragma warning disable CA2234 // Pass system uri objects instead of strings
+    //
+    //--
 
     private bool Request_www_broadcastify_com_Login
       (
@@ -63,7 +71,7 @@ namespace Class_ss_broadcastify
 		    if (e.Status == WebExceptionStatus.ProtocolError) response = (HttpWebResponse)e.Response;
 		    else return false;
 	      }
-	    catch (Exception)
+	    catch
 	      {
 		    if(response != null) response.Close();
 		    return false;
@@ -114,7 +122,7 @@ namespace Class_ss_broadcastify
 		    if (e.Status == WebExceptionStatus.ProtocolError) response = (HttpWebResponse)e.Response;
 		    else return false;
 	      }
-	    catch (Exception)
+	    catch
 	      {
 		    if(response != null) response.Close();
 		    return false;
@@ -122,6 +130,15 @@ namespace Class_ss_broadcastify
 
 	    return true;
       }
+
+    //--
+    //
+    #pragma warning restore CA1031 // Do not catch general exception types
+    #pragma warning restore CA2234 // Pass system uri objects instead of strings
+    //
+    // END code generated initially by Fiddler extension "Request to Code"
+    //
+    //--
 
     private void Login
       (

@@ -16,7 +16,7 @@ namespace exception
       public string notification_message;
       }
 
-    private p_type p;
+    private p_type p; // Private Parcel of Page-Pertinent Process-Persistent Parameters
 
     // / <summary>
     // / Required method for Designer support -- do not modify
@@ -96,7 +96,7 @@ namespace exception
     protected void Button_submit_Click(object sender, System.EventArgs e)
       {
       var comment = k.Safe(TextArea_user_comment.Value, k.safe_hint_type.PUNCTUATED);
-      if (comment != k.EMPTY)
+      if (comment.Length > 0)
         {
         k.SmtpMailSend
           (

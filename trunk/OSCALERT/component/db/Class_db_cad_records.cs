@@ -59,7 +59,8 @@ namespace Class_db_cad_records
       using var my_sql_command = new MySqlCommand
         (
         "select cad_record.id as id"
-        + " from cad_record",
+        + " from cad_record"
+        + (sort_order.Length > 0 ? " order by " + sort_order.Replace("%",(be_sort_order_ascending ? "asc" : "desc")) : k.EMPTY),
         connection
         );
       ((target) as BaseDataList).DataSource = my_sql_command.ExecuteReader();
@@ -97,7 +98,7 @@ namespace Class_db_cad_records
         using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from cad_record where id = \"" + id + "\""), connection);
         my_sql_command.ExecuteNonQuery();
         }
-      catch(System.Exception e)
+      catch(Exception e)
         {
         if (e.Message.StartsWith("Cannot delete or update a parent row: a foreign key constraint fails", true, null))
           {
@@ -105,7 +106,7 @@ namespace Class_db_cad_records
           }
         else
           {
-          throw e;
+          throw;
           }
         }
       Close();

@@ -1,31 +1,23 @@
-using MySql.Data.MySqlClient;
-using kix;
-using System;
-
-using System.Web.UI.WebControls;
 using Class_db;
 using Class_db_trail;
+using kix;
+using MySql.Data.MySqlClient;
+using System.Web.UI.WebControls;
 
 namespace Class_db_roles
-{
-    public struct crosstab_metadata_rec_type
+  {
+  public class TClass_db_roles: TClass_db
     {
-        public uint index;
-        public string sql_name;
-        public string id;
-        public string natural_text;
-        public string soft_hyphenation_text;
-    } // end crosstab_metadata_rec_type
 
-    public class TClass_db_roles: TClass_db
-    {
         private readonly TClass_db_trail db_trail = null;
+
         //Constructor  Create()
         public TClass_db_roles() : base()
         {
             // TODO: Add any constructor code here
             db_trail = new TClass_db_trail();
         }
+
         public bool Bind(string partial_name, object target)
         {
             bool result;
@@ -49,7 +41,7 @@ namespace Class_db_roles
             MySqlDataReader dr;
             string where_clause;
             ((target) as ListControl).Items.Clear();
-            if (unselected_literal != k.EMPTY)
+            if (unselected_literal.Length > 0)
             {
                 ((target) as ListControl).Items.Add(new ListItem(unselected_literal, k.EMPTY));
             }
@@ -67,7 +59,7 @@ namespace Class_db_roles
             }
             dr.Close();
             Close();
-            if (selected_value != k.EMPTY)
+            if (selected_value.Length > 0)
             {
                 ((target) as ListControl).SelectedValue = selected_value;
             }
@@ -100,7 +92,7 @@ namespace Class_db_roles
                 }
                 else
                 {
-                    throw e;
+                    throw;
                 }
             }
             Close();
