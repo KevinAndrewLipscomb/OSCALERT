@@ -60,7 +60,8 @@ namespace Class_db_oscalert_logs
       using var my_sql_command = new MySqlCommand
         (
         "select oscalert_log.id as id"
-        + " from oscalert_log",
+        + " from oscalert_log"
+        + (sort_order.Length > 0 ? " order by " + sort_order.Replace("%",(be_sort_order_ascending ? "asc" : "desc")) : k.EMPTY),
         connection
         );
       ((target) as BaseDataList).DataSource = my_sql_command.ExecuteReader();
@@ -98,7 +99,7 @@ namespace Class_db_oscalert_logs
         using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from oscalert_log where id = \"" + id + "\""), connection);
         my_sql_command.ExecuteNonQuery();
         }
-      catch(System.Exception e)
+      catch(Exception e)
         {
         if (e.Message.StartsWith("Cannot delete or update a parent row: a foreign key constraint fails", true, null))
           {
@@ -106,7 +107,7 @@ namespace Class_db_oscalert_logs
           }
         else
           {
-          throw e;
+          throw;
           }
         }
       Close();

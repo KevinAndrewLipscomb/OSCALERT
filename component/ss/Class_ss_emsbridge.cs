@@ -18,6 +18,15 @@ namespace Class_ss_emsbridge
       {      
       }
 
+    //--
+    //
+    // BEGIN code generated initially by Fiddler extension "Request to Code"
+    //
+    #pragma warning disable CA1031 // Do not catch general exception types
+    #pragma warning disable CA2234 // Pass system uri objects instead of strings
+    //
+    //--
+
     private bool Request_vbems_emsbridge_com_ResourceAppsCaddispatchCaddispatchhistorydetail
       (
       CookieContainer cookie_container,
@@ -55,6 +64,17 @@ namespace Class_ss_emsbridge
 	    return true;
     }
 
+
+    //--
+    //
+    #pragma warning restore CA1031 // Do not catch general exception types
+    #pragma warning restore CA2234 // Pass system uri objects instead of strings
+    //
+    // END code generated initially by Fiddler extension "Request to Code"
+    //
+    //--
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types")]
     internal string NatureOf
       (
       string incident_id,

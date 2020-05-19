@@ -32,7 +32,7 @@ namespace Class_db_notifications
       )
       {
       ((target) as ListControl).Items.Clear();
-      if (unselected_literal != k.EMPTY)
+      if (unselected_literal.Length > 0)
         {
         ((target) as ListControl).Items.Add(new ListItem(unselected_literal, k.EMPTY));
         }
@@ -45,7 +45,7 @@ namespace Class_db_notifications
         }
       dr.Close();
       Close();
-      if (selected_value != k.EMPTY)
+      if (selected_value.Length > 0)
         {
         ((target) as ListControl).SelectedValue = selected_value;
         }
@@ -61,8 +61,10 @@ namespace Class_db_notifications
 
     public string TargetOf
       (
+      #pragma warning disable CA1801 // Remove unused parameter
       string name,
       string member_id
+      #pragma warning restore CA1801 // Remove unused parameter
       )
       {
       // tier_2_match_value: string;

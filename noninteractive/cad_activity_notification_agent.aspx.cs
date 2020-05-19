@@ -8,7 +8,7 @@ using System.Web;
 namespace cad_activity_notification_agent
   {
 
-  public partial class TWebForm_cad_activity_notification_agent: System.Web.UI.Page
+  public partial class TWebForm_cad_activity_notification_agent: ki_web_ui.page_class
     {
 
     protected void Page_Load(object sender, EventArgs e)

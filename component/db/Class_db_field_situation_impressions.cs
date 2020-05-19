@@ -57,7 +57,8 @@ namespace Class_db_field_situation_impressions
       using var my_sql_command = new MySqlCommand
         (
         "select field_situation_impression.id as id"
-        + " from field_situation_impression",
+        + " from field_situation_impression"
+        + (sort_order.Length > 0 ? " order by " + sort_order.Replace("%",(be_sort_order_ascending ? "asc" : "desc")) : k.EMPTY),
         connection
         );
       ((target) as BaseDataList).DataSource = my_sql_command.ExecuteReader();
@@ -103,7 +104,7 @@ namespace Class_db_field_situation_impressions
           }
         else
           {
-          throw e;
+          throw;
           }
         }
       Close();

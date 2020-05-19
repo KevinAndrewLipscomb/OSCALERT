@@ -27,7 +27,7 @@ namespace Class_ss
       public static string USER_AGENT_DESIGNATOR = ConfigurationManager.AppSettings["ss_user_agent_designator"];
       }
 
-    [DllImport("wininet.dll", SetLastError = true)]
+    [DllImport("wininet.dll", SetLastError = true, CharSet = CharSet.Unicode)]
     private static extern bool InternetGetCookieEx
       (
       string url, 
