@@ -89,7 +89,7 @@ namespace UserControl_precontent
                 engine_innodb_status:engine_innodb_status
                 );
               }
-            ScriptManager_control.AsyncPostBackErrorMessage = AlertMessage
+            ScriptManager_control.AsyncPostBackErrorMessage = APP_HANDLED_ASYNC_POST_BACK_ERROR_MESSAGE_MARK + AlertMessage
               (
               cause:cause,
               state:k.alert_state_type.FAILURE,
