@@ -50,9 +50,11 @@ namespace Class_db_cad_records
 
     internal void BindBaseDataList
       (
+      #pragma warning disable CA1801 // Remove unused parameter
       string sort_order,
       bool be_sort_order_ascending,
       object target
+      #pragma warning restore CA1801 // Remove unused parameter
       )
       {
       Open();
