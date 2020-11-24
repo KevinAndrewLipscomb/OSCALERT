@@ -63,6 +63,7 @@ namespace Class_ss_imagetrendelite
 
     private bool Request_www_imagetrendelite_com_Signin
       (
+      CookieContainer cookie_container,
       string username,
       string password,
       out HttpWebResponse response
@@ -73,7 +74,7 @@ namespace Class_ss_imagetrendelite
 	    try
 	    {
 		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/AuthAPI/Authenticate?organizationId=VBEMS");
-            Normalize(request);
+            NormalizeWithCookie(request,cookie_container);
 
 		    request.Accept = "*/*";
 		    request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
@@ -116,7 +117,7 @@ namespace Class_ss_imagetrendelite
 
     private bool Request_www_imagetrendelite_com_Get1
       (
-      string authorization_token,
+      CookieContainer cookie_container,
       out HttpWebResponse response
       )
       {
@@ -125,11 +126,10 @@ namespace Class_ss_imagetrendelite
 	    try
 	    {
 		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/GetDynamicListViews?dynamicListViewTypeName=ViewAllEMSCADList");
-        Normalize(request);
+        NormalizeWithCookie(request,cookie_container);
 
 		    request.Accept = "*/*";
 		    request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
-		    request.Headers.Set(HttpRequestHeader.Authorization, authorization_token);
 		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
@@ -152,7 +152,7 @@ namespace Class_ss_imagetrendelite
 
     private bool Request_www_imagetrendelite_com_Get2
       (
-      string authorization_token,
+      CookieContainer cookie_container,
       out HttpWebResponse response
       )
       {
@@ -161,11 +161,10 @@ namespace Class_ss_imagetrendelite
 	    try
 	    {
 		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/GetDynamicListViewByID?dynamicListViewModelID=910a358f-b03d-489a-bbe0-39d64ebc08cb");
-        Normalize(request);
+        NormalizeWithCookie(request,cookie_container);
 
 		    request.Accept = "*/*";
 		    request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
-		    request.Headers.Set(HttpRequestHeader.Authorization, authorization_token);
 		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
@@ -188,7 +187,7 @@ namespace Class_ss_imagetrendelite
 
     private bool Request_www_imagetrendelite_com_Load
       (
-      string authorization_token,
+      CookieContainer cookie_container,
       string request_identifier,
       StreamWriter log,
       out HttpWebResponse response
@@ -199,11 +198,10 @@ namespace Class_ss_imagetrendelite
 	    try
 	    {
 		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/LoadDynamicListRecords?skip=0&pageSize=200&search=&comparisonType=STARTSWITH&sortColumn=UnitNotifiedByDispatch&sortAscending=false&viewID=910a358f-b03d-489a-bbe0-39d64ebc08cb&includeTotalRecordCount=false&RequestIdentifier=" + request_identifier);
-        Normalize(request);
+        NormalizeWithCookie(request,cookie_container);
 
 		    request.Accept = "*/*";
 		    request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
-		    request.Headers.Set(HttpRequestHeader.Authorization, authorization_token);
 		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
@@ -243,15 +241,17 @@ namespace Class_ss_imagetrendelite
     //
     //--
 
-    internal string AuthorizationTokenOf
+    internal void Login
       (
       string username,
-      string password
+      string password,
+      CookieContainer cookie_container
       )
       {
       HttpWebResponse response;
       if(!Request_www_imagetrendelite_com_Signin
           (
+          cookie_container:cookie_container,
           username:username,
           password:password,
           response:out response
@@ -260,17 +260,15 @@ namespace Class_ss_imagetrendelite
         {
         throw new Exception("Request_www_imagetrendelite_com_Signin() returned FALSE.");
         }
-      var authorization_token = response.Headers.Get("Authorization");
       HtmlDocumentOf(ConsumedStreamOf(response));
-      return authorization_token;
       }
 
-    internal void Nudge(string authorization_token)
+    internal void Nudge(CookieContainer cookie_container)
       {
       HttpWebResponse response;
       if(!Request_www_imagetrendelite_com_Get1
           (
-          authorization_token:authorization_token,
+          cookie_container:cookie_container,
           response:out response
           )
         )
@@ -281,7 +279,7 @@ namespace Class_ss_imagetrendelite
       //
       if(!Request_www_imagetrendelite_com_Get2
           (
-          authorization_token:authorization_token,
+          cookie_container:cookie_container,
           response:out response
           )
         )
@@ -294,7 +292,7 @@ namespace Class_ss_imagetrendelite
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types")]
     internal EmsCadList CurrentEmsCadList
       (
-      string authorization_token,
+      CookieContainer cookie_container,
       string request_identifier,
       StreamWriter log
       )
@@ -302,7 +300,7 @@ namespace Class_ss_imagetrendelite
       HttpWebResponse response;
       if(!Request_www_imagetrendelite_com_Load
           (
-          authorization_token:authorization_token,
+          cookie_container:cookie_container as CookieContainer,
           request_identifier:request_identifier,
           log:log,
           response:out response

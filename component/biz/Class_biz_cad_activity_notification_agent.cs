@@ -5,6 +5,7 @@ using kix;
 using System;
 using System.Configuration;
 using System.IO;
+using System.Net;
 using System.Threading;
 
 namespace Class_biz_cad_activity_notification_agent
@@ -33,12 +34,15 @@ namespace Class_biz_cad_activity_notification_agent
       var saved_meta_surge_alert_timestamp_als = DateTime.MinValue;
       var saved_meta_surge_alert_timestamp_fire = DateTime.MinValue;
       //
+      var cookie_container = new CookieContainer();
+      //
       TClass_ss_imagetrendelite.EmsCadList current_ems_cad_list;
       //
-      var authorization_token = ss_imagetrendelite.AuthorizationTokenOf
+      ss_imagetrendelite.Login
         (
         username:ConfigurationManager.AppSettings["vbemsbridge_username"],
-        password:ConfigurationManager.AppSettings["vbemsbridge_password"]
+        password:ConfigurationManager.AppSettings["vbemsbridge_password"],
+        cookie_container:cookie_container
         );
       var datetime_of_last_nudge = DateTime.Now;
       var request_identifier = Guid.NewGuid().ToString();
@@ -46,10 +50,10 @@ namespace Class_biz_cad_activity_notification_agent
         {
         if (DateTime.Now > datetime_of_last_nudge.AddMinutes(double.Parse(ConfigurationManager.AppSettings["nudge_interval_minutes"])))
           {
-          ss_imagetrendelite.Nudge(authorization_token);
+          ss_imagetrendelite.Nudge(cookie_container);
           datetime_of_last_nudge = DateTime.Now;
           }
-        current_ems_cad_list = ss_imagetrendelite.CurrentEmsCadList(authorization_token,request_identifier,log);
+        current_ems_cad_list = ss_imagetrendelite.CurrentEmsCadList(cookie_container,request_identifier,log);
         if (current_ems_cad_list == null)
           {
           log.WriteLine(DateTime.Now.ToString("s") + "***ss_imagetrendelite.CurrentEmsCadList returned null.");
