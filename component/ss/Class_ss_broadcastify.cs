@@ -108,7 +108,7 @@ namespace Class_ss_broadcastify
 
 		    request.Method = "POST";
 
-		    string postString = @"alert=" + HttpUtility.UrlEncode(alert) + "&action=doUpdateAlerts&feedId=14744";
+		    string postString = @"incCat=3&incType=18&alert=" + HttpUtility.UrlEncode(alert) + "&confirmRules=on&action=doUpdateAlerts&feedId=14744";
 		    byte[] postBytes = System.Text.Encoding.UTF8.GetBytes(postString);
 		    request.ContentLength = postBytes.Length;
 		    Stream stream = request.GetRequestStream();
