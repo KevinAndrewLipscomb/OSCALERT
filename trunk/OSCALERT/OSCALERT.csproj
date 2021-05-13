@@ -29,7 +29,6 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <Use64BitIISExpress />
     <LangVersion>preview</LangVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
