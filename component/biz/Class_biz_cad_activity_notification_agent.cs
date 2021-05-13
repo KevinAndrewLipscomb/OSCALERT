@@ -1,6 +1,5 @@
 using Class_biz_cad_records;
 using Class_biz_field_situations;
-using Class_db_radio_dispatches;
 using Class_ss_imagetrendelite;
 using kix;
 using System;
@@ -24,14 +23,13 @@ namespace Class_biz_cad_activity_notification_agent
       //
       var biz_cad_records = new TClass_biz_cad_records();
       var biz_field_situations = new TClass_biz_field_situations();
-      var db_radio_dispatches = new TClass_db_radio_dispatches();
       var ss_imagetrendelite = new TClass_ss_imagetrendelite();
       //
       var address = k.EMPTY;
       var current_incident_num = k.EMPTY;
       var incident_date_time_initialized = k.EMPTY;
       var nature = k.EMPTY;
-      var saved_incident_num = k.EMPTY; // for use managing nature
+      //var saved_incident_num = k.EMPTY; // for use managing nature
       var saved_meta_surge_alert_timestamp_ems = DateTime.MinValue;
       var saved_meta_surge_alert_timestamp_als = DateTime.MinValue;
       var saved_meta_surge_alert_timestamp_fire = DateTime.MinValue;
@@ -90,14 +88,12 @@ namespace Class_biz_cad_activity_notification_agent
                 )
               )
               {
-              if (current_incident_num != saved_incident_num)
-                {
-                //
-                // Determine nature, if supported.
-                //
-                nature = db_radio_dispatches.NatureOf(address);
-                //
-                }
+              //if (current_incident_num != saved_incident_num)
+              //  {
+              //  //
+              //  // Determine nature, if supported.
+              //  //
+              //  }
               biz_cad_records.Set
                 (
                 id:k.EMPTY,
@@ -115,7 +111,7 @@ namespace Class_biz_cad_activity_notification_agent
                 time_downloaded:k.EMPTY,
                 nature:nature
                 );
-              saved_incident_num = current_incident_num; // for use managing nature
+              //saved_incident_num = current_incident_num; // for use managing nature
               }
             cells.Clear();
             }
