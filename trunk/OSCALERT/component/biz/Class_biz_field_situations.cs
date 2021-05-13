@@ -54,6 +54,7 @@ namespace Class_biz_field_situations
       else
         {
         impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("Typical");
+        var normalized_nature = digest.nature.ToLower();
         //
         // Form current impression.
         //
@@ -61,12 +62,12 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("AlsEms");
           }
-        if (digest.nature == "Stabbing or Gunshot Wound")
+        if (normalized_nature.Contains("stabbing") || normalized_nature.Contains("gunshot wound"))
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("StabbingOrGsw");
           }
         if(
-            (digest.nature == "Cardiac Arrest")
+            normalized_nature.Contains("cardiac arrest")
           ||
             (
               (digest.be_emtals)
@@ -119,7 +120,7 @@ namespace Class_biz_field_situations
           }
         if(
             (
-              (digest.nature == "Cardiac Arrest")
+              normalized_nature.Contains("cardiac arrest")
             ||
               (
                 (digest.num_ambulances + digest.num_holds == 1)
@@ -141,7 +142,7 @@ namespace Class_biz_field_situations
             (digest.num_holds == 1)
           &&
             (
-              (digest.nature == "Cardiac Arrest")
+              normalized_nature.Contains("cardiac arrest")
             ||
               (
                 (digest.num_engines + digest.num_ladders + digest.num_frsqs + digest.num_hazs + digest.num_squad_trucks == 1)
