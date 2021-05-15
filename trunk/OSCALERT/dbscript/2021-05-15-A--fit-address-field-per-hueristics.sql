@@ -1,0 +1,6 @@
+START TRANSACTION
+;
+ALTER TABLE `radio_dispatch` 
+  CHANGE COLUMN `address` `address` VARCHAR(36) NOT NULL
+;
+COMMIT
