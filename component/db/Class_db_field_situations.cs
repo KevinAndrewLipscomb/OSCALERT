@@ -293,7 +293,7 @@ namespace Class_db_field_situations
         +   " , DATE_FORMAT(time_on_scene,'%H:%i') as time_onscene"
         +   " , DATE_FORMAT(time_transporting,'%H:%i') as time_transporting"
         +   " , DATE_FORMAT(time_at_hospital,'%H:%i') as time_at_hospital"
-        +   " , IFNULL(nature,(select IFNULL(description,radio_dispatch.nature) from radio_dispatch left join incident_nature on (incident_nature.designator=radio_dispatch.nature) where address = incident_address order by transmission_datetime desc limit 1)) as nature"
+        +   " , IFNULL(nature,(select IFNULL(description,radio_dispatch.nature) from radio_dispatch left join incident_nature on (incident_nature.designator=radio_dispatch.nature) where incident_address like CONCAT(address,'%') order by transmission_datetime desc limit 1)) as nature"
         +   " from cad_record"
         +   " where be_current"
         +   " )"
