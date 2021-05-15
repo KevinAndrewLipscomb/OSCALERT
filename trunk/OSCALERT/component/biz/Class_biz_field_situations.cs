@@ -44,9 +44,17 @@ namespace Class_biz_field_situations
       //
       // Set up the default impression.
       //
-      if (digest.be_etby || digest.be_ftby || digest.num_acarts >= 1 || digest.num_matvs >= 1 || digest.num_mbks >= 1)
+      var normalized_nature = digest.nature.ToLower();
+      if (digest.be_etby || digest.be_ftby || digest.num_acarts >= 1 || digest.num_matvs >= 1 || digest.num_mbks >= 1 || normalized_nature.Contains("standby"))
         {
         impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("Standby");
+        //
+        // No further analysis needed
+        //
+        }
+      else if (normalized_nature == "proactive service")
+        {
+        impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("ProactiveService");
         //
         // No further analysis needed
         //
@@ -54,7 +62,6 @@ namespace Class_biz_field_situations
       else
         {
         impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("Typical");
-        var normalized_nature = digest.nature.ToLower();
         //
         // Form current impression.
         //
@@ -84,7 +91,12 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("CardiacArrest");
           }
-        if (digest.be_mrt || (digest.num_fboas >= 1) || (digest.num_rbs >= 1) || (digest.num_zods >= 1))
+        if
+          (
+            digest.be_mrt || (digest.num_fboas >= 1) || (digest.num_rbs >= 1) || (digest.num_zods >= 1)
+          ||
+            normalized_nature.Contains("boat")|| normalized_nature.Contains("ship") || normalized_nature.Contains("water") || normalized_nature.Contains("swimmer")
+          )
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MrtCall");
           }
@@ -93,19 +105,23 @@ namespace Class_biz_field_situations
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("SarCall");
           }
         if(
-            (digest.num_ambulances >= 2)
-          &&
-            (digest.num_mci_trucks >= 1)
-          &&
-            (digest.num_supervisors >= 1)
-          &&
-            (digest.num_engines >= 1)
-          &&
-            (digest.num_ladders >= 1)
-          &&
-            (digest.num_bats >= 1)
-          &&
-            (digest.num_tacs >= 1)
+            normalized_nature.Contains("airport alert")
+          ||
+            (
+              (digest.num_ambulances >= 2)
+            &&
+              (digest.num_mci_trucks >= 1)
+            &&
+              (digest.num_supervisors >= 1)
+            &&
+              (digest.num_engines >= 1)
+            &&
+              (digest.num_ladders >= 1)
+            &&
+              (digest.num_bats >= 1)
+            &&
+              (digest.num_tacs >= 1)
+            )
           )
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("AirportAlert");
