@@ -224,7 +224,7 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MultiAlarmFire");
           }
-        if (digest.be_sqtm)
+        if ((digest.be_sqtm) || normalized_nature.Contains(" pin"))
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("Trap");
           }
