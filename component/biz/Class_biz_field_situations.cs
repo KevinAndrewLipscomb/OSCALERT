@@ -119,8 +119,8 @@ namespace Class_biz_field_situations
               (digest.num_ladders >= 1)
             &&
               (digest.num_bats >= 1)
-            &&
-              (digest.num_tacs >= 1)
+            //&&
+            //  (digest.num_tacs >= 1)
             )
           )
           {
@@ -174,8 +174,8 @@ namespace Class_biz_field_situations
           }
         if(
             (digest.num_engines + digest.num_ladders + digest.num_frsqs >= 5)
-          &&
-            (digest.num_tacs >= 1)
+          //&&
+          //  (digest.num_tacs >= 1)
           &&
             (digest.num_bats >= 1)
           &&
@@ -190,8 +190,8 @@ namespace Class_biz_field_situations
           }
         if(
             (digest.num_engines + digest.num_ladders + digest.num_frsqs >= 9)
-          &&
-            (digest.num_tacs >= 2)
+          //&&
+          //  (digest.num_tacs >= 2)
           &&
             (digest.num_bats >= 2)
           &&
@@ -208,8 +208,8 @@ namespace Class_biz_field_situations
           }
         if(
             (digest.num_engines + digest.num_ladders + digest.num_frsqs >= 13)
-          &&
-            (digest.num_tacs >= 3)
+          //&&
+          //  (digest.num_tacs >= 3)
           &&
             (digest.num_bats >= 3)
           &&
