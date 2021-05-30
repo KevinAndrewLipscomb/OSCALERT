@@ -117,20 +117,22 @@ namespace Class_biz_cad_activity_notification_agent
             }
           rows.Clear();
           //
-          // Validate and trim the cad_records.
-          //
-          biz_cad_records.ValidateAndTrim();
-          //
-          // Notify members as appropriate.
-          //
-          biz_field_situations.DetectAndNotify
-            (
-            saved_multambholds_alert_timestamp:ref saved_meta_surge_alert_timestamp_ems,
-            saved_multalsholds_alert_timestamp:ref saved_meta_surge_alert_timestamp_als,
-            saved_firesurge_alert_timestamp:ref saved_meta_surge_alert_timestamp_fire
-            );
-          //
           }
+        //
+        biz_cad_records.Augment();
+        //
+        // Validate and trim the cad_records.
+        //
+        biz_cad_records.ValidateAndTrim();
+        //
+        // Notify members as appropriate.
+        //
+        biz_field_situations.DetectAndNotify
+          (
+          saved_multambholds_alert_timestamp:ref saved_meta_surge_alert_timestamp_ems,
+          saved_multalsholds_alert_timestamp:ref saved_meta_surge_alert_timestamp_als,
+          saved_firesurge_alert_timestamp:ref saved_meta_surge_alert_timestamp_fire
+          );
         //
         Thread.Sleep(millisecondsTimeout:int.Parse(ConfigurationManager.AppSettings["vbemsbridge_refresh_rate_in_seconds"])*1000);
         }

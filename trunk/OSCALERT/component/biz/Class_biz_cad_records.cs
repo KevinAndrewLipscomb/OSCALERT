@@ -18,6 +18,11 @@ namespace Class_biz_cad_records
       db_cad_records = new TClass_db_cad_records();
       }
 
+    internal void Augment()
+      {
+      db_cad_records.Augment();
+      }
+
     internal string LocalRenditionOf(string nature)
       {
       var active_case_board_rendition_of = nature;

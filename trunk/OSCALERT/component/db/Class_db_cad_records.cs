@@ -24,6 +24,30 @@ namespace Class_db_cad_records
       db_trail = new TClass_db_trail();
       }
 
+    internal void Augment()
+      {
+      Open();
+      using var my_sql_command = new MySqlCommand
+        (
+        "insert into cad_record (incident_date,incident_num,incident_address,call_sign,time_initialized,time_of_alarm,be_augmented)"
+         + " select DATE(transmission_datetime) as incident_date"
+         + " , (select incident_num from cad_record where incident_address = radio_dispatch.address limit 1) as incident_num"
+         + " , address as incident_address"
+         + " , unit as call_sign"
+         + " , TIME(transmission_datetime) as time_initialized"
+         + " , TIME(transmission_datetime) as time_of_alarm"
+         + " , TRUE as be_augmented"
+         + " from radio_dispatch"
+         +   " join capcode_unit_map on (capcode_unit_map.capcode=radio_dispatch.capcode)"
+         +   " left join cad_record on (cad_record.incident_address=radio_dispatch.address and cad_record.call_sign=capcode_unit_map.unit)"
+         + " where cad_record.id is null"
+         +   " and transmission_datetime > GREATEST((select min(TIMESTAMP(incident_date,time_initialized)) from cad_record where be_current),DATE_SUB(NOW(),INTERVAL 3 HOUR))",
+        connection
+        );
+      my_sql_command.ExecuteNonQuery();
+      Close();
+      }
+
     public bool Bind(string partial_spec, object target)
       {
       var concat_clause = "concat(IFNULL(incident_date,'-'),'|',IFNULL(incident_num,'-'),'|',IFNULL(incident_address,'-'),'|',IFNULL(call_sign,'-'),'|',IFNULL(time_initialized,'-'),'|',IFNULL(time_of_alarm,'-'),'|',IFNULL(time_enroute,'-'),'|',IFNULL(time_on_scene,'-'),'|',IFNULL(time_transporting,'-'),'|',IFNULL(time_at_hospital,'-'),'|',IFNULL(time_available,'-'),'|',IFNULL(time_downloaded,'-'))";
@@ -282,7 +306,7 @@ namespace Class_db_cad_records
         (
         k.EMPTY
         //
-        // Set be_current to FALSE on each record which is clearly not associated with the unit's latest incident, or where the unit has already gone available.
+        // On primary data, set be_current to FALSE on each record which is clearly not associated with the unit's latest incident, or where the unit has already gone available.
         //
         + " update cad_record left join"
         +   " ("
@@ -295,8 +319,40 @@ namespace Class_db_cad_records
         +   " as valid_record"
         +     " on (valid_record.call_sign=cad_record.call_sign and valid_record.max_incident_num=cad_record.incident_num)"
         + " set be_current = FALSE"
-        + " where valid_record.max_incident_num is null"
-        +   " or time_available is not null"
+        + " where (valid_record.max_incident_num is null or time_available is not null)"
+        +   " and not be_augmented"
+        + ";"
+        //
+        // On augmented data, set be_current to FALSE on each record which is clearly not associated with the unit's latest incident, or which is probably stale.
+        //
+        + " update cad_record as target left join"
+        +   " ("
+        +   " SELECT call_sign"
+        +   " , max(time_of_alarm) as max_time_of_alarm"
+        +   " FROM cad_record"
+        +   " where be_augmented"
+        +   " group by call_sign"
+        +   " )"
+        +   " as valid_record"
+        +     " on (valid_record.call_sign=target.call_sign and valid_record.max_time_of_alarm=target.time_of_alarm)"
+        + " set be_current = FALSE"
+        + " where be_augmented"
+        +   " and"
+        +     " ("
+        +       " valid_record.max_time_of_alarm is null"
+        +     " or"
+        +       " (select count(*) from (select id from cad_record where not be_augmented and incident_num = target.incident_num and be_current) as non_augmented)= 0"
+        +         " and time_of_alarm < DATE_SUB(NOW(),INTERVAL 20 MINUTE)"
+        +     " or"
+        +       " (select count(*) from (select id from cad_record where not be_augmented and incident_num = target.incident_num and be_current) as non_augmented) > 0"
+        +         " and time_of_alarm < DATE_SUB(NOW(),INTERVAL 30 MINUTE)"
+        +         " and nature not like '% structure fire'"
+        +         " and nature not like '% in distress'"
+        +         " and nature <> 'Cardiac arrest'"
+        +     " or"
+        +       " (select count(*) from (select id from cad_record where not be_augmented and incident_num = target.incident_num and be_current) as non_augmented) > 0"
+        +         " and time_of_alarm < DATE_SUB(NOW(),INTERVAL 60 MINUTE)"
+        +     " )"
         + ";"
         //
         // Set be_current to FALSE on each additional record which really is not associated with the unit's latest incident, but which fact could not be determined in the earlier update because of variations on the unit's
