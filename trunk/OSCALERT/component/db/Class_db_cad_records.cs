@@ -30,18 +30,18 @@ namespace Class_db_cad_records
       using var my_sql_command = new MySqlCommand
         (
         "insert into cad_record (incident_date,incident_num,incident_address,call_sign,time_initialized,time_of_alarm,be_augmented)"
-         + " select DATE(transmission_datetime) as incident_date"
-         + " , (select incident_num from cad_record where incident_address = radio_dispatch.address order by id desc limit 1) as incident_num"
-         + " , address as incident_address"
-         + " , unit as call_sign"
-         + " , TIME(transmission_datetime) as time_initialized"
-         + " , TIME(transmission_datetime) as time_of_alarm"
-         + " , TRUE as be_augmented"
-         + " from radio_dispatch"
-         +   " join capcode_unit_map on (capcode_unit_map.capcode=radio_dispatch.capcode)"
-         +   " left join cad_record on (cad_record.incident_address=radio_dispatch.address and cad_record.call_sign=capcode_unit_map.unit)"
-         + " where cad_record.id is null"
-         +   " and transmission_datetime > GREATEST((select min(TIMESTAMP(incident_date,time_initialized)) from cad_record where be_current),DATE_SUB(NOW(),INTERVAL 3 HOUR))",
+        + " select DATE(transmission_datetime) as incident_date"
+        + " , IFNULL((select incident_num from cad_record where incident_address = radio_dispatch.address order by id desc limit 1),'') as incident_num"
+        + " , address as incident_address"
+        + " , unit as call_sign"
+        + " , TIME(transmission_datetime) as time_initialized"
+        + " , TIME(transmission_datetime) as time_of_alarm"
+        + " , TRUE as be_augmented"
+        + " from radio_dispatch"
+        +   " join capcode_unit_map on (capcode_unit_map.capcode=radio_dispatch.capcode)"
+        +   " left join cad_record on (cad_record.incident_address=radio_dispatch.address and cad_record.call_sign=capcode_unit_map.unit)"
+        + " where cad_record.id is null"
+        +   " and transmission_datetime > GREATEST((select min(TIMESTAMP(incident_date,time_initialized)) from cad_record where be_current),DATE_SUB(NOW(),INTERVAL 3 HOUR))",
         connection
         );
       my_sql_command.ExecuteNonQuery();
