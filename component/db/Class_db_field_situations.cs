@@ -311,7 +311,7 @@ namespace Class_db_field_situations
         +   " where be_current"
         +   " )"
         +   " as active_case_assignment"
-        + " group by incident_num,address"
+        + " group by IFNULL(incident_num,address)"
         + " order by incident_num desc"
         ,
         connection
