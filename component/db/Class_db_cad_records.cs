@@ -31,7 +31,7 @@ namespace Class_db_cad_records
         (
         "insert into cad_record (incident_date,incident_num,incident_address,call_sign,time_initialized,time_of_alarm,be_augmented)"
          + " select DATE(transmission_datetime) as incident_date"
-         + " , (select incident_num from cad_record where incident_address = radio_dispatch.address limit 1) as incident_num"
+         + " , (select incident_num from cad_record where incident_address = radio_dispatch.address order by id desc limit 1) as incident_num"
          + " , address as incident_address"
          + " , unit as call_sign"
          + " , TIME(transmission_datetime) as time_initialized"
