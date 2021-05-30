@@ -193,7 +193,7 @@ namespace Class_db_field_situations
       Open();
       using var my_sql_command = new MySqlCommand
         (
-        "select IFNULL(incident_num,LEFT(MD5(RAND()),16)) as case_num"
+        "select IFNULL(incident_num,CONCAT('OFS',LEFT(MD5(RAND()),13)) as case_num"
         + " , incident_address as address"
         + " , GROUP_CONCAT(call_sign order by list_pecking_order,call_sign) as assignment"
         + " , DATE_FORMAT(TIMESTAMP(incident_date,time_initialized),'%Y-%m-%d %H:%i') as time_initialized"
