@@ -193,7 +193,7 @@ namespace Class_db_field_situations
       Open();
       using var my_sql_command = new MySqlCommand
         (
-        "select IFNULL(incident_num,CONCAT('OFS',LEFT(MD5(RAND()),13))) as case_num"
+        "select IFNULL(MAX(incident_num),CONCAT('OFS',LEFT(MD5(RAND()),13))) as case_num" // the call to MAX() assures that an actual incident_num value will be favored over a NULL incident_num during the GROUP BY
         + " , incident_address as address"
         + " , GROUP_CONCAT(call_sign order by list_pecking_order,call_sign) as assignment"
         + " , DATE_FORMAT(TIMESTAMP(incident_date,time_initialized),'%Y-%m-%d %H:%i') as time_initialized"
@@ -312,7 +312,7 @@ namespace Class_db_field_situations
         +   " )"
         +   " as active_case_assignment"
         + " group by address"
-        + " order by incident_num desc"
+        + " order by time_initialized desc"
         ,
         connection
         );
