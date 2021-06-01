@@ -250,8 +250,11 @@ namespace Class_biz_field_situations
         var prior_impression_pecking_order = db_field_situations.PriorImpressionPeckingOrder(address:digest.address);
         if (impression_pecking_order.val > prior_impression_pecking_order.val)
           {
-          be_escalation = (impression_pecking_order.val > 1599);
-          be_address_of_particular_interest = ConfigurationManager.AppSettings["addresses_of_particular_interest"].Contains(digest.address);
+          if (!digest.case_num.StartsWith("OFS")) // Don't set values that will trigger an OSCALERT on the sole basis of an augmented record.
+            {
+            be_escalation = (impression_pecking_order.val > 1599);
+            be_address_of_particular_interest = ConfigurationManager.AppSettings["addresses_of_particular_interest"].Contains(digest.address);
+            }
           }
         else
           {
