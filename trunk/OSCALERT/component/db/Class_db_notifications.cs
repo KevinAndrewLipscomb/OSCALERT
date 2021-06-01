@@ -176,7 +176,8 @@ namespace Class_db_notifications
         condition_clause = " min_oscalert_peck_order_general <= (select pecking_order from field_situation_impression where description = '" + description + "')";
         }
       Open();
-      using var my_sql_command = new MySqlCommand("select CONCAT(phone_num,'@',hostname) as sms_target from member join sms_gateway on (sms_gateway.id=member.phone_service_id) where " + condition_clause,connection);
+      //using var my_sql_command = new MySqlCommand("select CONCAT(phone_num,'@',hostname) as sms_target from member join sms_gateway on (sms_gateway.id=member.phone_service_id) where " + condition_clause,connection);
+      using var my_sql_command = new MySqlCommand("select CONCAT(phone_num,'@sms.clicksend.com') as sms_target from member where " + condition_clause,connection);
       var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {
