@@ -247,7 +247,7 @@ namespace Class_biz_field_situations
         //
         // Consider prior impression, identify escalation, prevent downgrade.
         //
-        var prior_impression_pecking_order = db_field_situations.PriorImpressionPeckingOrder(address:digest.address);
+        var prior_impression_pecking_order = db_field_situations.PriorImpressionPeckingOrder(case_num:digest.case_num);
         if (impression_pecking_order.val > prior_impression_pecking_order.val)
           {
           if (!digest.case_num.StartsWith("OFS")) // Don't set values that will trigger an OSCALERT on the sole basis of an augmented record.
