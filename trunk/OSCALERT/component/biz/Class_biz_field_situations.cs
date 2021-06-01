@@ -247,7 +247,7 @@ namespace Class_biz_field_situations
         //
         // Consider prior impression, identify escalation, prevent downgrade.
         //
-        var prior_impression_pecking_order = db_field_situations.PriorImpressionPeckingOrder(case_num:digest.case_num);
+        var prior_impression_pecking_order = db_field_situations.PriorImpressionPeckingOrder(address:digest.address);
         if (impression_pecking_order.val > prior_impression_pecking_order.val)
           {
           be_escalation = (impression_pecking_order.val > 1599);
