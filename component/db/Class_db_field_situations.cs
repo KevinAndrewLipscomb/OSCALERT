@@ -541,11 +541,11 @@ namespace Class_db_field_situations
       return num_considered_active;
       }
 
-    internal k.int_nonnegative PriorImpressionPeckingOrder(string address)
+    internal k.int_nonnegative PriorImpressionPeckingOrder(string case_num)
       {
       Open();
       using var my_sql_command = new MySqlCommand
-        ("select pecking_order from field_situation join field_situation_impression on (field_situation_impression.id=field_situation.impression_id) where address = '" + address + "'",connection);
+        ("select pecking_order from field_situation join field_situation_impression on (field_situation_impression.id=field_situation.impression_id) where case_num = '" + case_num + "'",connection);
       var pecking_order_obj = my_sql_command.ExecuteScalar();
       Close();
       return new k.int_nonnegative((pecking_order_obj == null ? 0 : int.Parse(pecking_order_obj.ToString())));
