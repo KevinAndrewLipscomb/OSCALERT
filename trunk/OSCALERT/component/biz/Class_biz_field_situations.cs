@@ -104,25 +104,7 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("SarCall");
           }
-        if(
-            normalized_nature.Contains("airport alert")
-          ||
-            (
-              (digest.num_ambulances >= 2)
-            &&
-              (digest.num_mci_trucks >= 1)
-            &&
-              (digest.num_supervisors >= 1)
-            &&
-              (digest.num_engines >= 1)
-            &&
-              (digest.num_ladders >= 1)
-            &&
-              (digest.num_bats >= 1)
-            //&&
-            //  (digest.num_tacs >= 1)
-            )
-          )
+        if(normalized_nature.Contains("airport alert"))
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("AirportAlert");
           }
@@ -174,10 +156,10 @@ namespace Class_biz_field_situations
           }
         if(
             (digest.num_engines + digest.num_ladders + digest.num_frsqs >= 5)
-          //&&
-          //  (digest.num_tacs >= 1)
           &&
-            (digest.num_bats >= 1)
+            (digest.num_bats >= 2)
+          &&
+            (digest.num_cars >= 1)
           &&
             (digest.num_ambulances + digest.num_holds >= 1)
           &&
@@ -189,9 +171,7 @@ namespace Class_biz_field_situations
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("WorkingFire");
           }
         if(
-            (digest.num_engines + digest.num_ladders + digest.num_frsqs >= 9)
-          //&&
-          //  (digest.num_tacs >= 2)
+            (digest.num_engines + digest.num_ladders + digest.num_frsqs >= 10)
           &&
             (digest.num_bats >= 2)
           &&
@@ -208,12 +188,10 @@ namespace Class_biz_field_situations
           }
         if(
             (digest.num_engines + digest.num_ladders + digest.num_frsqs >= 13)
-          //&&
-          //  (digest.num_tacs >= 3)
           &&
             (digest.num_bats >= 3)
           &&
-            (digest.num_cars >= 2)
+            (digest.num_cars >= 1)
           &&
             (digest.num_ambulances + digest.num_holds >= 3)
           &&
