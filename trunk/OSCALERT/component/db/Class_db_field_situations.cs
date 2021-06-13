@@ -206,7 +206,7 @@ namespace Class_db_field_situations
         + " , sum(call_sign REGEXP '^ACART[[:digit:]]') as num_acarts"
         + " , sum(call_sign REGEXP '^MATV[[:digit:]]') as num_matvs"
         + " , sum(call_sign REGEXP '^MBK[[:digit:]]') as num_mbks"
-        + " , sum(call_sign REGEXP '^LG[[:alnum:]]') as num_lifeguards"
+        + " , sum(call_sign REGEXP '^.LG') as num_lifeguards"
         + " , sum(call_sign REGEXP '^MCI[[:digit:]]') as num_mci_trucks"
         + " , sum(call_sign REGEXP '^MMTK[[:digit:]]') as num_mrtks"
         + " , sum(call_sign REGEXP '^MBOAT[[:digit:]]') as num_rbs"
