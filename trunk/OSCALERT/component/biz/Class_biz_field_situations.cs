@@ -202,7 +202,17 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MultiAlarmFire");
           }
-        if ((digest.be_sqtm) || normalized_nature.Contains(" pin"))
+        if(
+            digest.be_sqtm
+          ||
+            normalized_nature.Contains(" pin")
+          ||
+            (
+              normalized_nature.Equals("Technical rescue")
+            &&
+              (digest.num_ambulances + digest.num_holds >= 1)
+            )
+          )
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("Trap");
           }
