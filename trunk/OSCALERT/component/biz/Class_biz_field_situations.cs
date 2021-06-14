@@ -95,7 +95,7 @@ namespace Class_biz_field_situations
           (
             digest.be_mrt || (digest.num_fboas >= 1) || (digest.num_rbs >= 1) || (digest.num_zods >= 1)
           ||
-            normalized_nature.Contains("boat")|| normalized_nature.Contains("ship") || normalized_nature.Contains("water") || normalized_nature.Contains("swimmer") || normalized_nature.Equals("Drowning")
+            normalized_nature.Contains("boat") || normalized_nature.Contains("ship") || normalized_nature.Contains("water") || normalized_nature.Contains("swimmer") || normalized_nature.Equals("drowning")
           )
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MrtCall");
