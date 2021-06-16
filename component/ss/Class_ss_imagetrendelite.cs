@@ -73,13 +73,13 @@ namespace Class_ss_imagetrendelite
 
 	    try
 	    {
-		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/AuthAPI/Authenticate?organizationId=VBEMS");
+		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://vbems.imagetrendelite.com/Elite/AuthAPI/Authenticate?organizationId=VBEMS");
             NormalizeWithCookie(request,cookie_container);
 
 		    request.Accept = "*/*";
 		    request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
 		    request.ContentType = "application/json";
-		    request.Referer = "https://www.imagetrendelite.com/Elite/?organizationId=VBEMS";
+		    request.Referer = "https://vbems.imagetrendelite.com/Elite/?organizationId=VBEMS";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
 		    request.Headers.Set(HttpRequestHeader.CacheControl, "no-cache");
@@ -125,12 +125,12 @@ namespace Class_ss_imagetrendelite
 
 	    try
 	    {
-		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/GetDynamicListViews?dynamicListViewTypeName=ViewAllEMSCADList");
+		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://vbems.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/GetDynamicListViews?dynamicListViewTypeName=ViewAllEMSCADList");
         NormalizeWithCookie(request,cookie_container);
 
 		    request.Accept = "*/*";
 		    request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
-		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
+		    request.Referer = "https://vbems.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
 
@@ -160,12 +160,12 @@ namespace Class_ss_imagetrendelite
 
 	    try
 	    {
-		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/GetDynamicListViewByID?dynamicListViewModelID=910a358f-b03d-489a-bbe0-39d64ebc08cb");
+		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://vbems.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/GetDynamicListViewByID?dynamicListViewModelID=910a358f-b03d-489a-bbe0-39d64ebc08cb");
         NormalizeWithCookie(request,cookie_container);
 
 		    request.Accept = "*/*";
 		    request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
-		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
+		    request.Referer = "https://vbems.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
 
@@ -197,12 +197,12 @@ namespace Class_ss_imagetrendelite
 
 	    try
 	    {
-		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/LoadDynamicListRecords?skip=0&pageSize=200&search=&comparisonType=STARTSWITH&sortColumn=UnitNotifiedByDispatch&sortAscending=false&viewID=910a358f-b03d-489a-bbe0-39d64ebc08cb&includeTotalRecordCount=false&RequestIdentifier=" + request_identifier);
+		    HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://vbems.imagetrendelite.com/Elite/Organizationvbems/Agency00404/DynamicListAPIController/LoadDynamicListRecords?skip=0&pageSize=200&search=&comparisonType=STARTSWITH&sortColumn=UnitNotifiedByDispatch&sortAscending=false&viewID=910a358f-b03d-489a-bbe0-39d64ebc08cb&includeTotalRecordCount=false&RequestIdentifier=" + request_identifier);
         NormalizeWithCookie(request,cookie_container);
 
 		    request.Accept = "*/*";
 		    request.Headers.Add("X-Requested-With", @"XMLHttpRequest");
-		    request.Referer = "https://www.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
+		    request.Referer = "https://vbems.imagetrendelite.com/Elite/Organizationvbems/Agency00404/RunForm/CadList?startingFilter=ems";
 		    request.Headers.Set(HttpRequestHeader.AcceptLanguage, "en-US");
 		    request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
 
