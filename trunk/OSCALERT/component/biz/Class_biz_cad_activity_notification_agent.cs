@@ -99,7 +99,7 @@ namespace Class_biz_cad_activity_notification_agent
                 id:k.EMPTY,
                 incident_date:(incident_date_time_initialized.Split())[0],
                 incident_num:current_incident_num,
-                incident_address:address,
+                incident_address:k.Safe(address,k.safe_hint_type.PUNCTUATED),
                 call_sign:cells[6].Value,
                 time_initialized:(incident_date_time_initialized.Split())[1],
                 time_of_alarm:(cells[0].Value.Contains(k.SPACE) ? (cells[0].Value.Split())[1] : k.EMPTY),
