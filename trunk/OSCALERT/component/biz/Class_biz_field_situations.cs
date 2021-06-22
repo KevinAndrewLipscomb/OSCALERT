@@ -159,7 +159,7 @@ namespace Class_biz_field_situations
           &&
             (digest.num_bats >= 2)
           &&
-            (digest.num_cars >= 1)
+            (digest.num_cars + digest.num_sups >= 1)
           &&
             (digest.num_ambulances + digest.num_holds >= 1)
           &&
@@ -175,7 +175,7 @@ namespace Class_biz_field_situations
           &&
             (digest.num_bats >= 2)
           &&
-            (digest.num_cars >= 1)
+            (digest.num_cars + digest.num_sups >= 1)
           &&
             (digest.num_ambulances + digest.num_holds >= 2)
           &&
@@ -191,7 +191,7 @@ namespace Class_biz_field_situations
           &&
             (digest.num_bats >= 3)
           &&
-            (digest.num_cars >= 1)
+            (digest.num_cars + digest.num_sups >= 1)
           &&
             (digest.num_ambulances + digest.num_holds >= 3)
           &&
