@@ -301,7 +301,9 @@ namespace Class_db_field_situations
         +         " from radio_dispatch"
         +           " left join incident_nature on (incident_nature.designator=radio_dispatch.nature)"
         +         " where incident_address like CONCAT(address,'%')"
+        +           " or address like CONCAT(incident_address,'%')"
         +           " or incident_address like CONCAT(SUBSTRING_INDEX(address,' / ',-1),'% / ',SUBSTRING_INDEX(address,' / ',1))"
+        +           " or address like CONCAT(SUBSTRING_INDEX(incident_address,' / ',-1),'% / ',SUBSTRING_INDEX(incident_address,' / ',1))"
                         // incidents at intersections, which generate multiple 911 calls, are sometimes dispatched as a transposition of how they appear in the final case of record:  B / A instead of A / B
         +         " order by transmission_datetime desc"
         +         " limit 1"
