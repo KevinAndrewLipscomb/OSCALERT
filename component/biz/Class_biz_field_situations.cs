@@ -4,6 +4,7 @@ using Class_biz_notifications;
 using Class_biz_publicity;
 using Class_db_field_situation_impressions;
 using Class_db_field_situations;
+using Class_db_schedule_assignments;
 using Class_ss_broadcastify;
 using kix;
 using System;
@@ -21,10 +22,13 @@ namespace Class_biz_field_situations
     //
     //--
 
+    private readonly int SMALL_MCI_NUM_AMBULANCES_THRESHOLD = 4;
+
     private readonly TClass_biz_notifications biz_notifications = null;
     private readonly TClass_biz_publicity biz_publicity = null;
     private readonly TClass_db_field_situation_impressions db_field_situation_impressions = null;
     private readonly TClass_db_field_situations db_field_situations = null;
+    private readonly TClass_db_schedule_assignments db_schedule_assignments = null;
     private readonly TClass_ss_broadcastify ss_broadcastify = null;
 
     private void FormImpression
@@ -45,7 +49,25 @@ namespace Class_biz_field_situations
       // Set up the default impression.
       //
       var normalized_nature = digest.nature.ToLower();
-      if (digest.be_etby || digest.be_ftby || digest.num_acarts >= 1 || digest.num_matvs >= 1 || digest.num_mbks >= 1 || normalized_nature.Contains("standby"))
+      if(
+          digest.be_etby
+        ||
+          digest.be_ftby
+        ||
+          digest.num_acarts >= 1
+        ||
+          digest.num_matvs >= 1
+        ||
+          digest.num_mbks >= 1
+        ||
+          normalized_nature.Contains("standby")
+        ||
+          (
+            (digest.num_ambulances >= SMALL_MCI_NUM_AMBULANCES_THRESHOLD)
+          &&
+            db_schedule_assignments.BeSpecialEventActive()
+          )
+        )
         {
         impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("Standby");
         //
@@ -216,7 +238,7 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("Trap");
           }
-        if (digest.num_ambulances + digest.num_holds >= 4)
+        if (digest.num_ambulances + digest.num_holds >= SMALL_MCI_NUM_AMBULANCES_THRESHOLD)
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MciSmall");
           }
@@ -271,6 +293,7 @@ namespace Class_biz_field_situations
       biz_publicity = new TClass_biz_publicity();
       db_field_situation_impressions = new TClass_db_field_situation_impressions();
       db_field_situations = new TClass_db_field_situations();
+      db_schedule_assignments = new TClass_db_schedule_assignments();
       ss_broadcastify = new TClass_ss_broadcastify();
       }
 
