@@ -203,7 +203,7 @@ namespace Class_db_field_situations
         + " , sum(call_sign REGEXP '^EMS[[:digit:]]') as num_supervisors"
         + " , sum(call_sign REGEXP '^HOLD[[:digit:]]') as num_holds"
         + " , sum(call_sign REGEXP '^HZC[[:digit:]]') as num_hzcs"
-        + " , sum(call_sign REGEXP '^ACART[[:digit:]]') as num_acarts"
+        + " , sum(call_sign REGEXP '^(CART|MRAT)[[:digit:]]') as num_acarts"
         + " , sum(call_sign REGEXP '^MATV[[:digit:]]') as num_matvs"
         + " , sum(call_sign REGEXP '^MBK[[:digit:]]') as num_mbks"
         + " , sum(call_sign REGEXP '^.LG') as num_lifeguards"
@@ -212,7 +212,7 @@ namespace Class_db_field_situations
         + " , sum(call_sign REGEXP '^MBOAT[[:digit:]]') as num_rbs"
         + " , sum(call_sign REGEXP '^TAC[[:digit:]]') as num_tacs"
         + " , sum(call_sign REGEXP '^BAT[[:digit:]]') as num_bats"
-        + " , sum(call_sign REGEXP '^CAR[[:digit:]]?') as num_cars"
+        + " , sum(call_sign REGEXP '^CAR[[:digit:]]') as num_cars"
         + " , sum(call_sign REGEXP '^N?E[[:digit:]]') as num_engines"
         + " , sum(call_sign REGEXP '^FBOA[[:digit:]]') as num_fboas"
         + " , sum(call_sign REGEXP '^FR[[:digit:]]') as num_frsqs"
@@ -256,13 +256,13 @@ namespace Class_db_field_situations
         +                                            " IF(call_sign REGEXP '^HOLD[[:digit:]]',130," // holding for ambulance
         +                                               " IF(call_sign REGEXP '^ZM[[:digit:]]',140," // zone car
         +                                                  " IF(call_sign REGEXP '^HZC[[:digit:]]',150," // holding for zone car
-        +                                                     " IF(call_sign REGEXP '^ACART[[:digit:]]',160," // ambulance cart
+        +                                                     " IF(call_sign REGEXP '^(CART|MRAT)[[:digit:]]',160," // ambulance cart
         +                                                        " IF(call_sign REGEXP '^MATV[[:digit:]]',170," // medical atv
         +                                                           " IF(call_sign REGEXP '^MBK[[:digit:]]',180," // medical bike team
         +                                                              " IF(call_sign REGEXP '^EMS[[:digit:]]',190," // EMS supervisor or chief
         +                                                                 " IF(call_sign REGEXP '^ECH[[:digit:]]',200," // EMS chief
         +                                                                    " IF(call_sign REGEXP '^BAT[[:digit:]]',210," // battalion chief
-        +                                                                       " IF(call_sign REGEXP '^CAR[[:digit:]]?',220," // fire >=div chief
+        +                                                                       " IF(call_sign REGEXP '^CAR[[:digit:]]',220," // fire >=div chief
         +                                                                          " 300" // anybody else, alphabetically
         +                                                                          " )"
         +                                                                       " )"
