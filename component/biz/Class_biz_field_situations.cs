@@ -401,11 +401,14 @@ namespace Class_biz_field_situations
           {
           be_any_case_escalated = true;
           //
-          biz_notifications.IssueOscalert
-            (
-            description:impression_description,
-            elaboration:impression_elaboration
-            );
+          if (!impression_description.StartsWith("Mci") || bool.Parse(ConfigurationManager.AppSettings["do_issue_for_mci"]))
+            {
+            biz_notifications.IssueOscalert
+              (
+              description:impression_description,
+              elaboration:impression_elaboration
+              );
+            }
           }
         if (be_escalation && (impression_description.EndsWith("AlarmFire") || impression_description.StartsWith("Mci")))
           {
