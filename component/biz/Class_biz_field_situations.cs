@@ -238,14 +238,14 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("Trap");
           }
-        if (digest.num_ambulances + digest.num_holds >= SMALL_MCI_NUM_AMBULANCES_THRESHOLD)
-          {
-          impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MciSmall");
-          }
-        if (digest.num_ambulances + digest.num_holds >= 7)
-          {
-          impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MciMedium");
-          }
+        //if (digest.num_ambulances + digest.num_holds >= SMALL_MCI_NUM_AMBULANCES_THRESHOLD)
+        //  {
+        //  impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MciSmall");
+        //  }
+        //if (digest.num_ambulances + digest.num_holds >= 7)
+        //  {
+        //  impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MciMedium");
+        //  }
         if (digest.num_ambulances + digest.num_holds >= 11)
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MciLarge");
