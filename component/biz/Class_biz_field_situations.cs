@@ -8,6 +8,7 @@ using Class_db_schedule_assignments;
 using Class_ss_broadcastify;
 using kix;
 using System;
+using System.Collections;
 using System.Configuration;
 
 namespace Class_biz_field_situations
@@ -238,14 +239,14 @@ namespace Class_biz_field_situations
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("Trap");
           }
-        //if (digest.num_ambulances + digest.num_holds >= SMALL_MCI_NUM_AMBULANCES_THRESHOLD)
-        //  {
-        //  impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MciSmall");
-        //  }
-        //if (digest.num_ambulances + digest.num_holds >= 7)
-        //  {
-        //  impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MciMedium");
-        //  }
+        if (digest.num_ambulances + digest.num_holds >= SMALL_MCI_NUM_AMBULANCES_THRESHOLD)
+          {
+          impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MciSmall");
+          }
+        if (digest.num_ambulances + digest.num_holds >= 7)
+          {
+          impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MciMedium");
+          }
         if (digest.num_ambulances + digest.num_holds >= 11)
           {
           impression_pecking_order.val = db_field_situation_impressions.PeckingOrderValOfDescription("MciLarge");
@@ -401,7 +402,7 @@ namespace Class_biz_field_situations
           {
           be_any_case_escalated = true;
           //
-          if (!impression_description.StartsWith("Mci") || bool.Parse(ConfigurationManager.AppSettings["do_issue_for_mci"]))
+          if (!new ArrayList() {"MciSmall","MciMedium"}.Contains(impression_description))
             {
             biz_notifications.IssueOscalert
               (
