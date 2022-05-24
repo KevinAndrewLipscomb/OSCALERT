@@ -402,14 +402,14 @@ namespace Class_biz_field_situations
           {
           be_any_case_escalated = true;
           //
-          if (!new ArrayList() {"MciSmall","MciMedium"}.Contains(impression_description))
-            {
-            biz_notifications.IssueOscalert
-              (
-              description:impression_description,
-              elaboration:impression_elaboration
-              );
-            }
+          //if (!new ArrayList() {"MciSmall","MciMedium"}.Contains(impression_description)) // Uncomment and adjust if ordered to turn off certain alerts.
+          //  {
+          biz_notifications.IssueOscalert
+            (
+            description:impression_description,
+            elaboration:impression_elaboration
+            );
+            //}
           }
         if (be_escalation && (impression_description.EndsWith("AlarmFire") || impression_description.StartsWith("Mci")))
           {
