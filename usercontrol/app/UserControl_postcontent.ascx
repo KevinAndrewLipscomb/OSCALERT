@@ -56,8 +56,6 @@
                 </td>
               </tr>
             </table>
-            <ajaxToolkit:DropShadowExtender ID="DropShadowExtender_reference_material" runat="server" TargetControlID="Td_reference_material" />
-            <ajaxToolkit:DropShadowExtender ID="DropShadowExtender_process_improvement" runat="server" TargetControlID="Td_process_improvement" />
           </td>
         </tr>
       </table>
