@@ -56,9 +56,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
-      <HintPath>packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.19.4.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604">
       <HintPath>packages\Google.Protobuf.3.19.4\lib\net45\Google.Protobuf.dll</HintPath>
@@ -81,9 +80,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MySql.Data, Version=8.0.28.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
-      <HintPath>packages\MySql.Data.8.0.28\lib\net452\MySql.Data.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MySql.Data, Version=8.0.31.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>packages\MySql.Data.8.0.31\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="Renci.SshNet, Version=2020.0.1.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106">
       <HintPath>packages\SSH.NET.2020.0.1\lib\net40\Renci.SshNet.dll</HintPath>
@@ -129,13 +127,8 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
-      <HintPath>packages\MySql.Data.8.0.28\lib\net452\Ubiety.Dns.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
-      <HintPath>packages\MySql.Data.8.0.28\lib\net452\ZstdNet.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>packages\MySql.Data.8.0.31\lib\net452\ZstdNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -184,7 +177,6 @@
     <Compile Include="component\ss\Class_ss_imagetrendelite.cs" />
     <Compile Include="exception.aspx.cs">
       <DependentUpon>exception.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="exception.aspx.designer.cs">
       <DependentUpon>exception.aspx</DependentUpon>
@@ -194,7 +186,6 @@
     </Compile>
     <Compile Include="noninteractive\cad_activity_notification_agent.aspx.cs">
       <DependentUpon>cad_activity_notification_agent.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="noninteractive\cad_activity_notification_agent.aspx.designer.cs">
       <DependentUpon>cad_activity_notification_agent.aspx</DependentUpon>
@@ -202,70 +193,60 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="timeout.aspx.cs">
       <DependentUpon>timeout.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="timeout.aspx.designer.cs">
       <DependentUpon>timeout.aspx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_common_header_bar.ascx.cs">
       <DependentUpon>UserControl_common_header_bar.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_common_header_bar.ascx.designer.cs">
       <DependentUpon>UserControl_common_header_bar.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_postcontent.ascx.cs">
       <DependentUpon>UserControl_postcontent.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_postcontent.ascx.designer.cs">
       <DependentUpon>UserControl_postcontent.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_precontent.ascx.cs">
       <DependentUpon>UserControl_precontent.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_precontent.ascx.designer.cs">
       <DependentUpon>UserControl_precontent.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_update_progress_blocker.ascx.cs">
       <DependentUpon>UserControl_update_progress_blocker.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\app\UserControl_update_progress_blocker.ascx.designer.cs">
       <DependentUpon>UserControl_update_progress_blocker.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_about_by.ascx.cs">
       <DependentUpon>UserControl_about_by.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_about_by.ascx.designer.cs">
       <DependentUpon>UserControl_about_by.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_about_tools.ascx.cs">
       <DependentUpon>UserControl_about_tools.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_about_tools.ascx.designer.cs">
       <DependentUpon>UserControl_about_tools.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_attachment_explorer.ascx.cs">
       <DependentUpon>UserControl_attachment_explorer.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_attachment_explorer.ascx.designer.cs">
       <DependentUpon>UserControl_attachment_explorer.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_bread_crumb_trail.ascx.cs">
       <DependentUpon>UserControl_bread_crumb_trail.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_bread_crumb_trail.ascx.designer.cs">
       <DependentUpon>UserControl_bread_crumb_trail.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_config_welcome.ascx.cs">
       <DependentUpon>UserControl_config_welcome.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_config_welcome.ascx.designer.cs">
       <DependentUpon>UserControl_config_welcome.ascx</DependentUpon>
@@ -278,14 +259,12 @@
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_print_div.ascx.cs">
       <DependentUpon>UserControl_print_div.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_print_div.ascx.designer.cs">
       <DependentUpon>UserControl_print_div.ascx</DependentUpon>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_session_interrupted.ascx.cs">
       <DependentUpon>UserControl_session_interrupted.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="usercontrol\ki\UserControl_session_interrupted.ascx.designer.cs">
       <DependentUpon>UserControl_session_interrupted.ascx</DependentUpon>

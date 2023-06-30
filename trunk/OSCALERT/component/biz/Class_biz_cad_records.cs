@@ -2,6 +2,7 @@
 
 using Class_biz_incident_nature_translations;
 using Class_db_cad_records;
+using MySql.Data.MySqlClient;
 using System;
 
 namespace Class_biz_cad_records
@@ -112,23 +113,55 @@ namespace Class_biz_cad_records
       string nature
       )
       {
-      db_cad_records.Set
-        (
-        id,
-        incident_date,
-        incident_num,
-        incident_address,
-        call_sign,
-        time_initialized,
-        time_of_alarm,
-        time_enroute,
-        time_on_scene,
-        time_transporting,
-        time_at_hospital,
-        time_available,
-        time_downloaded,
-        nature
-        );
+      try
+        {
+        db_cad_records.Set
+          (
+          id,
+          incident_date,
+          incident_num,
+          incident_address,
+          call_sign,
+          time_initialized,
+          time_of_alarm,
+          time_enroute,
+          time_on_scene,
+          time_transporting,
+          time_at_hospital,
+          time_available,
+          time_downloaded,
+          nature,
+          parse_format:"%Y-%m-%d" // the dominant format used by the provider
+          );
+        }
+      catch (MySqlException e)
+        {
+        if (e.Message.Contains("Incorrect datetime value")) 
+          {
+          db_cad_records.Set
+            (
+            id,
+            incident_date,
+            incident_num,
+            incident_address,
+            call_sign,
+            time_initialized,
+            time_of_alarm,
+            time_enroute,
+            time_on_scene,
+            time_transporting,
+            time_at_hospital,
+            time_available,
+            time_downloaded,
+            nature,
+            parse_format:"%m/%d/%Y" // the format used by the provider occassionally, for unknown reasons
+            );
+          }
+        else
+          {
+          throw e;
+          }
+        }
       }
 
     public object Summary(string id)
