@@ -208,14 +208,15 @@ namespace Class_db_cad_records
       string time_at_hospital,
       string time_available,
       string time_downloaded,
-      string nature
+      string nature,
+      string parse_format
       )
       {
       //
       // Perform the Set in the usual fashion.
       //
       var childless_field_assignments_clause = k.EMPTY
-      + "incident_date = STR_TO_DATE(NULLIF('" + incident_date + "',''),'" + ConfigurationManager.AppSettings["scrape_format_of_incident_date_mysql_expression"] + "')"
+      + "incident_date = STR_TO_DATE(NULLIF('" + incident_date + "',''),'" + parse_format + "')"
       + " , incident_num = NULLIF('" + incident_num + "','')"
       + " , incident_address = NULLIF('" + incident_address + "','')"
       + " , call_sign = NULLIF('" + call_sign + "','')"
