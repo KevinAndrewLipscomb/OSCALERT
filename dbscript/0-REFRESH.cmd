@@ -1,4 +1,4 @@
-@REM $Id$
+@REM $Id: 0-REFRESH.cmd 7827 2022-12-03 17:56:08Z kevinanlipscomb $
 @REM
 set base_db_name=oscalertdb
 set the_host=localhost
