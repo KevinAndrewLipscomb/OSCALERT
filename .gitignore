@@ -1,0 +1,20 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.dll.config
+*.lnk
+*.log
+*.pdb
+*.user
+.svn/
+.vs/
+1-user-setup.sql
+bin/*.xml
+obj/
+packages/
+unpublished.*
+/lib/ki/
+/lib/oscalib/
+/usercontrol/ki
+/Web.config

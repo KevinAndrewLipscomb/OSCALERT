@@ -135,6 +135,7 @@
     <Content Include="exception.aspx" />
     <Content Include="Global.asax" />
     <Content Include="noninteractive\cad_activity_notification_agent.aspx" />
+    <Content Include="noninteractive\scratch\000-README-RE-MAKING-THIS-FOLDER-WRITEABLE.txt" />
     <Content Include="timeout.aspx" />
     <Content Include="usercontrol\app\UserControl_common_header_bar.ascx" />
     <Content Include="usercontrol\app\UserControl_postcontent.ascx" />

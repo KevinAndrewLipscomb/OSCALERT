@@ -1,5 +1,5 @@
 REM
-REM $Id$
+REM $Id: work.bat 5487 2014-11-22 22:50:44Z kevinanlipscomb $
 REM
 cd "C:\Inetpub\wwwroot\OSCALERT"
 start /max explorer /e,/select,C:\Inetpub\wwwroot\OSCALERT\.svn
