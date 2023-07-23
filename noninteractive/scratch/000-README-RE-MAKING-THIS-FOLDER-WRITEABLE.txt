@@ -1,0 +1,1 @@
+You must grant write access to this directory to the aplication pool account.
